@@ -37,8 +37,8 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--agent",
-        default="answer_1",
-        help="Agent module name inside rag_agent package (default: answer_1).",
+        default="answer_4",
+        help="Agent module name inside rag_agent package (default: answer_4).",
     )
     return parser.parse_args()
 
