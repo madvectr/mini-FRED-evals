@@ -14,8 +14,9 @@
 - `data/raw/` — raw CSV/JSON captures directly from FRED (kept small, one file per series).
 - `data/snapshots/` — DuckDB files and manifest metadata for offline reuse.
 - `corpus/series_cards/` — generated Markdown “series cards” derived from the warehouse.
-- `scripts/` — CLI entry points for ingest, QC, card generation, answerer, and MVES workflows.
+- `scripts/` — CLI entry points for ingest, QC, card generation, answer runner, and MVES workflows.
 - `src/` — Python package with clients (`fred_client`), warehouse helpers, card builders, parsing/truth utilities, and shared helpers.
+- `rag_agent/` — versioned RAG agents (e.g., `answer_1.py`) that `scripts/answer.py` can load via `--agent`.
 - `mves/` — evaluation spec + verifier map + Python verifiers.
 - `eval/` — golden JSONL generated from DuckDB-derived snapshots plus refusal cases.
 - `reports/` — artifacts emitted by `scripts/mves_run.py`.

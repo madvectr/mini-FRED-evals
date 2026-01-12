@@ -25,12 +25,13 @@ The ingest script downloads metadata + observations for CPIAUCSL, UNRATE, FEDFUN
 
 ### Series cards & answerer
 - `python scripts/build_series_cards.py --last-n 12` writes `corpus/series_cards/series_<SERIES>.md` (the context plane for RAG-style explanations).
-- `python scripts/answer.py "What was the unemployment rate in April 2020?"` loads the DuckDB truth store, uses TF-IDF retrieval over `corpus/series_cards` to ground/infer series IDs, computes the numeric answer, and emits JSON (value, explanation text, deterministic citations, retrieved doc scores).
+- Agents live under `rag_agent/`. The current baseline is `answer_1.py`.
+- `python scripts/answer.py "What was the unemployment rate in April 2020?"` (or `--agent answer_1` explicitly) loads the DuckDB truth store, uses TF-IDF retrieval over `corpus/series_cards` to ground/infer series IDs, computes the numeric answer, and emits JSON (value, explanation text, deterministic citations, retrieved doc scores).
 
 ### MVES: running evaluations
 - Specs, verifiers, and goldens live in `mves/` + `eval/golden.jsonl`.
 - Regenerate the data-derived golden set with `python scripts/generate_golden.py --out eval/golden.jsonl` (see `--help` for sampling knobs). Ambiguity tests live in `eval/refusal.jsonl`.
-- Run the full gate with `python scripts/mves_run.py`.
+- Run the full gate with `python scripts/mves_run.py --agent answer_1` (or any other agent module).
 - Results land in `reports/mves_report.json|md`. The runner exits non-zero if any critical verifier fails or pass rate drops below 90%.
 
 ### Next milestones

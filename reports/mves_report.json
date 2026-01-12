@@ -535,6 +535,11 @@
           "message": "Expected transform mom but got ma."
         },
         {
+          "verifier_id": "primary_value_mentioned",
+          "severity": "medium",
+          "message": "Answer text does not appear to cite value 1.4466666666666665."
+        },
+        {
           "verifier_id": "truth_matches",
           "severity": "critical",
           "message": "Value 1.4466666666666665 differs from truth 6.33802816901409 (tol=1e-06)."
@@ -1385,6 +1390,11 @@
       },
       "failures": [
         {
+          "verifier_id": "primary_value_mentioned",
+          "severity": "medium",
+          "message": "Answer text does not appear to cite value 2.6566666666666667."
+        },
+        {
           "verifier_id": "truth_matches",
           "severity": "critical",
           "message": "Value 2.6566666666666667 differs from truth 1.9383333333333335 (tol=1e-06)."
@@ -1440,11 +1450,6 @@
           "verifier_id": "expectation_transform",
           "severity": "critical",
           "message": "Expected transform yoy but got point."
-        },
-        {
-          "verifier_id": "primary_value_mentioned",
-          "severity": "medium",
-          "message": "Answer text does not include value 16872.27."
         },
         {
           "verifier_id": "truth_matches",
@@ -1559,7 +1564,7 @@
     {
       "id": "fedfunds_ma_4",
       "question": "What was the 3-period moving average of Effective Federal Funds Rate in November 2004?",
-      "status": "pass",
+      "status": "fail",
       "response": {
         "question": "What was the 3-period moving average of Effective Federal Funds Rate in November 2004?",
         "series_id": "FEDFUNDS",
@@ -1600,7 +1605,13 @@
           }
         ]
       },
-      "failures": []
+      "failures": [
+        {
+          "verifier_id": "primary_value_mentioned",
+          "severity": "medium",
+          "message": "Answer text does not appear to cite value 1.7666666666666666."
+        }
+      ]
     },
     {
       "id": "gdpc1_yoy_4",
@@ -1651,11 +1662,6 @@
           "verifier_id": "expectation_transform",
           "severity": "critical",
           "message": "Expected transform yoy but got point."
-        },
-        {
-          "verifier_id": "primary_value_mentioned",
-          "severity": "medium",
-          "message": "Answer text does not include value 16943.29."
         },
         {
           "verifier_id": "truth_matches",
@@ -2559,7 +2565,7 @@
     {
       "id": "gdpc1_point_19",
       "question": "What was Real Gross Domestic Product in October 2019?",
-      "status": "fail",
+      "status": "pass",
       "response": {
         "question": "What was Real Gross Domestic Product in October 2019?",
         "series_id": "GDPC1",
@@ -2596,13 +2602,7 @@
           }
         ]
       },
-      "failures": [
-        {
-          "verifier_id": "primary_value_mentioned",
-          "severity": "medium",
-          "message": "Answer text does not include value 20985.45."
-        }
-      ]
+      "failures": []
     },
     {
       "id": "unrate_point_1",

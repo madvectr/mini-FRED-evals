@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Dict, List, Optional
@@ -220,10 +221,21 @@ def _primary_value_mentioned(response: Dict[str, Any]) -> List[str]:
     answer = response.get("answer") or ""
     if value is None:
         return []
-    normalized = f"{float(value):.2f}".rstrip("0").rstrip(".")
-    if normalized and normalized not in answer:
-        return [f"Answer text does not include value {normalized}."]
-    return []
+    cleaned = answer.replace(",", "")
+    matches = re.findall(r"-?\d+(?:\.\d+)?", cleaned)
+    try:
+        target = float(value)
+    except (TypeError, ValueError):
+        return ["Unable to interpret numeric value."]
+    tolerance = max(1e-4, abs(target) * 1e-3)
+    for token in matches:
+        try:
+            candidate = float(token)
+        except ValueError:
+            continue
+        if abs(candidate - target) <= tolerance:
+            return []
+    return [f"Answer text does not appear to cite value {target}."]
 
 
 def _expectation_transform(case: Dict[str, Any], response: Dict[str, Any]) -> List[str]:

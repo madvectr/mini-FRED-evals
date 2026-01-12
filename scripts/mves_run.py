@@ -39,6 +39,11 @@ def parse_args() -> argparse.Namespace:
         default="data/warehouse.duckdb",
         help="Path to DuckDB warehouse (default: data/warehouse.duckdb).",
     )
+    parser.add_argument(
+        "--agent",
+        default="answer_1",
+        help="rag_agent module to evaluate (default: answer_1).",
+    )
     return parser.parse_args()
 
 
@@ -53,8 +58,8 @@ def load_golden(path: Path) -> List[Dict[str, Any]]:
     return cases
 
 
-def run_answer(question: str) -> Dict[str, Any]:
-    cmd = [sys.executable, str(ANSWER_SCRIPT), question]
+def run_answer(question: str, agent: str) -> Dict[str, Any]:
+    cmd = [sys.executable, str(ANSWER_SCRIPT), "--agent", agent, question]
     completed = subprocess.run(
         cmd, capture_output=True, text=True, check=False, cwd=Path(__file__).resolve().parents[1]
     )
@@ -68,10 +73,10 @@ def run_answer(question: str) -> Dict[str, Any]:
         raise RuntimeError(f"Failed to parse answer.py output: {exc}\nOutput: {completed.stdout}")
 
 
-def run_case(case: Dict[str, Any], db_path: Path) -> Dict[str, Any]:
+def run_case(case: Dict[str, Any], db_path: Path, agent: str) -> Dict[str, Any]:
     question = case["question"]
     try:
-        response = run_answer(question)
+        response = run_answer(question, agent)
     except Exception as exc:
         failure = Failure("runner_error", "critical", str(exc))
         return {
@@ -170,12 +175,13 @@ def main() -> None:
         cases.extend(load_golden(REFUSAL_PATH))
 
     db_path = Path(args.db)
+    agent = args.agent
 
     results = []
     total = len(cases)
     for idx, case in enumerate(cases, start=1):
         print(f"[MVES] ({idx}/{total}) running {case['id']}...", flush=True)
-        results.append(run_case(case, db_path))
+        results.append(run_case(case, db_path, agent))
     summary = summarize(results)
     write_reports(reports_dir, summary, results)
 
