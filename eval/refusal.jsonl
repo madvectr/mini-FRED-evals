@@ -1,0 +1,5 @@
+{"id":"refusal_last_summer","question":"What was inflation last summer?","expect":{"should_answer":false,"should_have_value":false,"transform":null,"series_id":null}}
+{"id":"refusal_missing_series","question":"What was the value in June 2022?","expect":{"should_answer":false,"should_have_value":false,"transform":null,"series_id":null}}
+{"id":"refusal_missing_date","question":"Tell me the unemployment rate.","expect":{"should_answer":false,"should_have_value":false,"transform":"point","series_id":"UNRATE"}}
+{"id":"refusal_vague_range","question":"How high did it go between 2010 and 2012?","expect":{"should_answer":false,"should_have_value":false,"transform":null,"series_id":null}}
+{"id":"refusal_no_context","question":"What was it?","expect":{"should_answer":false,"should_have_value":false,"transform":null,"series_id":null}}

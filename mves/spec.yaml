@@ -1,0 +1,111 @@
+{
+  "version": "0.1",
+  "transforms": ["point", "yoy", "mom", "ma", "max", "min"],
+  "required_fields": {
+    "question": "str",
+    "series_id": ["str", null],
+    "transform": "str",
+    "date": ["str", null],
+    "window": {
+      "start": ["str", null],
+      "end": ["str", null],
+      "periods": ["int", null]
+    },
+    "value": ["float", null],
+    "unit": ["str", null],
+    "answer": "str",
+    "citations": "list",
+    "confidence": "float",
+    "errors": "list",
+    "retrieved_docs": "list"
+  },
+  "behavior_rules": [
+    {
+      "id": "errors_block_value",
+      "description": "If errors exist then no value/citations allowed and confidence must be low.",
+      "expression": {
+        "if": "len(errors) > 0",
+        "then": [
+          "value is None",
+          "len(citations) == 0",
+          "confidence <= 0.4"
+        ]
+      }
+    },
+    {
+      "id": "value_requires_citation",
+      "description": "Valid values must include citations, series, and high confidence.",
+      "expression": {
+        "if": "value is not None",
+        "then": [
+          "series_id is not None",
+          "len(citations) > 0",
+          "confidence >= 0.7"
+        ]
+      }
+    },
+    {
+      "id": "citation_doc_format",
+      "description": "Citation doc IDs must match series_<series_id>.",
+      "expression": {
+        "always": "all(c['doc_id'] == f'series_{series_id}' for c in citations)"
+      }
+    },
+    {
+      "id": "retrieved_contains_citation",
+      "description": "retrieved_docs must include every cited doc.",
+      "expression": {
+        "always": "set(c['doc_id'] for c in citations).issubset(set(r['doc_id'] for r in retrieved_docs))"
+      }
+    },
+    {
+      "id": "window_required_for_extrema",
+      "description": "Max/min queries must include window bounds.",
+      "expression": {
+        "if": "transform in {'max','min'}",
+        "then": [
+          "window['start'] is not None",
+          "window['end'] is not None"
+        ]
+      }
+    },
+    {
+      "id": "date_required_for_pointlike",
+      "description": "Point/yoy/mom/ma require a date.",
+      "expression": {
+        "if": "transform in {'point','yoy','mom','ma'}",
+        "then": [
+          "date is not None"
+        ]
+      }
+    },
+    {
+      "id": "no_urls_in_answer",
+      "description": "Answers should not contain URLs.",
+      "expression": {
+        "always": "'http' not in answer.lower()"
+      }
+    },
+    {
+      "id": "primary_value_in_answer",
+      "description": "If a numeric value is provided, ensure it appears in the answer text.",
+      "expression": {
+        "if": "value is not None",
+        "then": [
+          "str(round(value, 2)).rstrip('0').rstrip('.') in answer or str(round(value, 4)) in answer"
+        ]
+      }
+    }
+  ],
+  "truth_spec": {
+    "description": "Expected numeric outcome derived from the Mini-FRED DuckDB warehouse.",
+    "fields": {
+      "series_id": "required",
+      "transform": "required",
+      "date": "required for point/yoy/mom/ma",
+      "window": "required for max/min (start/end ISO strings)",
+      "periods": "required for ma",
+      "tolerance": "optional numeric (default 1e-6)"
+    }
+  }
+}
