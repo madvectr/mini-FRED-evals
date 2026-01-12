@@ -12,6 +12,7 @@
       "periods": ["int", null]
     },
     "value": ["float", null],
+    "value_display": ["str", null],
     "unit": ["str", null],
     "answer": "str",
     "citations": "list",
@@ -87,12 +88,13 @@
       }
     },
     {
-      "id": "primary_value_in_answer",
-      "description": "If a numeric value is provided, ensure it appears in the answer text.",
+      "id": "value_display_in_answer",
+      "description": "If a numeric value is provided, ensure the exact value_display string is present.",
       "expression": {
         "if": "value is not None",
         "then": [
-          "str(round(value, 2)).rstrip('0').rstrip('.') in answer or str(round(value, 4)) in answer"
+          "value_display is not None",
+          "value_display in answer"
         ]
       }
     }

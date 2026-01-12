@@ -14,7 +14,7 @@
 - `data/raw/` — raw CSV/JSON captures directly from FRED (kept small, one file per series).
 - `data/snapshots/` — DuckDB files and manifest metadata for offline reuse.
 - `corpus/series_cards/` — generated Markdown “series cards” derived from the warehouse.
-- `scripts/` — CLI entry points for ingest, QC, card generation, answer runner, and MVES workflows.
+- `scripts/` — CLI entry points for ingest, QC, card generation, RAG agent wrapper, and MVES workflows.
 - `src/` — Python package with clients (`fred_client`), warehouse helpers, card builders, parsing/truth utilities, and shared helpers.
 - `rag_agent/` — versioned RAG agents (e.g., `answer_1.py`) that `scripts/answer.py` can load via `--agent`.
 - `mves/` — evaluation spec + verifier map + Python verifiers.
@@ -43,7 +43,7 @@ Both tables share a deterministic CSV import contract so they can be regenerated
 2. **Ingest:** `scripts/ingest_fred.py` reads the config, downloads metadata + observations via `fred_client`, caches raw JSON under `data/raw/`, stores everything in `data/warehouse.duckdb`, and optionally exports CSV snapshots under `data/snapshots/`.
 3. **QC:** `scripts/qc_checks.py` runs schema validation, coverage checks, row-count thresholds, and null-density warnings; it exits non-zero if critical checks fail.
 4. **Series cards:** `scripts/build_series_cards.py` loads the latest snapshot, fetches the last _N_ observations for each series, and produces Markdown cards in `corpus/series_cards/` (`series_<SERIES>.md`).
-5. **Answerer:** `scripts/answer.py` parses a natural-language question, computes the requested statistic from DuckDB (`src/truth.py`), runs a TF-IDF retriever over series cards (`src/retriever.py`) to infer/ground the series, and emits a JSON payload with citations + retrieved doc scores.
+5. **Answerer:** `scripts/answer.py` loads a versioned agent (e.g., `rag_agent.answer_3`). Each agent parses the question, retrieves series cards, computes the requested statistic from DuckDB (`src/truth.py`), and emits JSON with `value`, `value_display`, citations, and retrieved-doc traces.
 6. **MVES control plane:** `scripts/generate_golden.py` samples queries/dates/windows from the warehouse snapshots to produce `eval/golden.jsonl`; `scripts/mves_run.py` replays those questions through the answerer, applies verifiers in `mves/verifiers.py`, and writes reports under `reports/`.
 
 ## What Comes Next

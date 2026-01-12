@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import json
-import re
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Dict, List, Optional
@@ -71,7 +70,7 @@ def verify_case(
         "date_rules": lambda: _date_rules(response),
         "confidence_rules": lambda: _confidence_rules(response),
         "no_urls_in_answer": lambda: _no_urls_in_answer(response),
-        "primary_value_mentioned": lambda: _primary_value_mentioned(response),
+        "value_display_in_answer": lambda: _value_display_in_answer(response),
         "expectation_transform": lambda: _expectation_transform(case, response),
         "expectation_value_presence": lambda: _expectation_value_presence(case, response),
         "truth_matches": lambda: _truth_matches(case, response, db_path),
@@ -126,6 +125,8 @@ def _schema_valid(response: Dict[str, Any], spec: Dict[str, Any]) -> List[str]:
         messages.append("retrieved_docs must be a list.")
     if not isinstance(response.get("errors"), list):
         messages.append("errors must be a list.")
+    if response.get("value") is not None and response.get("value_display") in (None, ""):
+        messages.append("value_display missing while value provided.")
     return messages
 
 
@@ -151,6 +152,8 @@ def _citations_present_when_value(response: Dict[str, Any]) -> List[str]:
             messages.append("Citations missing while value provided.")
         if response.get("confidence", 0) < 0.7:
             messages.append("Confidence too low for answered case.")
+        if not response.get("value_display"):
+            messages.append("value_display missing while value provided.")
     return messages
 
 
@@ -216,26 +219,17 @@ def _no_urls_in_answer(response: Dict[str, Any]) -> List[str]:
     return []
 
 
-def _primary_value_mentioned(response: Dict[str, Any]) -> List[str]:
+def _value_display_in_answer(response: Dict[str, Any]) -> List[str]:
     value = response.get("value")
-    answer = response.get("answer") or ""
     if value is None:
         return []
-    cleaned = answer.replace(",", "")
-    matches = re.findall(r"-?\d+(?:\.\d+)?", cleaned)
-    try:
-        target = float(value)
-    except (TypeError, ValueError):
-        return ["Unable to interpret numeric value."]
-    tolerance = max(1e-4, abs(target) * 1e-3)
-    for token in matches:
-        try:
-            candidate = float(token)
-        except ValueError:
-            continue
-        if abs(candidate - target) <= tolerance:
-            return []
-    return [f"Answer text does not appear to cite value {target}."]
+    value_display = response.get("value_display")
+    answer = response.get("answer") or ""
+    if not value_display:
+        return ["value_display missing while value provided."]
+    if value_display not in answer:
+        return [f"value_display '{value_display}' not found in answer text."]
+    return []
 
 
 def _expectation_transform(case: Dict[str, Any], response: Dict[str, Any]) -> List[str]:

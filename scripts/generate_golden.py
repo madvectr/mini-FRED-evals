@@ -4,14 +4,15 @@
 from __future__ import annotations
 
 import argparse
-import calendar
-import csv
 import json
 import random
 import sys
-from datetime import date, datetime
+from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Sequence
+
+import duckdb  # type: ignore[import]
+
 try:
     import yaml  # type: ignore[import]
 except ModuleNotFoundError:  # pragma: no cover - fallback when PyYAML missing
@@ -20,6 +21,8 @@ except ModuleNotFoundError:  # pragma: no cover - fallback when PyYAML missing
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
+
+from src import truth  # noqa: E402
 
 
 def parse_args() -> argparse.Namespace:
@@ -70,20 +73,17 @@ def fmt_date(date_str: str) -> str:
 class GoldenGenerator:
     def __init__(
         self,
-        observations: Dict[str, List[Dict[str, Any]]],
+        conn: duckdb.DuckDBPyConnection,
         config: Dict[str, Any],
         seed: int,
         ma_period_range: Sequence[int],
     ):
-        self.observations = observations
+        self.conn = conn
         self.config = config
         self.rng = random.Random(seed)
         self.series_meta = {entry["id"]: entry for entry in config.get("series", [])}
         self.ma_period_range = ma_period_range
-        self.lookup = {
-            series_id: {row["date"]: row["value"] for row in rows}
-            for series_id, rows in observations.items()
-        }
+        self.date_cache: Dict[str, List[str]] = {}
 
     def build(self, counts: Dict[str, int]) -> List[Dict[str, Any]]:
         cases: List[Dict[str, Any]] = []
@@ -100,9 +100,9 @@ class GoldenGenerator:
 
     def _build_point_cases(self, count: int) -> List[Dict[str, Any]]:
         candidates = []
-        for series_id, rows in self.observations.items():
-            for row in rows:
-                candidates.append((series_id, row["date"]))
+        for series_id in self.series_meta:
+            for date_str in self._series_dates(series_id):
+                candidates.append((series_id, date_str))
         self.rng.shuffle(candidates)
         cases = []
         for idx, (series_id, date_str) in enumerate(candidates[:count]):
@@ -121,10 +121,9 @@ class GoldenGenerator:
 
     def _build_yoy_cases(self, count: int) -> List[Dict[str, Any]]:
         options = []
-        for series_id, rows in self.observations.items():
-            for row in rows:
-                date_str = row["date"]
-                if self._get_yoy(series_id, date_str) is None:
+        for series_id in self.series_meta:
+            for date_str in self._series_dates(series_id):
+                if truth.get_yoy(self.conn, series_id, date_str) is None:
                     continue
                 options.append((series_id, date_str))
         self.rng.shuffle(options)
@@ -145,10 +144,9 @@ class GoldenGenerator:
 
     def _build_mom_cases(self, count: int) -> List[Dict[str, Any]]:
         options = []
-        for series_id, rows in self.observations.items():
-            for row in rows:
-                date_str = row["date"]
-                if self._get_mom(series_id, date_str) is None:
+        for series_id in self.series_meta:
+            for date_str in self._series_dates(series_id):
+                if truth.get_mom(self.conn, series_id, date_str) is None:
                     continue
                 options.append((series_id, date_str))
         self.rng.shuffle(options)
@@ -170,11 +168,10 @@ class GoldenGenerator:
     def _build_ma_cases(self, count: int) -> List[Dict[str, Any]]:
         min_period, max_period = self.ma_period_range
         options = []
-        for series_id, rows in self.observations.items():
-            for row in rows:
-                date_str = row["date"]
+        for series_id in self.series_meta:
+            for date_str in self._series_dates(series_id):
                 for periods in range(min_period, max_period + 1):
-                    if self._get_ma(series_id, date_str, periods) is None:
+                    if truth.get_ma(self.conn, series_id, date_str, periods) is None:
                         continue
                     options.append((series_id, date_str, periods))
         self.rng.shuffle(options)
@@ -197,8 +194,8 @@ class GoldenGenerator:
     def _build_window_cases(self, count: int, transform: str) -> List[Dict[str, Any]]:
         assert transform in {"max", "min"}
         options = []
-        for series_id, rows in self.observations.items():
-            dates = [row["date"] for row in rows]
+        for series_id in self.series_meta:
+            dates = self._series_dates(series_id)
             if len(dates) < 3:
                 continue
             indices = list(range(len(dates) - 2))
@@ -209,9 +206,10 @@ class GoldenGenerator:
                 if not end_candidates:
                     continue
                 end_date = self.rng.choice(end_candidates)
-                value = (
-                    self._get_window_extreme(series_id, start_date, end_date, transform)
-                )
+                if transform == "max":
+                    _, value = truth.get_max(self.conn, series_id, start_date, end_date)
+                else:
+                    _, value = truth.get_min(self.conn, series_id, start_date, end_date)
                 if value is None:
                     continue
                 options.append((series_id, start_date, end_date))
@@ -268,77 +266,23 @@ class GoldenGenerator:
             "truth_spec": truth_spec,
         }
 
-    def _get_value(self, series_id: str, target_date: str) -> Optional[float]:
-        return self.lookup.get(series_id, {}).get(target_date)
-
-    def _shift_months(self, dt: date, months: int) -> date:
-        year = dt.year + (dt.month + months - 1) // 12
-        month = (dt.month + months - 1) % 12 + 1
-        day = min(dt.day, calendar.monthrange(year, month)[1])
-        return date(year, month, day)
-
-    def _shift_years(self, dt: date, years: int) -> date:
-        target_year = dt.year + years
-        day = dt.day
-        while day > 0:
-            try:
-                return date(target_year, dt.month, day)
-            except ValueError:
-                day -= 1
-        return date(target_year, dt.month, 1)
-
-    def _get_yoy(self, series_id: str, target_date: str) -> Optional[float]:
-        dt = datetime.fromisoformat(target_date).date()
-        prev_dt = self._shift_years(dt, -1)
-        current = self._get_value(series_id, target_date)
-        prev = self._get_value(series_id, prev_dt.isoformat())
-        if current is None or prev in (None, 0):
-            return None
-        return (current - prev) / prev * 100.0
-
-    def _get_mom(self, series_id: str, target_date: str) -> Optional[float]:
-        dt = datetime.fromisoformat(target_date).date()
-        prev_dt = self._shift_months(dt, -1)
-        current = self._get_value(series_id, target_date)
-        prev = self._get_value(series_id, prev_dt.isoformat())
-        if current is None or prev in (None, 0):
-            return None
-        return (current - prev) / prev * 100.0
-
-    def _get_ma(self, series_id: str, target_date: str, periods: int) -> Optional[float]:
-        rows = self.observations.get(series_id, [])
-        dates = [row["date"] for row in rows]
-        if target_date not in dates:
-            return None
-        idx = dates.index(target_date)
-        if idx + 1 < periods:
-            return None
-        values = [rows[i]["value"] for i in range(idx - periods + 1, idx + 1)]
-        if any(v is None for v in values):
-            return None
-        return sum(values) / periods
-
-    def _get_window_extreme(
-        self, series_id: str, start: str, end: str, transform: str
-    ) -> Optional[float]:
-        rows = self.observations.get(series_id, [])
-        values = [
-            row["value"]
-            for row in rows
-            if start <= row["date"] <= end and row["value"] is not None
-        ]
-        if not values:
-            return None
-        return max(values) if transform == "max" else min(values)
+    def _series_dates(self, series_id: str) -> List[str]:
+        if series_id not in self.date_cache:
+            rows = self.conn.execute(
+                "SELECT date::TEXT FROM observations WHERE series_id = ? ORDER BY date",
+                [series_id],
+            ).fetchall()
+            self.date_cache[series_id] = [row[0] for row in rows]
+        return self.date_cache[series_id]
 
 
 def main() -> None:
     args = parse_args()
     config = load_config(Path(args.config))
-    observations = load_observations()
+    conn = duckdb.connect(args.db, read_only=True)
     min_period, max_period = (int(x) for x in args.ma_periods.split(","))
     generator = GoldenGenerator(
-        observations=observations,
+        conn=conn,
         config=config,
         seed=args.seed,
         ma_period_range=(min_period, max_period),
@@ -356,28 +300,11 @@ def main() -> None:
     with out_path.open("w", encoding="utf-8") as handle:
         for case in cases:
             handle.write(f"{json_dump(case)}\n")
+    conn.close()
 
 
 def json_dump(obj: Any) -> str:
     return json.dumps(obj, separators=(",", ":"))
-
-
-def load_observations() -> Dict[str, List[Dict[str, Any]]]:
-    obs_path = Path("data/snapshots/observations.csv")
-    data: Dict[str, List[Dict[str, Any]]] = {}
-    with obs_path.open("r", encoding="utf-8") as handle:
-        reader = csv.DictReader(handle)
-        for row in reader:
-            series_id = row["series_id"]
-            date_str = row["date"]
-            if not date_str:
-                continue
-            value_str = row["value"]
-            value = float(value_str) if value_str not in ("", ".", None) else None
-            data.setdefault(series_id, []).append({"date": date_str, "value": value})
-    for series_id in data:
-        data[series_id].sort(key=lambda r: r["date"])
-    return data
 
 
 if __name__ == "__main__":
