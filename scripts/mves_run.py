@@ -125,19 +125,28 @@ def write_reports(
     reports_dir: Path,
     summary: Dict[str, Any],
     results: List[Dict[str, Any]],
+    agent: str,
 ) -> None:
     reports_dir.mkdir(parents=True, exist_ok=True)
+    summary_with_agent = dict(summary)
+    summary_with_agent["agent"] = agent
     report_json = {
-        "summary": summary,
+        "summary": summary_with_agent,
         "cases": results,
     }
-    (reports_dir / "mves_report.json").write_text(
+    suffix = agent.replace("/", "_")
+    report_json = {
+        "summary": summary_with_agent,
+        "cases": results,
+    }
+    (reports_dir / f"mves_report_{suffix}.json").write_text(
         json.dumps(report_json, indent=2), encoding="utf-8"
     )
 
     lines = [
         "# MVES Report",
         "",
+        f"- Agent: {agent}",
         f"- Total cases: {summary['total']}",
         f"- Passed: {summary['passed']}",
         f"- Failed: {summary['failed']}",
@@ -162,7 +171,9 @@ def write_reports(
             lines.append(f"  - [{failure['severity']}] {failure['verifier_id']}: {failure['message']}")
         lines.append("")
 
-    (reports_dir / "mves_report.md").write_text("\n".join(lines).strip() + "\n", encoding="utf-8")
+    (reports_dir / f"mves_report_{suffix}.md").write_text(
+        "\n".join(lines).strip() + "\n", encoding="utf-8"
+    )
 
 
 def main() -> None:
@@ -183,7 +194,7 @@ def main() -> None:
         print(f"[MVES] ({idx}/{total}) running {case['id']}...", flush=True)
         results.append(run_case(case, db_path, agent))
     summary = summarize(results)
-    write_reports(reports_dir, summary, results)
+    write_reports(reports_dir, summary, results, agent)
 
     pass_rate_ok = summary["pass_rate"] >= 0.9
     no_critical_failures = summary["critical_failures"] == 0

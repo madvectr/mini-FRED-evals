@@ -1,0 +1,3156 @@
+{
+  "summary": {
+    "total": 63,
+    "passed": 30,
+    "failed": 33,
+    "pass_rate": 0.47619047619047616,
+    "critical_failures": 55,
+    "failure_breakdown": {
+      "expectation_transform": 24,
+      "truth_matches": 27,
+      "primary_value_mentioned": 3,
+      "date_rules": 4
+    },
+    "agent": "answer_1"
+  },
+  "cases": [
+    {
+      "id": "cpiaucsl_point_16",
+      "question": "What was Consumer Price Index for All Urban Consumers: All Items in April 2001?",
+      "status": "pass",
+      "response": {
+        "question": "What was Consumer Price Index for All Urban Consumers: All Items in April 2001?",
+        "series_id": "CPIAUCSL",
+        "transform": "point",
+        "date": "2001-04-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": null
+        },
+        "value": 176.4,
+        "unit": "Index 1982-1984=100",
+        "answer": "In April 2001, Consumer Price Index for All Urban Consumers: All Items in U.S. City Average was 176.40 Index 1982-1984=100. The Consumer Price Index for All Urban Consumers: All Items (CPIAUCSL) is a price index of a basket of goods and services paid by urban consumers.",
+        "citations": [
+          {
+            "doc_id": "series_CPIAUCSL",
+            "series_id": "CPIAUCSL",
+            "dates": [
+              "2001-04-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.2493
+          },
+          {
+            "doc_id": "series_PCEPI",
+            "score": 0.2063
+          },
+          {
+            "doc_id": "series_FEDFUNDS",
+            "score": 0.0095
+          }
+        ]
+      },
+      "failures": []
+    },
+    {
+      "id": "fedfunds_point_14",
+      "question": "What was Effective Federal Funds Rate in September 2023?",
+      "status": "pass",
+      "response": {
+        "question": "What was Effective Federal Funds Rate in September 2023?",
+        "series_id": "FEDFUNDS",
+        "transform": "point",
+        "date": "2023-09-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": null
+        },
+        "value": 5.33,
+        "unit": "Percent",
+        "answer": "In September 2023, Federal Funds Effective Rate was 5.33%. When a depository institution has surplus balances in its reserve account, it lends to other banks in need of larger balances.",
+        "citations": [
+          {
+            "doc_id": "series_FEDFUNDS",
+            "series_id": "FEDFUNDS",
+            "dates": [
+              "2023-09-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_FEDFUNDS",
+            "score": 0.2617
+          },
+          {
+            "doc_id": "series_GDPC1",
+            "score": 0.0677
+          },
+          {
+            "doc_id": "series_UNRATE",
+            "score": 0.0187
+          }
+        ]
+      },
+      "failures": []
+    },
+    {
+      "id": "unrate_mom_0",
+      "question": "What was the month-over-month change in Civilian Unemployment Rate in January 2015?",
+      "status": "fail",
+      "response": {
+        "question": "What was the month-over-month change in Civilian Unemployment Rate in January 2015?",
+        "series_id": "UNRATE",
+        "transform": "point",
+        "date": "2015-01-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": null
+        },
+        "value": 5.7,
+        "unit": "Percent",
+        "answer": "In January 2015, Unemployment Rate was 5.70%. The unemployment rate represents the number of unemployed as a percentage of the labor force.",
+        "citations": [
+          {
+            "doc_id": "series_UNRATE",
+            "series_id": "UNRATE",
+            "dates": [
+              "2015-01-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_UNRATE",
+            "score": 0.1746
+          },
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.0401
+          },
+          {
+            "doc_id": "series_FEDFUNDS",
+            "score": 0.027
+          }
+        ]
+      },
+      "failures": [
+        {
+          "verifier_id": "expectation_transform",
+          "severity": "critical",
+          "message": "Expected transform mom but got point."
+        },
+        {
+          "verifier_id": "truth_matches",
+          "severity": "critical",
+          "message": "Value 5.7 differs from truth 1.7857142857142954 (tol=1e-06)."
+        }
+      ]
+    },
+    {
+      "id": "cpiaucsl_max_1",
+      "question": "What was the highest Consumer Price Index for All Urban Consumers: All Items between July 2000 and March 2011?",
+      "status": "fail",
+      "response": {
+        "question": "What was the highest Consumer Price Index for All Urban Consumers: All Items between July 2000 and March 2011?",
+        "series_id": "CPIAUCSL",
+        "transform": "ma",
+        "date": "2000-07-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": 3
+        },
+        "value": 172.0333333333333,
+        "unit": "Index 1982-1984=100",
+        "answer": "The 3-period moving average of Consumer Price Index for All Urban Consumers: All Items in U.S. City Average on July 2000 was 172.03 Index 1982-1984=100. The Consumer Price Index for All Urban Consumers: All Items (CPIAUCSL) is a price index of a basket of goods and services paid by urban consumers.",
+        "citations": [
+          {
+            "doc_id": "series_CPIAUCSL",
+            "series_id": "CPIAUCSL",
+            "dates": [
+              "2000-07-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.2493
+          },
+          {
+            "doc_id": "series_PCEPI",
+            "score": 0.2063
+          },
+          {
+            "doc_id": "series_FEDFUNDS",
+            "score": 0.0095
+          }
+        ]
+      },
+      "failures": [
+        {
+          "verifier_id": "expectation_transform",
+          "severity": "critical",
+          "message": "Expected transform max but got ma."
+        },
+        {
+          "verifier_id": "truth_matches",
+          "severity": "critical",
+          "message": "Value 172.0333333333333 differs from truth 223.046 (tol=1e-06)."
+        }
+      ]
+    },
+    {
+      "id": "fedfunds_ma_2",
+      "question": "What was the 6-period moving average of Effective Federal Funds Rate in March 2005?",
+      "status": "fail",
+      "response": {
+        "question": "What was the 6-period moving average of Effective Federal Funds Rate in March 2005?",
+        "series_id": "FEDFUNDS",
+        "transform": "ma",
+        "date": "2005-03-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": 3
+        },
+        "value": 2.47,
+        "unit": "Percent",
+        "answer": "The 3-period moving average of Federal Funds Effective Rate on March 2005 was 2.47%. When a depository institution has surplus balances in its reserve account, it lends to other banks in need of larger balances.",
+        "citations": [
+          {
+            "doc_id": "series_FEDFUNDS",
+            "series_id": "FEDFUNDS",
+            "dates": [
+              "2005-03-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_FEDFUNDS",
+            "score": 0.2585
+          },
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.0462
+          },
+          {
+            "doc_id": "series_UNRATE",
+            "score": 0.0179
+          }
+        ]
+      },
+      "failures": [
+        {
+          "verifier_id": "truth_matches",
+          "severity": "critical",
+          "message": "Value 2.47 differs from truth 2.21 (tol=1e-06)."
+        }
+      ]
+    },
+    {
+      "id": "pcepi_max_4",
+      "question": "What was the highest Personal Consumption Expenditures Price Index between July 2015 and December 2018?",
+      "status": "pass",
+      "response": {
+        "question": "What was the highest Personal Consumption Expenditures Price Index between July 2015 and December 2018?",
+        "series_id": "PCEPI",
+        "transform": "max",
+        "date": null,
+        "window": {
+          "start": "2015-07-01",
+          "end": "2018-12-01",
+          "periods": null
+        },
+        "value": 102.701,
+        "unit": "Index 2017=100",
+        "answer": "The maximum value of Personal Consumption Expenditures: Chain-type Price Index between 2015-07-01 and 2018-12-01 was 102.70 Index 2017=100 on December 2018. BEA Account Code: DPCERG The Personal Consumption Expenditures Price Index is a measure of the prices that people living in the United States, or those buying on their behalf, pay for goods and servic\u2026",
+        "citations": [
+          {
+            "doc_id": "series_PCEPI",
+            "series_id": "PCEPI",
+            "dates": [
+              "2018-12-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_PCEPI",
+            "score": 0.3779
+          },
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.0803
+          }
+        ]
+      },
+      "failures": []
+    },
+    {
+      "id": "cpiaucsl_mom_2",
+      "question": "What was the month-over-month change in Consumer Price Index for All Urban Consumers: All Items in April 2022?",
+      "status": "fail",
+      "response": {
+        "question": "What was the month-over-month change in Consumer Price Index for All Urban Consumers: All Items in April 2022?",
+        "series_id": "CPIAUCSL",
+        "transform": "point",
+        "date": "2022-04-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": null
+        },
+        "value": 288.582,
+        "unit": "Index 1982-1984=100",
+        "answer": "In April 2022, Consumer Price Index for All Urban Consumers: All Items in U.S. City Average was 288.58 Index 1982-1984=100. The Consumer Price Index for All Urban Consumers: All Items (CPIAUCSL) is a price index of a basket of goods and services paid by urban consumers.",
+        "citations": [
+          {
+            "doc_id": "series_CPIAUCSL",
+            "series_id": "CPIAUCSL",
+            "dates": [
+              "2022-04-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.2445
+          },
+          {
+            "doc_id": "series_PCEPI",
+            "score": 0.1969
+          },
+          {
+            "doc_id": "series_GDPC1",
+            "score": 0.0217
+          }
+        ]
+      },
+      "failures": [
+        {
+          "verifier_id": "expectation_transform",
+          "severity": "critical",
+          "message": "Expected transform mom but got point."
+        },
+        {
+          "verifier_id": "truth_matches",
+          "severity": "critical",
+          "message": "Value 288.582 differs from truth 0.3878706077567196 (tol=1e-06)."
+        }
+      ]
+    },
+    {
+      "id": "cpiaucsl_yoy_1",
+      "question": "What was the year-over-year change in Consumer Price Index for All Urban Consumers: All Items in January 2004?",
+      "status": "fail",
+      "response": {
+        "question": "What was the year-over-year change in Consumer Price Index for All Urban Consumers: All Items in January 2004?",
+        "series_id": "CPIAUCSL",
+        "transform": "point",
+        "date": "2004-01-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": null
+        },
+        "value": 186.3,
+        "unit": "Index 1982-1984=100",
+        "answer": "In January 2004, Consumer Price Index for All Urban Consumers: All Items in U.S. City Average was 186.30 Index 1982-1984=100. The Consumer Price Index for All Urban Consumers: All Items (CPIAUCSL) is a price index of a basket of goods and services paid by urban consumers.",
+        "citations": [
+          {
+            "doc_id": "series_CPIAUCSL",
+            "series_id": "CPIAUCSL",
+            "dates": [
+              "2004-01-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.2578
+          },
+          {
+            "doc_id": "series_PCEPI",
+            "score": 0.1883
+          },
+          {
+            "doc_id": "series_FEDFUNDS",
+            "score": 0.0203
+          }
+        ]
+      },
+      "failures": [
+        {
+          "verifier_id": "expectation_transform",
+          "severity": "critical",
+          "message": "Expected transform yoy but got point."
+        },
+        {
+          "verifier_id": "truth_matches",
+          "severity": "critical",
+          "message": "Value 186.3 differs from truth 2.0262869660460114 (tol=1e-06)."
+        }
+      ]
+    },
+    {
+      "id": "fedfunds_mom_7",
+      "question": "What was the month-over-month change in Effective Federal Funds Rate in October 2014?",
+      "status": "fail",
+      "response": {
+        "question": "What was the month-over-month change in Effective Federal Funds Rate in October 2014?",
+        "series_id": "FEDFUNDS",
+        "transform": "point",
+        "date": "2014-10-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": null
+        },
+        "value": 0.09,
+        "unit": "Percent",
+        "answer": "In October 2014, Federal Funds Effective Rate was 0.09%. When a depository institution has surplus balances in its reserve account, it lends to other banks in need of larger balances.",
+        "citations": [
+          {
+            "doc_id": "series_FEDFUNDS",
+            "series_id": "FEDFUNDS",
+            "dates": [
+              "2014-10-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_FEDFUNDS",
+            "score": 0.2686
+          },
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.0268
+          },
+          {
+            "doc_id": "series_PCEPI",
+            "score": 0.0231
+          }
+        ]
+      },
+      "failures": [
+        {
+          "verifier_id": "expectation_transform",
+          "severity": "critical",
+          "message": "Expected transform mom but got point."
+        },
+        {
+          "verifier_id": "truth_matches",
+          "severity": "critical",
+          "message": "Value 0.09 differs from truth 0.0 (tol=1e-06)."
+        }
+      ]
+    },
+    {
+      "id": "fedfunds_mom_9",
+      "question": "What was the month-over-month change in Effective Federal Funds Rate in March 2018?",
+      "status": "fail",
+      "response": {
+        "question": "What was the month-over-month change in Effective Federal Funds Rate in March 2018?",
+        "series_id": "FEDFUNDS",
+        "transform": "ma",
+        "date": "2018-03-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": 3
+        },
+        "value": 1.4466666666666665,
+        "unit": "Percent",
+        "answer": "The 3-period moving average of Federal Funds Effective Rate on March 2018 was 1.45%. When a depository institution has surplus balances in its reserve account, it lends to other banks in need of larger balances.",
+        "citations": [
+          {
+            "doc_id": "series_FEDFUNDS",
+            "series_id": "FEDFUNDS",
+            "dates": [
+              "2018-03-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_FEDFUNDS",
+            "score": 0.2686
+          },
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.0268
+          },
+          {
+            "doc_id": "series_PCEPI",
+            "score": 0.0231
+          }
+        ]
+      },
+      "failures": [
+        {
+          "verifier_id": "expectation_transform",
+          "severity": "critical",
+          "message": "Expected transform mom but got ma."
+        },
+        {
+          "verifier_id": "primary_value_mentioned",
+          "severity": "medium",
+          "message": "Answer text does not appear to cite value 1.4466666666666665."
+        },
+        {
+          "verifier_id": "truth_matches",
+          "severity": "critical",
+          "message": "Value 1.4466666666666665 differs from truth 6.33802816901409 (tol=1e-06)."
+        }
+      ]
+    },
+    {
+      "id": "pcepi_yoy_3",
+      "question": "What was the year-over-year change in Personal Consumption Expenditures Price Index in November 2012?",
+      "status": "fail",
+      "response": {
+        "question": "What was the year-over-year change in Personal Consumption Expenditures Price Index in November 2012?",
+        "series_id": "PCEPI",
+        "transform": "point",
+        "date": "2012-11-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": null
+        },
+        "value": 95.109,
+        "unit": "Index 2017=100",
+        "answer": "In November 2012, Personal Consumption Expenditures: Chain-type Price Index was 95.11 Index 2017=100. BEA Account Code: DPCERG The Personal Consumption Expenditures Price Index is a measure of the prices that people living in the United States, or those buying on their behalf, pay for goods and servic\u2026",
+        "citations": [
+          {
+            "doc_id": "series_PCEPI",
+            "series_id": "PCEPI",
+            "dates": [
+              "2012-11-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_PCEPI",
+            "score": 0.3385
+          },
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.1109
+          },
+          {
+            "doc_id": "series_FEDFUNDS",
+            "score": 0.0118
+          }
+        ]
+      },
+      "failures": [
+        {
+          "verifier_id": "expectation_transform",
+          "severity": "critical",
+          "message": "Expected transform yoy but got point."
+        },
+        {
+          "verifier_id": "truth_matches",
+          "severity": "critical",
+          "message": "Value 95.109 differs from truth 1.6991017964071844 (tol=1e-06)."
+        }
+      ]
+    },
+    {
+      "id": "cpiaucsl_point_13",
+      "question": "What was Consumer Price Index for All Urban Consumers: All Items in December 2011?",
+      "status": "pass",
+      "response": {
+        "question": "What was Consumer Price Index for All Urban Consumers: All Items in December 2011?",
+        "series_id": "CPIAUCSL",
+        "transform": "point",
+        "date": "2011-12-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": null
+        },
+        "value": 227.223,
+        "unit": "Index 1982-1984=100",
+        "answer": "In December 2011, Consumer Price Index for All Urban Consumers: All Items in U.S. City Average was 227.22 Index 1982-1984=100. The Consumer Price Index for All Urban Consumers: All Items (CPIAUCSL) is a price index of a basket of goods and services paid by urban consumers.",
+        "citations": [
+          {
+            "doc_id": "series_CPIAUCSL",
+            "series_id": "CPIAUCSL",
+            "dates": [
+              "2011-12-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.2493
+          },
+          {
+            "doc_id": "series_PCEPI",
+            "score": 0.2063
+          },
+          {
+            "doc_id": "series_FEDFUNDS",
+            "score": 0.0095
+          }
+        ]
+      },
+      "failures": []
+    },
+    {
+      "id": "cpiaucsl_point_5",
+      "question": "What was Consumer Price Index for All Urban Consumers: All Items in July 2007?",
+      "status": "pass",
+      "response": {
+        "question": "What was Consumer Price Index for All Urban Consumers: All Items in July 2007?",
+        "series_id": "CPIAUCSL",
+        "transform": "point",
+        "date": "2007-07-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": null
+        },
+        "value": 207.603,
+        "unit": "Index 1982-1984=100",
+        "answer": "In July 2007, Consumer Price Index for All Urban Consumers: All Items in U.S. City Average was 207.60 Index 1982-1984=100. The Consumer Price Index for All Urban Consumers: All Items (CPIAUCSL) is a price index of a basket of goods and services paid by urban consumers.",
+        "citations": [
+          {
+            "doc_id": "series_CPIAUCSL",
+            "series_id": "CPIAUCSL",
+            "dates": [
+              "2007-07-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.2345
+          },
+          {
+            "doc_id": "series_PCEPI",
+            "score": 0.194
+          },
+          {
+            "doc_id": "series_FEDFUNDS",
+            "score": 0.0208
+          }
+        ]
+      },
+      "failures": []
+    },
+    {
+      "id": "cpiaucsl_max_0",
+      "question": "What was the highest Consumer Price Index for All Urban Consumers: All Items between September 2022 and July 2024?",
+      "status": "pass",
+      "response": {
+        "question": "What was the highest Consumer Price Index for All Urban Consumers: All Items between September 2022 and July 2024?",
+        "series_id": "CPIAUCSL",
+        "transform": "max",
+        "date": null,
+        "window": {
+          "start": "2022-09-01",
+          "end": "2024-07-01",
+          "periods": null
+        },
+        "value": 313.566,
+        "unit": "Index 1982-1984=100",
+        "answer": "The maximum value of Consumer Price Index for All Urban Consumers: All Items in U.S. City Average between 2022-09-01 and 2024-07-01 was 313.57 Index 1982-1984=100 on July 2024. The Consumer Price Index for All Urban Consumers: All Items (CPIAUCSL) is a price index of a basket of goods and services paid by urban consumers.",
+        "citations": [
+          {
+            "doc_id": "series_CPIAUCSL",
+            "series_id": "CPIAUCSL",
+            "dates": [
+              "2024-07-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.2347
+          },
+          {
+            "doc_id": "series_PCEPI",
+            "score": 0.2034
+          },
+          {
+            "doc_id": "series_GDPC1",
+            "score": 0.0454
+          }
+        ]
+      },
+      "failures": []
+    },
+    {
+      "id": "cpiaucsl_max_2",
+      "question": "What was the highest Consumer Price Index for All Urban Consumers: All Items between September 2001 and January 2024?",
+      "status": "pass",
+      "response": {
+        "question": "What was the highest Consumer Price Index for All Urban Consumers: All Items between September 2001 and January 2024?",
+        "series_id": "CPIAUCSL",
+        "transform": "max",
+        "date": null,
+        "window": {
+          "start": "2001-09-01",
+          "end": "2024-01-01",
+          "periods": null
+        },
+        "value": 309.794,
+        "unit": "Index 1982-1984=100",
+        "answer": "The maximum value of Consumer Price Index for All Urban Consumers: All Items in U.S. City Average between 2001-09-01 and 2024-01-01 was 309.79 Index 1982-1984=100 on January 2024. The Consumer Price Index for All Urban Consumers: All Items (CPIAUCSL) is a price index of a basket of goods and services paid by urban consumers.",
+        "citations": [
+          {
+            "doc_id": "series_CPIAUCSL",
+            "series_id": "CPIAUCSL",
+            "dates": [
+              "2024-01-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.2488
+          },
+          {
+            "doc_id": "series_PCEPI",
+            "score": 0.2156
+          },
+          {
+            "doc_id": "series_GDPC1",
+            "score": 0.0249
+          }
+        ]
+      },
+      "failures": []
+    },
+    {
+      "id": "pcepi_yoy_8",
+      "question": "What was the year-over-year change in Personal Consumption Expenditures Price Index in April 2009?",
+      "status": "fail",
+      "response": {
+        "question": "What was the year-over-year change in Personal Consumption Expenditures Price Index in April 2009?",
+        "series_id": "PCEPI",
+        "transform": "point",
+        "date": "2009-04-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": null
+        },
+        "value": 88.295,
+        "unit": "Index 2017=100",
+        "answer": "In April 2009, Personal Consumption Expenditures: Chain-type Price Index was 88.30 Index 2017=100. BEA Account Code: DPCERG The Personal Consumption Expenditures Price Index is a measure of the prices that people living in the United States, or those buying on their behalf, pay for goods and servic\u2026",
+        "citations": [
+          {
+            "doc_id": "series_PCEPI",
+            "series_id": "PCEPI",
+            "dates": [
+              "2009-04-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_PCEPI",
+            "score": 0.3385
+          },
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.1109
+          },
+          {
+            "doc_id": "series_FEDFUNDS",
+            "score": 0.0118
+          }
+        ]
+      },
+      "failures": [
+        {
+          "verifier_id": "expectation_transform",
+          "severity": "critical",
+          "message": "Expected transform yoy but got point."
+        },
+        {
+          "verifier_id": "truth_matches",
+          "severity": "critical",
+          "message": "Value 88.295 differs from truth -0.5675739591662123 (tol=1e-06)."
+        }
+      ]
+    },
+    {
+      "id": "fedfunds_point_17",
+      "question": "What was Effective Federal Funds Rate in June 2001?",
+      "status": "pass",
+      "response": {
+        "question": "What was Effective Federal Funds Rate in June 2001?",
+        "series_id": "FEDFUNDS",
+        "transform": "point",
+        "date": "2001-06-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": null
+        },
+        "value": 3.97,
+        "unit": "Percent",
+        "answer": "In June 2001, Federal Funds Effective Rate was 3.97%. When a depository institution has surplus balances in its reserve account, it lends to other banks in need of larger balances.",
+        "citations": [
+          {
+            "doc_id": "series_FEDFUNDS",
+            "series_id": "FEDFUNDS",
+            "dates": [
+              "2001-06-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_FEDFUNDS",
+            "score": 0.2828
+          },
+          {
+            "doc_id": "series_UNRATE",
+            "score": 0.0202
+          },
+          {
+            "doc_id": "series_PCEPI",
+            "score": 0.0122
+          }
+        ]
+      },
+      "failures": []
+    },
+    {
+      "id": "unrate_ma_0",
+      "question": "What was the 3-period moving average of Civilian Unemployment Rate in September 2022?",
+      "status": "pass",
+      "response": {
+        "question": "What was the 3-period moving average of Civilian Unemployment Rate in September 2022?",
+        "series_id": "UNRATE",
+        "transform": "ma",
+        "date": "2022-09-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": 3
+        },
+        "value": 3.533333333333333,
+        "unit": "Percent",
+        "answer": "The 3-period moving average of Unemployment Rate on September 2022 was 3.53%. The unemployment rate represents the number of unemployed as a percentage of the labor force.",
+        "citations": [
+          {
+            "doc_id": "series_UNRATE",
+            "series_id": "UNRATE",
+            "dates": [
+              "2022-09-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_UNRATE",
+            "score": 0.1349
+          },
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.0573
+          },
+          {
+            "doc_id": "series_GDPC1",
+            "score": 0.0391
+          }
+        ]
+      },
+      "failures": []
+    },
+    {
+      "id": "fedfunds_yoy_2",
+      "question": "What was the year-over-year change in Effective Federal Funds Rate in April 2015?",
+      "status": "fail",
+      "response": {
+        "question": "What was the year-over-year change in Effective Federal Funds Rate in April 2015?",
+        "series_id": "FEDFUNDS",
+        "transform": "point",
+        "date": "2015-04-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": null
+        },
+        "value": 0.12,
+        "unit": "Percent",
+        "answer": "In April 2015, Federal Funds Effective Rate was 0.12%. When a depository institution has surplus balances in its reserve account, it lends to other banks in need of larger balances.",
+        "citations": [
+          {
+            "doc_id": "series_FEDFUNDS",
+            "series_id": "FEDFUNDS",
+            "dates": [
+              "2015-04-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_FEDFUNDS",
+            "score": 0.2503
+          },
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.05
+          },
+          {
+            "doc_id": "series_PCEPI",
+            "score": 0.0204
+          }
+        ]
+      },
+      "failures": [
+        {
+          "verifier_id": "expectation_transform",
+          "severity": "critical",
+          "message": "Expected transform yoy but got point."
+        },
+        {
+          "verifier_id": "truth_matches",
+          "severity": "critical",
+          "message": "Value 0.12 differs from truth 33.33333333333333 (tol=1e-06)."
+        }
+      ]
+    },
+    {
+      "id": "fedfunds_mom_4",
+      "question": "What was the month-over-month change in Effective Federal Funds Rate in July 2012?",
+      "status": "fail",
+      "response": {
+        "question": "What was the month-over-month change in Effective Federal Funds Rate in July 2012?",
+        "series_id": "FEDFUNDS",
+        "transform": "point",
+        "date": "2012-07-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": null
+        },
+        "value": 0.16,
+        "unit": "Percent",
+        "answer": "In July 2012, Federal Funds Effective Rate was 0.16%. When a depository institution has surplus balances in its reserve account, it lends to other banks in need of larger balances.",
+        "citations": [
+          {
+            "doc_id": "series_FEDFUNDS",
+            "series_id": "FEDFUNDS",
+            "dates": [
+              "2012-07-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_FEDFUNDS",
+            "score": 0.2686
+          },
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.0268
+          },
+          {
+            "doc_id": "series_PCEPI",
+            "score": 0.0231
+          }
+        ]
+      },
+      "failures": [
+        {
+          "verifier_id": "expectation_transform",
+          "severity": "critical",
+          "message": "Expected transform mom but got point."
+        },
+        {
+          "verifier_id": "truth_matches",
+          "severity": "critical",
+          "message": "Value 0.16 differs from truth 0.0 (tol=1e-06)."
+        }
+      ]
+    },
+    {
+      "id": "cpiaucsl_point_2",
+      "question": "What was Consumer Price Index for All Urban Consumers: All Items in April 2019?",
+      "status": "pass",
+      "response": {
+        "question": "What was Consumer Price Index for All Urban Consumers: All Items in April 2019?",
+        "series_id": "CPIAUCSL",
+        "transform": "point",
+        "date": "2019-04-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": null
+        },
+        "value": 255.233,
+        "unit": "Index 1982-1984=100",
+        "answer": "In April 2019, Consumer Price Index for All Urban Consumers: All Items in U.S. City Average was 255.23 Index 1982-1984=100. The Consumer Price Index for All Urban Consumers: All Items (CPIAUCSL) is a price index of a basket of goods and services paid by urban consumers.",
+        "citations": [
+          {
+            "doc_id": "series_CPIAUCSL",
+            "series_id": "CPIAUCSL",
+            "dates": [
+              "2019-04-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.2493
+          },
+          {
+            "doc_id": "series_PCEPI",
+            "score": 0.2063
+          },
+          {
+            "doc_id": "series_FEDFUNDS",
+            "score": 0.0095
+          }
+        ]
+      },
+      "failures": []
+    },
+    {
+      "id": "pcepi_point_7",
+      "question": "What was Personal Consumption Expenditures Price Index in January 2009?",
+      "status": "pass",
+      "response": {
+        "question": "What was Personal Consumption Expenditures Price Index in January 2009?",
+        "series_id": "PCEPI",
+        "transform": "point",
+        "date": "2009-01-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": null
+        },
+        "value": 88.108,
+        "unit": "Index 2017=100",
+        "answer": "In January 2009, Personal Consumption Expenditures: Chain-type Price Index was 88.11 Index 2017=100. BEA Account Code: DPCERG The Personal Consumption Expenditures Price Index is a measure of the prices that people living in the United States, or those buying on their behalf, pay for goods and servic\u2026",
+        "citations": [
+          {
+            "doc_id": "series_PCEPI",
+            "series_id": "PCEPI",
+            "dates": [
+              "2009-01-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_PCEPI",
+            "score": 0.3779
+          },
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.0803
+          }
+        ]
+      },
+      "failures": []
+    },
+    {
+      "id": "cpiaucsl_min_0",
+      "question": "What was the lowest Consumer Price Index for All Urban Consumers: All Items between March 2018 and November 2022?",
+      "status": "fail",
+      "response": {
+        "question": "What was the lowest Consumer Price Index for All Urban Consumers: All Items between March 2018 and November 2022?",
+        "series_id": "CPIAUCSL",
+        "transform": "ma",
+        "date": "2018-03-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": 3
+        },
+        "value": 249.3216666666667,
+        "unit": "Index 1982-1984=100",
+        "answer": "The 3-period moving average of Consumer Price Index for All Urban Consumers: All Items in U.S. City Average on March 2018 was 249.32 Index 1982-1984=100. The Consumer Price Index for All Urban Consumers: All Items (CPIAUCSL) is a price index of a basket of goods and services paid by urban consumers.",
+        "citations": [
+          {
+            "doc_id": "series_CPIAUCSL",
+            "series_id": "CPIAUCSL",
+            "dates": [
+              "2018-03-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.2345
+          },
+          {
+            "doc_id": "series_PCEPI",
+            "score": 0.194
+          },
+          {
+            "doc_id": "series_GDPC1",
+            "score": 0.0225
+          }
+        ]
+      },
+      "failures": [
+        {
+          "verifier_id": "expectation_transform",
+          "severity": "critical",
+          "message": "Expected transform min but got ma."
+        },
+        {
+          "verifier_id": "truth_matches",
+          "severity": "critical",
+          "message": "Value 249.3216666666667 differs from truth 249.577 (tol=1e-06)."
+        }
+      ]
+    },
+    {
+      "id": "cpiaucsl_max_3",
+      "question": "What was the highest Consumer Price Index for All Urban Consumers: All Items between June 2012 and July 2015?",
+      "status": "pass",
+      "response": {
+        "question": "What was the highest Consumer Price Index for All Urban Consumers: All Items between June 2012 and July 2015?",
+        "series_id": "CPIAUCSL",
+        "transform": "max",
+        "date": null,
+        "window": {
+          "start": "2012-06-01",
+          "end": "2015-07-01",
+          "periods": null
+        },
+        "value": 238.034,
+        "unit": "Index 1982-1984=100",
+        "answer": "The maximum value of Consumer Price Index for All Urban Consumers: All Items in U.S. City Average between 2012-06-01 and 2015-07-01 was 238.03 Index 1982-1984=100 on July 2015. The Consumer Price Index for All Urban Consumers: All Items (CPIAUCSL) is a price index of a basket of goods and services paid by urban consumers.",
+        "citations": [
+          {
+            "doc_id": "series_CPIAUCSL",
+            "series_id": "CPIAUCSL",
+            "dates": [
+              "2015-07-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.2493
+          },
+          {
+            "doc_id": "series_PCEPI",
+            "score": 0.2063
+          },
+          {
+            "doc_id": "series_FEDFUNDS",
+            "score": 0.0095
+          }
+        ]
+      },
+      "failures": []
+    },
+    {
+      "id": "fedfunds_yoy_0",
+      "question": "What was the year-over-year change in Effective Federal Funds Rate in November 2015?",
+      "status": "fail",
+      "response": {
+        "question": "What was the year-over-year change in Effective Federal Funds Rate in November 2015?",
+        "series_id": "FEDFUNDS",
+        "transform": "point",
+        "date": "2015-11-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": null
+        },
+        "value": 0.12,
+        "unit": "Percent",
+        "answer": "In November 2015, Federal Funds Effective Rate was 0.12%. When a depository institution has surplus balances in its reserve account, it lends to other banks in need of larger balances.",
+        "citations": [
+          {
+            "doc_id": "series_FEDFUNDS",
+            "series_id": "FEDFUNDS",
+            "dates": [
+              "2015-11-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_FEDFUNDS",
+            "score": 0.2503
+          },
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.05
+          },
+          {
+            "doc_id": "series_PCEPI",
+            "score": 0.0204
+          }
+        ]
+      },
+      "failures": [
+        {
+          "verifier_id": "expectation_transform",
+          "severity": "critical",
+          "message": "Expected transform yoy but got point."
+        },
+        {
+          "verifier_id": "truth_matches",
+          "severity": "critical",
+          "message": "Value 0.12 differs from truth 33.33333333333333 (tol=1e-06)."
+        }
+      ]
+    },
+    {
+      "id": "fedfunds_min_3",
+      "question": "What was the lowest Effective Federal Funds Rate between October 2023 and October 2025?",
+      "status": "pass",
+      "response": {
+        "question": "What was the lowest Effective Federal Funds Rate between October 2023 and October 2025?",
+        "series_id": "FEDFUNDS",
+        "transform": "min",
+        "date": null,
+        "window": {
+          "start": "2023-10-01",
+          "end": "2025-10-01",
+          "periods": null
+        },
+        "value": 4.09,
+        "unit": "Percent",
+        "answer": "The minimum value of Federal Funds Effective Rate between 2023-10-01 and 2025-10-01 was 4.09% on October 2025. When a depository institution has surplus balances in its reserve account, it lends to other banks in need of larger balances.",
+        "citations": [
+          {
+            "doc_id": "series_FEDFUNDS",
+            "series_id": "FEDFUNDS",
+            "dates": [
+              "2025-10-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_FEDFUNDS",
+            "score": 0.2678
+          },
+          {
+            "doc_id": "series_GDPC1",
+            "score": 0.08
+          },
+          {
+            "doc_id": "series_UNRATE",
+            "score": 0.0403
+          }
+        ]
+      },
+      "failures": []
+    },
+    {
+      "id": "fedfunds_ma_5",
+      "question": "What was the 6-period moving average of Effective Federal Funds Rate in October 2022?",
+      "status": "fail",
+      "response": {
+        "question": "What was the 6-period moving average of Effective Federal Funds Rate in October 2022?",
+        "series_id": "FEDFUNDS",
+        "transform": "ma",
+        "date": "2022-10-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": 3
+        },
+        "value": 2.6566666666666667,
+        "unit": "Percent",
+        "answer": "The 3-period moving average of Federal Funds Effective Rate on October 2022 was 2.66%. When a depository institution has surplus balances in its reserve account, it lends to other banks in need of larger balances.",
+        "citations": [
+          {
+            "doc_id": "series_FEDFUNDS",
+            "series_id": "FEDFUNDS",
+            "dates": [
+              "2022-10-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_FEDFUNDS",
+            "score": 0.243
+          },
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.0435
+          },
+          {
+            "doc_id": "series_GDPC1",
+            "score": 0.0297
+          }
+        ]
+      },
+      "failures": [
+        {
+          "verifier_id": "primary_value_mentioned",
+          "severity": "medium",
+          "message": "Answer text does not appear to cite value 2.6566666666666667."
+        },
+        {
+          "verifier_id": "truth_matches",
+          "severity": "critical",
+          "message": "Value 2.6566666666666667 differs from truth 1.9383333333333335 (tol=1e-06)."
+        }
+      ]
+    },
+    {
+      "id": "gdpc1_yoy_6",
+      "question": "What was the year-over-year change in Real Gross Domestic Product in July 2010?",
+      "status": "fail",
+      "response": {
+        "question": "What was the year-over-year change in Real Gross Domestic Product in July 2010?",
+        "series_id": "GDPC1",
+        "transform": "point",
+        "date": "2010-07-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": null
+        },
+        "value": 16872.266,
+        "unit": "Billions of Chained 2017 Dollars",
+        "answer": "In July 2010, Real Gross Domestic Product was 16,872.27 Billions of Chained 2017 Dollars. BEA Account Code: A191RX Real gross domestic product is the inflation adjusted value of the goods and services produced by labor and property located in the United States.For more information see the\u2026",
+        "citations": [
+          {
+            "doc_id": "series_GDPC1",
+            "series_id": "GDPC1",
+            "dates": [
+              "2010-07-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_GDPC1",
+            "score": 0.2517
+          },
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.0438
+          },
+          {
+            "doc_id": "series_PCEPI",
+            "score": 0.0196
+          }
+        ]
+      },
+      "failures": [
+        {
+          "verifier_id": "expectation_transform",
+          "severity": "critical",
+          "message": "Expected transform yoy but got point."
+        },
+        {
+          "verifier_id": "truth_matches",
+          "severity": "critical",
+          "message": "Value 16872.266 differs from truth 3.3442092537792205 (tol=1e-06)."
+        }
+      ]
+    },
+    {
+      "id": "fedfunds_point_3",
+      "question": "What was Effective Federal Funds Rate in January 2015?",
+      "status": "pass",
+      "response": {
+        "question": "What was Effective Federal Funds Rate in January 2015?",
+        "series_id": "FEDFUNDS",
+        "transform": "point",
+        "date": "2015-01-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": null
+        },
+        "value": 0.11,
+        "unit": "Percent",
+        "answer": "In January 2015, Federal Funds Effective Rate was 0.11%. When a depository institution has surplus balances in its reserve account, it lends to other banks in need of larger balances.",
+        "citations": [
+          {
+            "doc_id": "series_FEDFUNDS",
+            "series_id": "FEDFUNDS",
+            "dates": [
+              "2015-01-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_FEDFUNDS",
+            "score": 0.2828
+          },
+          {
+            "doc_id": "series_UNRATE",
+            "score": 0.0202
+          },
+          {
+            "doc_id": "series_PCEPI",
+            "score": 0.0122
+          }
+        ]
+      },
+      "failures": []
+    },
+    {
+      "id": "fedfunds_mom_5",
+      "question": "What was the month-over-month change in Effective Federal Funds Rate in April 2023?",
+      "status": "fail",
+      "response": {
+        "question": "What was the month-over-month change in Effective Federal Funds Rate in April 2023?",
+        "series_id": "FEDFUNDS",
+        "transform": "point",
+        "date": "2023-04-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": null
+        },
+        "value": 4.83,
+        "unit": "Percent",
+        "answer": "In April 2023, Federal Funds Effective Rate was 4.83%. When a depository institution has surplus balances in its reserve account, it lends to other banks in need of larger balances.",
+        "citations": [
+          {
+            "doc_id": "series_FEDFUNDS",
+            "series_id": "FEDFUNDS",
+            "dates": [
+              "2023-04-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_FEDFUNDS",
+            "score": 0.2503
+          },
+          {
+            "doc_id": "series_GDPC1",
+            "score": 0.0648
+          },
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.025
+          }
+        ]
+      },
+      "failures": [
+        {
+          "verifier_id": "expectation_transform",
+          "severity": "critical",
+          "message": "Expected transform mom but got point."
+        },
+        {
+          "verifier_id": "truth_matches",
+          "severity": "critical",
+          "message": "Value 4.83 differs from truth 3.8709677419354778 (tol=1e-06)."
+        }
+      ]
+    },
+    {
+      "id": "fedfunds_ma_4",
+      "question": "What was the 3-period moving average of Effective Federal Funds Rate in November 2004?",
+      "status": "fail",
+      "response": {
+        "question": "What was the 3-period moving average of Effective Federal Funds Rate in November 2004?",
+        "series_id": "FEDFUNDS",
+        "transform": "ma",
+        "date": "2004-11-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": 3
+        },
+        "value": 1.7666666666666666,
+        "unit": "Percent",
+        "answer": "The 3-period moving average of Federal Funds Effective Rate on November 2004 was 1.77%. When a depository institution has surplus balances in its reserve account, it lends to other banks in need of larger balances.",
+        "citations": [
+          {
+            "doc_id": "series_FEDFUNDS",
+            "series_id": "FEDFUNDS",
+            "dates": [
+              "2004-11-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_FEDFUNDS",
+            "score": 0.2585
+          },
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.0462
+          },
+          {
+            "doc_id": "series_UNRATE",
+            "score": 0.0179
+          }
+        ]
+      },
+      "failures": [
+        {
+          "verifier_id": "primary_value_mentioned",
+          "severity": "medium",
+          "message": "Answer text does not appear to cite value 1.7666666666666666."
+        }
+      ]
+    },
+    {
+      "id": "gdpc1_yoy_4",
+      "question": "What was the year-over-year change in Real Gross Domestic Product in April 2008?",
+      "status": "fail",
+      "response": {
+        "question": "What was the year-over-year change in Real Gross Domestic Product in April 2008?",
+        "series_id": "GDPC1",
+        "transform": "point",
+        "date": "2008-04-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": null
+        },
+        "value": 16943.291,
+        "unit": "Billions of Chained 2017 Dollars",
+        "answer": "In April 2008, Real Gross Domestic Product was 16,943.29 Billions of Chained 2017 Dollars. BEA Account Code: A191RX Real gross domestic product is the inflation adjusted value of the goods and services produced by labor and property located in the United States.For more information see the\u2026",
+        "citations": [
+          {
+            "doc_id": "series_GDPC1",
+            "series_id": "GDPC1",
+            "dates": [
+              "2008-04-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_GDPC1",
+            "score": 0.2517
+          },
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.0438
+          },
+          {
+            "doc_id": "series_PCEPI",
+            "score": 0.0196
+          }
+        ]
+      },
+      "failures": [
+        {
+          "verifier_id": "expectation_transform",
+          "severity": "critical",
+          "message": "Expected transform yoy but got point."
+        },
+        {
+          "verifier_id": "truth_matches",
+          "severity": "critical",
+          "message": "Value 16943.291 differs from truth 1.3760107660276268 (tol=1e-06)."
+        }
+      ]
+    },
+    {
+      "id": "pcepi_min_4",
+      "question": "What was the lowest Personal Consumption Expenditures Price Index between March 2001 and March 2024?",
+      "status": "fail",
+      "response": {
+        "question": "What was the lowest Personal Consumption Expenditures Price Index between March 2001 and March 2024?",
+        "series_id": "PCEPI",
+        "transform": "ma",
+        "date": "2001-03-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": 3
+        },
+        "value": 75.01166666666667,
+        "unit": "Index 2017=100",
+        "answer": "The 3-period moving average of Personal Consumption Expenditures: Chain-type Price Index on March 2001 was 75.01 Index 2017=100. BEA Account Code: DPCERG The Personal Consumption Expenditures Price Index is a measure of the prices that people living in the United States, or those buying on their behalf, pay for goods and servic\u2026",
+        "citations": [
+          {
+            "doc_id": "series_PCEPI",
+            "series_id": "PCEPI",
+            "dates": [
+              "2001-03-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_PCEPI",
+            "score": 0.3825
+          },
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.0845
+          },
+          {
+            "doc_id": "series_GDPC1",
+            "score": 0.0244
+          }
+        ]
+      },
+      "failures": [
+        {
+          "verifier_id": "expectation_transform",
+          "severity": "critical",
+          "message": "Expected transform min but got ma."
+        },
+        {
+          "verifier_id": "truth_matches",
+          "severity": "critical",
+          "message": "Value 75.01166666666667 differs from truth 75.055 (tol=1e-06)."
+        }
+      ]
+    },
+    {
+      "id": "unrate_point_0",
+      "question": "What was Civilian Unemployment Rate in October 2007?",
+      "status": "pass",
+      "response": {
+        "question": "What was Civilian Unemployment Rate in October 2007?",
+        "series_id": "UNRATE",
+        "transform": "point",
+        "date": "2007-10-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": null
+        },
+        "value": 4.7,
+        "unit": "Percent",
+        "answer": "In October 2007, Unemployment Rate was 4.70%. The unemployment rate represents the number of unemployed as a percentage of the labor force.",
+        "citations": [
+          {
+            "doc_id": "series_UNRATE",
+            "series_id": "UNRATE",
+            "dates": [
+              "2007-10-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_UNRATE",
+            "score": 0.1651
+          },
+          {
+            "doc_id": "series_FEDFUNDS",
+            "score": 0.0446
+          },
+          {
+            "doc_id": "series_GDPC1",
+            "score": 0.0115
+          }
+        ]
+      },
+      "failures": []
+    },
+    {
+      "id": "pcepi_point_8",
+      "question": "What was Personal Consumption Expenditures Price Index in June 2013?",
+      "status": "pass",
+      "response": {
+        "question": "What was Personal Consumption Expenditures Price Index in June 2013?",
+        "series_id": "PCEPI",
+        "transform": "point",
+        "date": "2013-06-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": null
+        },
+        "value": 95.673,
+        "unit": "Index 2017=100",
+        "answer": "In June 2013, Personal Consumption Expenditures: Chain-type Price Index was 95.67 Index 2017=100. BEA Account Code: DPCERG The Personal Consumption Expenditures Price Index is a measure of the prices that people living in the United States, or those buying on their behalf, pay for goods and servic\u2026",
+        "citations": [
+          {
+            "doc_id": "series_PCEPI",
+            "series_id": "PCEPI",
+            "dates": [
+              "2013-06-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_PCEPI",
+            "score": 0.3779
+          },
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.0803
+          }
+        ]
+      },
+      "failures": []
+    },
+    {
+      "id": "pcepi_mom_3",
+      "question": "What was the month-over-month change in Personal Consumption Expenditures Price Index in March 2006?",
+      "status": "fail",
+      "response": {
+        "question": "What was the month-over-month change in Personal Consumption Expenditures Price Index in March 2006?",
+        "series_id": "PCEPI",
+        "transform": "ma",
+        "date": "2006-03-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": 3
+        },
+        "value": 83.62133333333334,
+        "unit": "Index 2017=100",
+        "answer": "The 3-period moving average of Personal Consumption Expenditures: Chain-type Price Index on March 2006 was 83.62 Index 2017=100. BEA Account Code: DPCERG The Personal Consumption Expenditures Price Index is a measure of the prices that people living in the United States, or those buying on their behalf, pay for goods and servic\u2026",
+        "citations": [
+          {
+            "doc_id": "series_PCEPI",
+            "series_id": "PCEPI",
+            "dates": [
+              "2006-03-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_PCEPI",
+            "score": 0.3735
+          },
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.0963
+          }
+        ]
+      },
+      "failures": [
+        {
+          "verifier_id": "expectation_transform",
+          "severity": "critical",
+          "message": "Expected transform mom but got ma."
+        },
+        {
+          "verifier_id": "truth_matches",
+          "severity": "critical",
+          "message": "Value 83.62133333333334 differs from truth 0.19381699846859676 (tol=1e-06)."
+        }
+      ]
+    },
+    {
+      "id": "unrate_point_6",
+      "question": "What was Civilian Unemployment Rate in June 2006?",
+      "status": "pass",
+      "response": {
+        "question": "What was Civilian Unemployment Rate in June 2006?",
+        "series_id": "UNRATE",
+        "transform": "point",
+        "date": "2006-06-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": null
+        },
+        "value": 4.6,
+        "unit": "Percent",
+        "answer": "In June 2006, Unemployment Rate was 4.60%. The unemployment rate represents the number of unemployed as a percentage of the labor force.",
+        "citations": [
+          {
+            "doc_id": "series_UNRATE",
+            "series_id": "UNRATE",
+            "dates": [
+              "2006-06-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_UNRATE",
+            "score": 0.1975
+          },
+          {
+            "doc_id": "series_FEDFUNDS",
+            "score": 0.0305
+          },
+          {
+            "doc_id": "series_GDPC1",
+            "score": 0.0138
+          }
+        ]
+      },
+      "failures": []
+    },
+    {
+      "id": "cpiaucsl_ma_7",
+      "question": "What was the 3-period moving average of Consumer Price Index for All Urban Consumers: All Items in April 2004?",
+      "status": "pass",
+      "response": {
+        "question": "What was the 3-period moving average of Consumer Price Index for All Urban Consumers: All Items in April 2004?",
+        "series_id": "CPIAUCSL",
+        "transform": "ma",
+        "date": "2004-04-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": 3
+        },
+        "value": 187.0666666666667,
+        "unit": "Index 1982-1984=100",
+        "answer": "The 3-period moving average of Consumer Price Index for All Urban Consumers: All Items in U.S. City Average on April 2004 was 187.07 Index 1982-1984=100. The Consumer Price Index for All Urban Consumers: All Items (CPIAUCSL) is a price index of a basket of goods and services paid by urban consumers.",
+        "citations": [
+          {
+            "doc_id": "series_CPIAUCSL",
+            "series_id": "CPIAUCSL",
+            "dates": [
+              "2004-04-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.2637
+          },
+          {
+            "doc_id": "series_PCEPI",
+            "score": 0.1871
+          },
+          {
+            "doc_id": "series_FEDFUNDS",
+            "score": 0.016
+          }
+        ]
+      },
+      "failures": []
+    },
+    {
+      "id": "pcepi_yoy_9",
+      "question": "What was the year-over-year change in Personal Consumption Expenditures Price Index in October 2013?",
+      "status": "fail",
+      "response": {
+        "question": "What was the year-over-year change in Personal Consumption Expenditures Price Index in October 2013?",
+        "series_id": "PCEPI",
+        "transform": "point",
+        "date": "2013-10-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": null
+        },
+        "value": 96.103,
+        "unit": "Index 2017=100",
+        "answer": "In October 2013, Personal Consumption Expenditures: Chain-type Price Index was 96.10 Index 2017=100. BEA Account Code: DPCERG The Personal Consumption Expenditures Price Index is a measure of the prices that people living in the United States, or those buying on their behalf, pay for goods and servic\u2026",
+        "citations": [
+          {
+            "doc_id": "series_PCEPI",
+            "series_id": "PCEPI",
+            "dates": [
+              "2013-10-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_PCEPI",
+            "score": 0.3385
+          },
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.1109
+          },
+          {
+            "doc_id": "series_FEDFUNDS",
+            "score": 0.0118
+          }
+        ]
+      },
+      "failures": [
+        {
+          "verifier_id": "expectation_transform",
+          "severity": "critical",
+          "message": "Expected transform yoy but got point."
+        },
+        {
+          "verifier_id": "truth_matches",
+          "severity": "critical",
+          "message": "Value 96.103 differs from truth 0.9761069199571183 (tol=1e-06)."
+        }
+      ]
+    },
+    {
+      "id": "cpiaucsl_point_15",
+      "question": "What was Consumer Price Index for All Urban Consumers: All Items in September 2005?",
+      "status": "pass",
+      "response": {
+        "question": "What was Consumer Price Index for All Urban Consumers: All Items in September 2005?",
+        "series_id": "CPIAUCSL",
+        "transform": "point",
+        "date": "2005-09-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": null
+        },
+        "value": 198.8,
+        "unit": "Index 1982-1984=100",
+        "answer": "In September 2005, Consumer Price Index for All Urban Consumers: All Items in U.S. City Average was 198.80 Index 1982-1984=100. The Consumer Price Index for All Urban Consumers: All Items (CPIAUCSL) is a price index of a basket of goods and services paid by urban consumers.",
+        "citations": [
+          {
+            "doc_id": "series_CPIAUCSL",
+            "series_id": "CPIAUCSL",
+            "dates": [
+              "2005-09-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.2493
+          },
+          {
+            "doc_id": "series_PCEPI",
+            "score": 0.2063
+          },
+          {
+            "doc_id": "series_FEDFUNDS",
+            "score": 0.0095
+          }
+        ]
+      },
+      "failures": []
+    },
+    {
+      "id": "pcepi_yoy_7",
+      "question": "What was the year-over-year change in Personal Consumption Expenditures Price Index in January 2015?",
+      "status": "fail",
+      "response": {
+        "question": "What was the year-over-year change in Personal Consumption Expenditures Price Index in January 2015?",
+        "series_id": "PCEPI",
+        "transform": "point",
+        "date": "2015-01-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": null
+        },
+        "value": 96.654,
+        "unit": "Index 2017=100",
+        "answer": "In January 2015, Personal Consumption Expenditures: Chain-type Price Index was 96.65 Index 2017=100. BEA Account Code: DPCERG The Personal Consumption Expenditures Price Index is a measure of the prices that people living in the United States, or those buying on their behalf, pay for goods and servic\u2026",
+        "citations": [
+          {
+            "doc_id": "series_PCEPI",
+            "series_id": "PCEPI",
+            "dates": [
+              "2015-01-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_PCEPI",
+            "score": 0.3385
+          },
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.1109
+          },
+          {
+            "doc_id": "series_FEDFUNDS",
+            "score": 0.0118
+          }
+        ]
+      },
+      "failures": [
+        {
+          "verifier_id": "expectation_transform",
+          "severity": "critical",
+          "message": "Expected transform yoy but got point."
+        },
+        {
+          "verifier_id": "truth_matches",
+          "severity": "critical",
+          "message": "Value 96.654 differs from truth 0.041401867224203574 (tol=1e-06)."
+        }
+      ]
+    },
+    {
+      "id": "cpiaucsl_min_2",
+      "question": "What was the lowest Consumer Price Index for All Urban Consumers: All Items between April 2009 and June 2020?",
+      "status": "pass",
+      "response": {
+        "question": "What was the lowest Consumer Price Index for All Urban Consumers: All Items between April 2009 and June 2020?",
+        "series_id": "CPIAUCSL",
+        "transform": "min",
+        "date": null,
+        "window": {
+          "start": "2009-04-01",
+          "end": "2020-06-01",
+          "periods": null
+        },
+        "value": 212.709,
+        "unit": "Index 1982-1984=100",
+        "answer": "The minimum value of Consumer Price Index for All Urban Consumers: All Items in U.S. City Average between 2009-04-01 and 2020-06-01 was 212.71 Index 1982-1984=100 on April 2009. The Consumer Price Index for All Urban Consumers: All Items (CPIAUCSL) is a price index of a basket of goods and services paid by urban consumers.",
+        "citations": [
+          {
+            "doc_id": "series_CPIAUCSL",
+            "series_id": "CPIAUCSL",
+            "dates": [
+              "2009-04-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.2345
+          },
+          {
+            "doc_id": "series_PCEPI",
+            "score": 0.194
+          },
+          {
+            "doc_id": "series_FEDFUNDS",
+            "score": 0.0208
+          }
+        ]
+      },
+      "failures": []
+    },
+    {
+      "id": "cpiaucsl_point_9",
+      "question": "What was Consumer Price Index for All Urban Consumers: All Items in November 2017?",
+      "status": "pass",
+      "response": {
+        "question": "What was Consumer Price Index for All Urban Consumers: All Items in November 2017?",
+        "series_id": "CPIAUCSL",
+        "transform": "point",
+        "date": "2017-11-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": null
+        },
+        "value": 247.284,
+        "unit": "Index 1982-1984=100",
+        "answer": "In November 2017, Consumer Price Index for All Urban Consumers: All Items in U.S. City Average was 247.28 Index 1982-1984=100. The Consumer Price Index for All Urban Consumers: All Items (CPIAUCSL) is a price index of a basket of goods and services paid by urban consumers.",
+        "citations": [
+          {
+            "doc_id": "series_CPIAUCSL",
+            "series_id": "CPIAUCSL",
+            "dates": [
+              "2017-11-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.2393
+          },
+          {
+            "doc_id": "series_PCEPI",
+            "score": 0.2084
+          },
+          {
+            "doc_id": "series_GDPC1",
+            "score": 0.0149
+          }
+        ]
+      },
+      "failures": []
+    },
+    {
+      "id": "unrate_point_4",
+      "question": "What was Civilian Unemployment Rate in February 2010?",
+      "status": "pass",
+      "response": {
+        "question": "What was Civilian Unemployment Rate in February 2010?",
+        "series_id": "UNRATE",
+        "transform": "point",
+        "date": "2010-02-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": null
+        },
+        "value": 9.8,
+        "unit": "Percent",
+        "answer": "In February 2010, Unemployment Rate was 9.80%. The unemployment rate represents the number of unemployed as a percentage of the labor force.",
+        "citations": [
+          {
+            "doc_id": "series_UNRATE",
+            "series_id": "UNRATE",
+            "dates": [
+              "2010-02-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_UNRATE",
+            "score": 0.1975
+          },
+          {
+            "doc_id": "series_FEDFUNDS",
+            "score": 0.0305
+          },
+          {
+            "doc_id": "series_GDPC1",
+            "score": 0.0138
+          }
+        ]
+      },
+      "failures": []
+    },
+    {
+      "id": "cpiaucsl_point_12",
+      "question": "What was Consumer Price Index for All Urban Consumers: All Items in September 2000?",
+      "status": "pass",
+      "response": {
+        "question": "What was Consumer Price Index for All Urban Consumers: All Items in September 2000?",
+        "series_id": "CPIAUCSL",
+        "transform": "point",
+        "date": "2000-09-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": null
+        },
+        "value": 173.6,
+        "unit": "Index 1982-1984=100",
+        "answer": "In September 2000, Consumer Price Index for All Urban Consumers: All Items in U.S. City Average was 173.60 Index 1982-1984=100. The Consumer Price Index for All Urban Consumers: All Items (CPIAUCSL) is a price index of a basket of goods and services paid by urban consumers.",
+        "citations": [
+          {
+            "doc_id": "series_CPIAUCSL",
+            "series_id": "CPIAUCSL",
+            "dates": [
+              "2000-09-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.2493
+          },
+          {
+            "doc_id": "series_PCEPI",
+            "score": 0.2063
+          },
+          {
+            "doc_id": "series_FEDFUNDS",
+            "score": 0.0095
+          }
+        ]
+      },
+      "failures": []
+    },
+    {
+      "id": "fedfunds_mom_8",
+      "question": "What was the month-over-month change in Effective Federal Funds Rate in December 2005?",
+      "status": "fail",
+      "response": {
+        "question": "What was the month-over-month change in Effective Federal Funds Rate in December 2005?",
+        "series_id": "FEDFUNDS",
+        "transform": "point",
+        "date": "2005-12-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": null
+        },
+        "value": 4.16,
+        "unit": "Percent",
+        "answer": "In December 2005, Federal Funds Effective Rate was 4.16%. When a depository institution has surplus balances in its reserve account, it lends to other banks in need of larger balances.",
+        "citations": [
+          {
+            "doc_id": "series_FEDFUNDS",
+            "series_id": "FEDFUNDS",
+            "dates": [
+              "2005-12-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_FEDFUNDS",
+            "score": 0.2686
+          },
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.0268
+          },
+          {
+            "doc_id": "series_PCEPI",
+            "score": 0.0231
+          }
+        ]
+      },
+      "failures": [
+        {
+          "verifier_id": "expectation_transform",
+          "severity": "critical",
+          "message": "Expected transform mom but got point."
+        },
+        {
+          "verifier_id": "truth_matches",
+          "severity": "critical",
+          "message": "Value 4.16 differs from truth 4.0000000000000036 (tol=1e-06)."
+        }
+      ]
+    },
+    {
+      "id": "pcepi_ma_3",
+      "question": "What was the 5-period moving average of Personal Consumption Expenditures Price Index in September 2006?",
+      "status": "fail",
+      "response": {
+        "question": "What was the 5-period moving average of Personal Consumption Expenditures Price Index in September 2006?",
+        "series_id": "PCEPI",
+        "transform": "ma",
+        "date": "2006-09-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": 3
+        },
+        "value": 84.96166666666666,
+        "unit": "Index 2017=100",
+        "answer": "The 3-period moving average of Personal Consumption Expenditures: Chain-type Price Index on September 2006 was 84.96 Index 2017=100. BEA Account Code: DPCERG The Personal Consumption Expenditures Price Index is a measure of the prices that people living in the United States, or those buying on their behalf, pay for goods and servic\u2026",
+        "citations": [
+          {
+            "doc_id": "series_PCEPI",
+            "series_id": "PCEPI",
+            "dates": [
+              "2006-09-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_PCEPI",
+            "score": 0.3439
+          },
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.11
+          },
+          {
+            "doc_id": "series_FEDFUNDS",
+            "score": 0.0073
+          }
+        ]
+      },
+      "failures": [
+        {
+          "verifier_id": "truth_matches",
+          "severity": "critical",
+          "message": "Value 84.96166666666666 differs from truth 84.763 (tol=1e-06)."
+        }
+      ]
+    },
+    {
+      "id": "fedfunds_yoy_5",
+      "question": "What was the year-over-year change in Effective Federal Funds Rate in December 2004?",
+      "status": "fail",
+      "response": {
+        "question": "What was the year-over-year change in Effective Federal Funds Rate in December 2004?",
+        "series_id": "FEDFUNDS",
+        "transform": "point",
+        "date": "2004-12-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": null
+        },
+        "value": 2.16,
+        "unit": "Percent",
+        "answer": "In December 2004, Federal Funds Effective Rate was 2.16%. When a depository institution has surplus balances in its reserve account, it lends to other banks in need of larger balances.",
+        "citations": [
+          {
+            "doc_id": "series_FEDFUNDS",
+            "series_id": "FEDFUNDS",
+            "dates": [
+              "2004-12-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_FEDFUNDS",
+            "score": 0.2503
+          },
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.05
+          },
+          {
+            "doc_id": "series_PCEPI",
+            "score": 0.0204
+          }
+        ]
+      },
+      "failures": [
+        {
+          "verifier_id": "expectation_transform",
+          "severity": "critical",
+          "message": "Expected transform yoy but got point."
+        },
+        {
+          "verifier_id": "truth_matches",
+          "severity": "critical",
+          "message": "Value 2.16 differs from truth 120.40816326530614 (tol=1e-06)."
+        }
+      ]
+    },
+    {
+      "id": "cpiaucsl_min_1",
+      "question": "What was the lowest Consumer Price Index for All Urban Consumers: All Items between February 2023 and April 2025?",
+      "status": "pass",
+      "response": {
+        "question": "What was the lowest Consumer Price Index for All Urban Consumers: All Items between February 2023 and April 2025?",
+        "series_id": "CPIAUCSL",
+        "transform": "min",
+        "date": null,
+        "window": {
+          "start": "2023-02-01",
+          "end": "2025-04-01",
+          "periods": null
+        },
+        "value": 301.476,
+        "unit": "Index 1982-1984=100",
+        "answer": "The minimum value of Consumer Price Index for All Urban Consumers: All Items in U.S. City Average between 2023-02-01 and 2025-04-01 was 301.48 Index 1982-1984=100 on February 2023. The Consumer Price Index for All Urban Consumers: All Items (CPIAUCSL) is a price index of a basket of goods and services paid by urban consumers.",
+        "citations": [
+          {
+            "doc_id": "series_CPIAUCSL",
+            "series_id": "CPIAUCSL",
+            "dates": [
+              "2023-02-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.2423
+          },
+          {
+            "doc_id": "series_PCEPI",
+            "score": 0.203
+          },
+          {
+            "doc_id": "series_GDPC1",
+            "score": 0.065
+          }
+        ]
+      },
+      "failures": []
+    },
+    {
+      "id": "cpiaucsl_point_10",
+      "question": "What was Consumer Price Index for All Urban Consumers: All Items in January 2016?",
+      "status": "pass",
+      "response": {
+        "question": "What was Consumer Price Index for All Urban Consumers: All Items in January 2016?",
+        "series_id": "CPIAUCSL",
+        "transform": "point",
+        "date": "2016-01-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": null
+        },
+        "value": 237.652,
+        "unit": "Index 1982-1984=100",
+        "answer": "In January 2016, Consumer Price Index for All Urban Consumers: All Items in U.S. City Average was 237.65 Index 1982-1984=100. The Consumer Price Index for All Urban Consumers: All Items (CPIAUCSL) is a price index of a basket of goods and services paid by urban consumers.",
+        "citations": [
+          {
+            "doc_id": "series_CPIAUCSL",
+            "series_id": "CPIAUCSL",
+            "dates": [
+              "2016-01-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.2493
+          },
+          {
+            "doc_id": "series_PCEPI",
+            "score": 0.2063
+          },
+          {
+            "doc_id": "series_FEDFUNDS",
+            "score": 0.0095
+          }
+        ]
+      },
+      "failures": []
+    },
+    {
+      "id": "gdpc1_point_19",
+      "question": "What was Real Gross Domestic Product in October 2019?",
+      "status": "pass",
+      "response": {
+        "question": "What was Real Gross Domestic Product in October 2019?",
+        "series_id": "GDPC1",
+        "transform": "point",
+        "date": "2019-10-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": null
+        },
+        "value": 20985.448,
+        "unit": "Billions of Chained 2017 Dollars",
+        "answer": "In October 2019, Real Gross Domestic Product was 20,985.45 Billions of Chained 2017 Dollars. BEA Account Code: A191RX Real gross domestic product is the inflation adjusted value of the goods and services produced by labor and property located in the United States.For more information see the\u2026",
+        "citations": [
+          {
+            "doc_id": "series_GDPC1",
+            "series_id": "GDPC1",
+            "dates": [
+              "2019-10-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_GDPC1",
+            "score": 0.2955
+          },
+          {
+            "doc_id": "series_PCEPI",
+            "score": 0.0115
+          }
+        ]
+      },
+      "failures": []
+    },
+    {
+      "id": "unrate_point_1",
+      "question": "What was Civilian Unemployment Rate in May 2024?",
+      "status": "fail",
+      "response": {
+        "question": "What was Civilian Unemployment Rate in May 2024?",
+        "series_id": "UNRATE",
+        "transform": "ma",
+        "date": "2024-05-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": 3
+        },
+        "value": 3.9,
+        "unit": "Percent",
+        "answer": "The 3-period moving average of Unemployment Rate on May 2024 was 3.90%. The unemployment rate represents the number of unemployed as a percentage of the labor force.",
+        "citations": [
+          {
+            "doc_id": "series_UNRATE",
+            "series_id": "UNRATE",
+            "dates": [
+              "2024-05-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_UNRATE",
+            "score": 0.1808
+          },
+          {
+            "doc_id": "series_GDPC1",
+            "score": 0.0552
+          },
+          {
+            "doc_id": "series_FEDFUNDS",
+            "score": 0.0279
+          }
+        ]
+      },
+      "failures": [
+        {
+          "verifier_id": "expectation_transform",
+          "severity": "critical",
+          "message": "Expected transform point but got ma."
+        }
+      ]
+    },
+    {
+      "id": "fedfunds_point_18",
+      "question": "What was Effective Federal Funds Rate in December 2010?",
+      "status": "pass",
+      "response": {
+        "question": "What was Effective Federal Funds Rate in December 2010?",
+        "series_id": "FEDFUNDS",
+        "transform": "point",
+        "date": "2010-12-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": null
+        },
+        "value": 0.18,
+        "unit": "Percent",
+        "answer": "In December 2010, Federal Funds Effective Rate was 0.18%. When a depository institution has surplus balances in its reserve account, it lends to other banks in need of larger balances.",
+        "citations": [
+          {
+            "doc_id": "series_FEDFUNDS",
+            "series_id": "FEDFUNDS",
+            "dates": [
+              "2010-12-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_FEDFUNDS",
+            "score": 0.2828
+          },
+          {
+            "doc_id": "series_UNRATE",
+            "score": 0.0202
+          },
+          {
+            "doc_id": "series_PCEPI",
+            "score": 0.0122
+          }
+        ]
+      },
+      "failures": []
+    },
+    {
+      "id": "unrate_ma_1",
+      "question": "What was the 6-period moving average of Civilian Unemployment Rate in June 2014?",
+      "status": "fail",
+      "response": {
+        "question": "What was the 6-period moving average of Civilian Unemployment Rate in June 2014?",
+        "series_id": "UNRATE",
+        "transform": "ma",
+        "date": "2014-06-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": 3
+        },
+        "value": 6.2,
+        "unit": "Percent",
+        "answer": "The 3-period moving average of Unemployment Rate on June 2014 was 6.20%. The unemployment rate represents the number of unemployed as a percentage of the labor force.",
+        "citations": [
+          {
+            "doc_id": "series_UNRATE",
+            "series_id": "UNRATE",
+            "dates": [
+              "2014-06-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_UNRATE",
+            "score": 0.151
+          },
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.0641
+          },
+          {
+            "doc_id": "series_FEDFUNDS",
+            "score": 0.0347
+          }
+        ]
+      },
+      "failures": [
+        {
+          "verifier_id": "truth_matches",
+          "severity": "critical",
+          "message": "Value 6.2 differs from truth 6.433333333333334 (tol=1e-06)."
+        }
+      ]
+    },
+    {
+      "id": "fedfunds_point_11",
+      "question": "What was Effective Federal Funds Rate in February 2007?",
+      "status": "pass",
+      "response": {
+        "question": "What was Effective Federal Funds Rate in February 2007?",
+        "series_id": "FEDFUNDS",
+        "transform": "point",
+        "date": "2007-02-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": null
+        },
+        "value": 5.26,
+        "unit": "Percent",
+        "answer": "In February 2007, Federal Funds Effective Rate was 5.26%. When a depository institution has surplus balances in its reserve account, it lends to other banks in need of larger balances.",
+        "citations": [
+          {
+            "doc_id": "series_FEDFUNDS",
+            "series_id": "FEDFUNDS",
+            "dates": [
+              "2007-02-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_FEDFUNDS",
+            "score": 0.2749
+          },
+          {
+            "doc_id": "series_UNRATE",
+            "score": 0.0187
+          },
+          {
+            "doc_id": "series_PCEPI",
+            "score": 0.0113
+          }
+        ]
+      },
+      "failures": []
+    },
+    {
+      "id": "pcepi_ma_6",
+      "question": "What was the 3-period moving average of Personal Consumption Expenditures Price Index in June 2023?",
+      "status": "pass",
+      "response": {
+        "question": "What was the 3-period moving average of Personal Consumption Expenditures Price Index in June 2023?",
+        "series_id": "PCEPI",
+        "transform": "ma",
+        "date": "2023-06-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": 3
+        },
+        "value": 120.19,
+        "unit": "Index 2017=100",
+        "answer": "The 3-period moving average of Personal Consumption Expenditures: Chain-type Price Index on June 2023 was 120.19 Index 2017=100. BEA Account Code: DPCERG The Personal Consumption Expenditures Price Index is a measure of the prices that people living in the United States, or those buying on their behalf, pay for goods and servic\u2026",
+        "citations": [
+          {
+            "doc_id": "series_PCEPI",
+            "series_id": "PCEPI",
+            "dates": [
+              "2023-06-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_PCEPI",
+            "score": 0.3273
+          },
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.1047
+          },
+          {
+            "doc_id": "series_GDPC1",
+            "score": 0.0485
+          }
+        ]
+      },
+      "failures": []
+    },
+    {
+      "id": "pcepi_mom_1",
+      "question": "What was the month-over-month change in Personal Consumption Expenditures Price Index in October 2008?",
+      "status": "fail",
+      "response": {
+        "question": "What was the month-over-month change in Personal Consumption Expenditures Price Index in October 2008?",
+        "series_id": "PCEPI",
+        "transform": "point",
+        "date": "2008-10-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": null
+        },
+        "value": 89.651,
+        "unit": "Index 2017=100",
+        "answer": "In October 2008, Personal Consumption Expenditures: Chain-type Price Index was 89.65 Index 2017=100. BEA Account Code: DPCERG The Personal Consumption Expenditures Price Index is a measure of the prices that people living in the United States, or those buying on their behalf, pay for goods and servic\u2026",
+        "citations": [
+          {
+            "doc_id": "series_PCEPI",
+            "series_id": "PCEPI",
+            "dates": [
+              "2008-10-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_PCEPI",
+            "score": 0.3735
+          },
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.0963
+          }
+        ]
+      },
+      "failures": [
+        {
+          "verifier_id": "expectation_transform",
+          "severity": "critical",
+          "message": "Expected transform mom but got point."
+        },
+        {
+          "verifier_id": "truth_matches",
+          "severity": "critical",
+          "message": "Value 89.651 differs from truth -0.6604097643134992 (tol=1e-06)."
+        }
+      ]
+    },
+    {
+      "id": "fedfunds_mom_6",
+      "question": "What was the month-over-month change in Effective Federal Funds Rate in February 2013?",
+      "status": "fail",
+      "response": {
+        "question": "What was the month-over-month change in Effective Federal Funds Rate in February 2013?",
+        "series_id": "FEDFUNDS",
+        "transform": "point",
+        "date": "2013-02-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": null
+        },
+        "value": 0.15,
+        "unit": "Percent",
+        "answer": "In February 2013, Federal Funds Effective Rate was 0.15%. When a depository institution has surplus balances in its reserve account, it lends to other banks in need of larger balances.",
+        "citations": [
+          {
+            "doc_id": "series_FEDFUNDS",
+            "series_id": "FEDFUNDS",
+            "dates": [
+              "2013-02-01"
+            ],
+            "source": "mini-fred"
+          }
+        ],
+        "confidence": 0.95,
+        "errors": [],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_FEDFUNDS",
+            "score": 0.2686
+          },
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.0268
+          },
+          {
+            "doc_id": "series_PCEPI",
+            "score": 0.0231
+          }
+        ]
+      },
+      "failures": [
+        {
+          "verifier_id": "expectation_transform",
+          "severity": "critical",
+          "message": "Expected transform mom but got point."
+        },
+        {
+          "verifier_id": "truth_matches",
+          "severity": "critical",
+          "message": "Value 0.15 differs from truth 7.142857142857128 (tol=1e-06)."
+        }
+      ]
+    },
+    {
+      "id": "refusal_last_summer",
+      "question": "What was inflation last summer?",
+      "status": "fail",
+      "response": {
+        "question": "What was inflation last summer?",
+        "series_id": "CPIAUCSL",
+        "transform": "point",
+        "date": null,
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": null
+        },
+        "value": null,
+        "unit": null,
+        "answer": "Please specify a date (e.g., April 2020 or 2020-04).",
+        "citations": [],
+        "confidence": 0.2,
+        "errors": [
+          "Please specify a date (e.g., April 2020 or 2020-04)."
+        ],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_PCEPI",
+            "score": 0.0671
+          },
+          {
+            "doc_id": "series_CPIAUCSL",
+            "score": 0.0551
+          },
+          {
+            "doc_id": "series_GDPC1",
+            "score": 0.0373
+          }
+        ]
+      },
+      "failures": [
+        {
+          "verifier_id": "date_rules",
+          "severity": "critical",
+          "message": "date missing for point/yoy/mom/ma transform."
+        }
+      ]
+    },
+    {
+      "id": "refusal_missing_series",
+      "question": "What was the value in June 2022?",
+      "status": "pass",
+      "response": {
+        "question": "What was the value in June 2022?",
+        "series_id": null,
+        "transform": "point",
+        "date": "2022-06-01",
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": null
+        },
+        "value": null,
+        "unit": null,
+        "answer": "Please specify which series to use (unemployment, CPI, fed funds, PCE, or GDP).",
+        "citations": [],
+        "confidence": 0.2,
+        "errors": [
+          "Please specify which series to use (unemployment, CPI, fed funds, PCE, or GDP)."
+        ],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_GDPC1",
+            "score": 0.0826
+          },
+          {
+            "doc_id": "series_UNRATE",
+            "score": 0.0152
+          },
+          {
+            "doc_id": "series_PCEPI",
+            "score": 0.0094
+          }
+        ]
+      },
+      "failures": []
+    },
+    {
+      "id": "refusal_missing_date",
+      "question": "Tell me the unemployment rate.",
+      "status": "fail",
+      "response": {
+        "question": "Tell me the unemployment rate.",
+        "series_id": "UNRATE",
+        "transform": "point",
+        "date": null,
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": null
+        },
+        "value": null,
+        "unit": null,
+        "answer": "Please specify a date (e.g., April 2020 or 2020-04).",
+        "citations": [],
+        "confidence": 0.2,
+        "errors": [
+          "Please specify a date (e.g., April 2020 or 2020-04)."
+        ],
+        "retrieved_docs": [
+          {
+            "doc_id": "series_UNRATE",
+            "score": 0.1975
+          },
+          {
+            "doc_id": "series_FEDFUNDS",
+            "score": 0.0305
+          },
+          {
+            "doc_id": "series_GDPC1",
+            "score": 0.0138
+          }
+        ]
+      },
+      "failures": [
+        {
+          "verifier_id": "date_rules",
+          "severity": "critical",
+          "message": "date missing for point/yoy/mom/ma transform."
+        }
+      ]
+    },
+    {
+      "id": "refusal_vague_range",
+      "question": "How high did it go between 2010 and 2012?",
+      "status": "fail",
+      "response": {
+        "question": "How high did it go between 2010 and 2012?",
+        "series_id": null,
+        "transform": "point",
+        "date": null,
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": null
+        },
+        "value": null,
+        "unit": null,
+        "answer": "Please specify a date (e.g., April 2020 or 2020-04). Please specify which series to use (unemployment, CPI, fed funds, PCE, or GDP).",
+        "citations": [],
+        "confidence": 0.2,
+        "errors": [
+          "Please specify a date (e.g., April 2020 or 2020-04).",
+          "Please specify which series to use (unemployment, CPI, fed funds, PCE, or GDP)."
+        ],
+        "retrieved_docs": []
+      },
+      "failures": [
+        {
+          "verifier_id": "date_rules",
+          "severity": "critical",
+          "message": "date missing for point/yoy/mom/ma transform."
+        }
+      ]
+    },
+    {
+      "id": "refusal_no_context",
+      "question": "What was it?",
+      "status": "fail",
+      "response": {
+        "question": "What was it?",
+        "series_id": null,
+        "transform": "point",
+        "date": null,
+        "window": {
+          "start": null,
+          "end": null,
+          "periods": null
+        },
+        "value": null,
+        "unit": null,
+        "answer": "Please specify a date (e.g., April 2020 or 2020-04). Please specify which series to use (unemployment, CPI, fed funds, PCE, or GDP).",
+        "citations": [],
+        "confidence": 0.2,
+        "errors": [
+          "Please specify a date (e.g., April 2020 or 2020-04).",
+          "Please specify which series to use (unemployment, CPI, fed funds, PCE, or GDP)."
+        ],
+        "retrieved_docs": []
+      },
+      "failures": [
+        {
+          "verifier_id": "date_rules",
+          "severity": "critical",
+          "message": "date missing for point/yoy/mom/ma transform."
+        }
+      ]
+    }
+  ]
+}

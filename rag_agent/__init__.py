@@ -1,3 +1,3 @@
 """Versioned Mini-FRED RAG agents."""
 
-__all__ = ["answer_1"]
+__all__ = ["answer_1", "answer_2"]
