@@ -1,0 +1,29 @@
+series:
+  - id: CPIAUCSL
+    title: Consumer Price Index for All Urban Consumers: All Items
+    frequency: monthly
+    units: Index 1982-84=100
+  - id: UNRATE
+    title: Civilian Unemployment Rate
+    frequency: monthly
+    units: Percent
+  - id: FEDFUNDS
+    title: Effective Federal Funds Rate
+    frequency: daily (target becomes monthly via average)
+    units: Percent
+  - id: PCEPI
+    title: Personal Consumption Expenditures Price Index
+    frequency: monthly
+    units: Index 2017=100
+  - id: GDPC1
+    title: Real Gross Domestic Product
+    frequency: quarterly
+    units: Billions of chained 2017 dollars
+
+date_range:
+  start: "2000-01-01"
+  end: "2025-12-31"
+
+truth_policy:
+  name: latest_available
+  description: Use the most recent release for each observation (no vintages).
