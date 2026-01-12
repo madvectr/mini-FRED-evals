@@ -1,0 +1,12 @@
+README.md
+pyproject.toml
+src/__init__.py
+src/fred_client.py
+src/series_cards.py
+src/util.py
+src/warehouse.py
+src/mini_fred.egg-info/PKG-INFO
+src/mini_fred.egg-info/SOURCES.txt
+src/mini_fred.egg-info/dependency_links.txt
+src/mini_fred.egg-info/requires.txt
+src/mini_fred.egg-info/top_level.txt

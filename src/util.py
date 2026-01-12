@@ -5,7 +5,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any, Mapping
 
-import yaml
+import yaml  # type: ignore[import]
 
 
 def resolve_project_root(start: Path | None = None) -> Path:

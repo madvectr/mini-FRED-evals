@@ -1,0 +1,8 @@
+duckdb>=0.10
+pandas>=2.2
+pyyaml>=6.0
+requests>=2.32
+python-dotenv>=1.0
+
+[dev]
+pytest>=8.0

@@ -14,34 +14,32 @@
 - `data/raw/` — raw CSV/JSON captures directly from FRED (kept small, one file per series).
 - `data/snapshots/` — DuckDB files and manifest metadata for offline reuse.
 - `corpus/series_cards/` — generated Markdown “series cards” derived from the warehouse.
-- `scripts/` — CLI entry points for ingest, QC, card generation (currently placeholders).
-- `src/` — Python package with clients (`fred_client`), warehouse helpers, card builders, and shared utilities.
+- `scripts/` — CLI entry points for ingest, QC, card generation, and the deterministic answerer.
+- `src/` — Python package with clients (`fred_client`), warehouse helpers, card builders, parsing/truth utilities, and shared helpers.
 
 ## Data Model (DuckDB)
 Two core tables make up the warehouse:
-1. `series_metadata`
+1. `series`
    - `series_id` (TEXT, PK)
    - `title` (TEXT)
    - `units` (TEXT)
    - `frequency` (TEXT)
    - `seasonal_adjustment` (TEXT)
    - `notes` (TEXT)
-   - `last_updated` (TIMESTAMP)
-2. `series_observations`
-   - `series_id` (TEXT, FK → series_metadata)
-   - `observation_date` (DATE)
+   - `last_updated` (TEXT)
+2. `observations`
+   - `series_id` (TEXT, FK → series.series_id)
+   - `date` (DATE)
    - `value` (DOUBLE)
-   - `status` (TEXT, optional flags such as “estimated”)
 
 Both tables share a deterministic CSV import contract so they can be regenerated purely from committed source files. Truth policy v1 keeps only the latest available values (no vintages).
 
 ## Build Steps (current plan)
 1. **Configure:** edit `config/series.yaml` if additional metadata is needed; series IDs/date range are frozen for v1.
-2. **Ingest (future):** `scripts/ingest_fred.py` will read the config, download metadata + observations via `fred_client`, and write both raw CSV dumps and a DuckDB snapshot to `data/snapshots/`.
-3. **QC (future):** `scripts/qc_checks.py` will run schema validation, range/freshness checks, and emit a simple report.
-4. **Series cards (future):** `scripts/build_series_cards.py` will load the latest snapshot, fetch the last _N_ observations for each series, and produce Markdown cards in `corpus/series_cards/`.
-
-Until ingest lands, the scripts simply validate configuration presence and document the expected workflow.
+2. **Ingest:** `scripts/ingest_fred.py` reads the config, downloads metadata + observations via `fred_client`, caches raw JSON under `data/raw/`, stores everything in `data/warehouse.duckdb`, and optionally exports CSV snapshots under `data/snapshots/`.
+3. **QC:** `scripts/qc_checks.py` runs schema validation, coverage checks, row-count thresholds, and null-density warnings; it exits non-zero if critical checks fail.
+4. **Series cards:** `scripts/build_series_cards.py` loads the latest snapshot, fetches the last _N_ observations for each series, and produces Markdown cards in `corpus/series_cards/` (`series_<SERIES>.md`).
+5. **Answerer:** `scripts/answer.py` parses a natural-language question, computes the requested statistic from DuckDB (`src/truth.py`), retrieves the matching series card for deterministic citations, and emits a JSON payload.
 
 ## What Comes Next
 - **Agent + MVES wiring:** promptfoo scenarios, verifier prompts, and any orchestration stay out of scope until the warehouse is fully reproducible.

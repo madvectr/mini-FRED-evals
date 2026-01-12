@@ -2,18 +2,34 @@
 
 Purpose is to create a deterministic, lightweight subset of key macroeconomic series that can be stored locally in DuckDB and reused for MVES verifiers and promptfoo experiments without requiring a network connection after the initial ingest.
 
-### Quickstart (scaffold stage)
+### Quickstart
 1. `cd mini-fred`
 2. Create a virtual environment (example): `python3 -m venv .venv && source .venv/bin/activate`
 3. Install dependencies: `pip install -e .`
-4. Inspect `config/series.yaml` to confirm the five locked series and date bounds.
-5. Run any placeholder script with `python scripts/<script>.py --help` to review the forthcoming workflow.
+4. Provide your FRED key (needed only for online ingest) by creating a `.env` file that contains `FRED_API_KEY=YOUR_KEY` or exporting the variable manually.
+5. Run the ingest command (see below) to populate DuckDB + snapshots.
+6. Execute QC checks to validate the snapshot.
+7. Generate Markdown series cards.
+8. Ask a question using the deterministic answer CLI.
+
+### Ingest & QC
+```
+# .env is read automatically; this manual export is optional
+export FRED_API_KEY=YOUR_KEY
+python scripts/ingest_fred.py --refresh --export-snapshots
+python scripts/qc_checks.py
+python scripts/build_series_cards.py --last-n 12
+python scripts/answer.py "What was the unemployment rate in April 2020?"
+```
+The ingest script downloads metadata + observations for CPIAUCSL, UNRATE, FEDFUNDS, PCEPI, and GDPC1 from 2000-01-01 through 2025-12-31, writes them into `data/warehouse.duckdb`, caches raw JSON in `data/raw/`, and optionally exports CSV snapshots under `data/snapshots/`. After a snapshot exists, downstream demos can run offline without reusing the API key because all inputs are already committed.
+
+### Series cards & answerer
+- `python scripts/build_series_cards.py --last-n 12` writes `corpus/series_cards/series_<SERIES>.md` (the context plane for RAG-style explanations).
+- `python scripts/answer.py "What was the unemployment rate in April 2020?"` loads the DuckDB truth store, computes the numeric answer, pulls the matching series card for grounding, and emits a JSON payload (value, explanation text, and deterministic citations).
 
 ### Next milestones
-- Implement `scripts/ingest_fred.py` to download metadata + observations into DuckDB snapshots.
-- Add basic QC coverage in `scripts/qc_checks.py` (schema validation, range checks, freshness).
-- Generate Markdown series cards and snapshot them into `corpus/series_cards`.
 - Commit reproducible data snapshots for offline truth checks.
+- Wire promptfoo/MVES verifiers to cite the committed series cards.
 
 ### Environment variables
-- `FRED_API_KEY`: required for future online ingest. Not needed once data snapshots are committed, but the variable will be read by `src/fred_client.py` when networking is enabled.
+- `FRED_API_KEY`: store it in `.env` (preferred) or export it before running ingest. Once snapshots are checked in, the warehouse can be queried offline without this key.

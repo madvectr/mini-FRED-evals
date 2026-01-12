@@ -1,11 +1,11 @@
-"""DuckDB warehouse helpers (schema + load stubs)."""
+"""DuckDB warehouse helpers (schema management + upsert utilities)."""
 
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Iterable, Mapping
+from typing import Iterable, Mapping, Sequence
 
-import duckdb
+import duckdb  # type: ignore[import]
 
 from .util import ensure_directory
 
@@ -21,39 +21,108 @@ def create_schema(con) -> None:
     """Create the Mini-FRED schema in DuckDB if it does not already exist."""
     con.execute(
         """
-        CREATE TABLE IF NOT EXISTS series_metadata (
+        CREATE TABLE IF NOT EXISTS series (
             series_id TEXT PRIMARY KEY,
             title TEXT,
             units TEXT,
             frequency TEXT,
             seasonal_adjustment TEXT,
             notes TEXT,
-            last_updated TIMESTAMP
+            last_updated TEXT
         );
         """
     )
     con.execute(
         """
-        CREATE TABLE IF NOT EXISTS series_observations (
+        CREATE TABLE IF NOT EXISTS observations (
             series_id TEXT,
-            observation_date DATE,
+            date DATE,
             value DOUBLE,
-            status TEXT,
-            PRIMARY KEY (series_id, observation_date)
+            PRIMARY KEY (series_id, date)
         );
         """
     )
 
 
-def load_metadata(con, rows: Iterable[Mapping[str, object]]) -> None:
-    """Insert normalized metadata rows into DuckDB (placeholder)."""
-    raise NotImplementedError(
-        "Metadata loading will be implemented once ingest wiring lands."
+def upsert_series_metadata(con, metadata: Mapping[str, object]) -> None:
+    """Upsert a single series metadata record."""
+
+    record = {
+        "series_id": metadata.get("id") or metadata.get("series_id"),
+        "title": metadata.get("title"),
+        "units": metadata.get("units"),
+        "frequency": metadata.get("frequency"),
+        "seasonal_adjustment": metadata.get("seasonal_adjustment"),
+        "notes": metadata.get("notes"),
+        "last_updated": metadata.get("last_updated"),
+    }
+    if not record["series_id"]:
+        raise ValueError("Metadata payload must include 'id' or 'series_id'.")
+
+    con.execute(
+        """
+        INSERT INTO series (
+            series_id, title, units, frequency, seasonal_adjustment, notes, last_updated
+        )
+        VALUES (?, ?, ?, ?, ?, ?, ?)
+        ON CONFLICT (series_id) DO UPDATE SET
+            title = excluded.title,
+            units = excluded.units,
+            frequency = excluded.frequency,
+            seasonal_adjustment = excluded.seasonal_adjustment,
+            notes = excluded.notes,
+            last_updated = excluded.last_updated;
+        """,
+        [
+            record["series_id"],
+            record["title"],
+            record["units"],
+            record["frequency"],
+            record["seasonal_adjustment"],
+            record["notes"],
+            record["last_updated"],
+        ],
     )
 
 
-def load_observations(con, rows: Iterable[Mapping[str, object]]) -> None:
-    """Insert observation rows into DuckDB (placeholder)."""
-    raise NotImplementedError(
-        "Observation loading will be implemented once ingest wiring lands."
+def upsert_observations(
+    con,
+    series_id: str,
+    observations_payload: Mapping[str, Iterable[Mapping[str, object]]],
+) -> None:
+    """Upsert observation rows for a series."""
+
+    rows: Sequence[Mapping[str, object]] = list(
+        observations_payload.get("observations", [])
     )
+    if not rows:
+        return
+
+    normalized_rows = [
+        (
+            series_id,
+            row.get("date"),
+            _coerce_value(row.get("value")),
+        )
+        for row in rows
+    ]
+
+    con.executemany(
+        """
+        INSERT INTO observations (series_id, date, value)
+        VALUES (?, ?, ?)
+        ON CONFLICT (series_id, date) DO UPDATE SET
+            value = excluded.value;
+        """,
+        normalized_rows,
+    )
+
+
+def _coerce_value(value: object) -> float | None:
+    """Return a float value or None for placeholder markers."""
+    if value in (None, "", ".", "NA", "nan", "NaN"):
+        return None
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return None

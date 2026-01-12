@@ -1,0 +1,50 @@
+{
+  "generated_at": "2026-01-12T01:23:45.406244+00:00",
+  "warehouse_path": "/Users/madvectr/mdev/mves/mini-fred/data/warehouse.duckdb",
+  "date_range": {
+    "start": "2000-01-01",
+    "end": "2025-12-31"
+  },
+  "truth_policy": {
+    "name": "latest_available",
+    "description": "Use the most recent release for each observation (no vintages)."
+  },
+  "refresh_requested": true,
+  "series": [
+    {
+      "series_id": "CPIAUCSL",
+      "title": "Consumer Price Index for All Urban Consumers: All Items in U.S. City Average",
+      "rows": 311,
+      "first_date": "2000-01-01",
+      "last_date": "2025-11-01"
+    },
+    {
+      "series_id": "UNRATE",
+      "title": "Unemployment Rate",
+      "rows": 312,
+      "first_date": "2000-01-01",
+      "last_date": "2025-12-01"
+    },
+    {
+      "series_id": "FEDFUNDS",
+      "title": "Federal Funds Effective Rate",
+      "rows": 312,
+      "first_date": "2000-01-01",
+      "last_date": "2025-12-01"
+    },
+    {
+      "series_id": "PCEPI",
+      "title": "Personal Consumption Expenditures: Chain-type Price Index",
+      "rows": 309,
+      "first_date": "2000-01-01",
+      "last_date": "2025-09-01"
+    },
+    {
+      "series_id": "GDPC1",
+      "title": "Real Gross Domestic Product",
+      "rows": 103,
+      "first_date": "2000-01-01",
+      "last_date": "2025-07-01"
+    }
+  ]
+}

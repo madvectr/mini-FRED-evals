@@ -1,6 +1,6 @@
 series:
   - id: CPIAUCSL
-    title: Consumer Price Index for All Urban Consumers: All Items
+    title: "Consumer Price Index for All Urban Consumers: All Items"
     frequency: monthly
     units: Index 1982-84=100
   - id: UNRATE
@@ -8,8 +8,8 @@ series:
     frequency: monthly
     units: Percent
   - id: FEDFUNDS
-    title: Effective Federal Funds Rate
-    frequency: daily (target becomes monthly via average)
+    title: "Effective Federal Funds Rate"
+    frequency: "daily (target becomes monthly via average)"
     units: Percent
   - id: PCEPI
     title: Personal Consumption Expenditures Price Index
