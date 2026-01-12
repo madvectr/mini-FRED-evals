@@ -77,6 +77,15 @@ TRANSFORM_KEYWORDS = {
 }
 
 
+MISSING_SERIES_ERROR = (
+    "Please specify which series to use (unemployment, CPI, fed funds, PCE, or GDP)."
+)
+DATE_REQUIRED_ERROR = "Please specify a date (e.g., April 2020 or 2020-04)."
+WINDOW_REQUIRED_ERROR = (
+    "Please provide a date window (e.g., between 2006-01 and 2008-12)."
+)
+
+
 @dataclass
 class ParseResult:
     question: str
@@ -87,6 +96,7 @@ class ParseResult:
     window_end: Optional[str] = None
     periods: Optional[int] = None
     errors: List[str] = field(default_factory=list)
+    missing_series: bool = False
 
 
 def parse_question(question: str) -> ParseResult:
@@ -103,22 +113,19 @@ def parse_question(question: str) -> ParseResult:
         result.window_start = start
         result.window_end = end
         if not start or not end:
-            result.errors.append(
-                "Please specify a date window (e.g., between 2006-01 and 2008-12)."
-            )
+            result.errors.append(WINDOW_REQUIRED_ERROR)
     else:
         detected_date = _extract_single_date(text)
         result.date = detected_date
         if not detected_date:
-            result.errors.append("Please specify a date (e.g., April 2020 or 2020-04).")
+            result.errors.append(DATE_REQUIRED_ERROR)
 
     if result.transform == "ma":
         result.periods = _detect_ma_periods(lowered)
 
     if not result.series_id:
-        result.errors.append(
-            "Please specify which series to use (unemployment, CPI, fed funds, PCE, or GDP)."
-        )
+        result.missing_series = True
+        result.errors.append(MISSING_SERIES_ERROR)
 
     return result
 
@@ -166,12 +173,13 @@ def _extract_single_date(text: str) -> Optional[str]:
 
 
 def _parse_date_token(token: str) -> Optional[str]:
-    clean = token.strip().replace(",", "")
+    clean = token.strip().strip(".,;:?!").replace(",", "")
     try:
         return datetime.fromisoformat(clean).date().isoformat()
     except ValueError:
         pass
-    if re.fullmatch(r"\d{4}-\d{2}", clean):
+    iso_month_match = re.fullmatch(r"\d{4}-\d{2}", clean)
+    if iso_month_match:
         try:
             dt = datetime.strptime(clean, "%Y-%m")
             return dt.replace(day=1).date().isoformat()

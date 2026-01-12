@@ -5,8 +5,9 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
-from datetime import datetime
+from datetime import date, datetime
 from pathlib import Path
 from typing import Dict, List, Optional
 
@@ -15,7 +16,8 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from src import warehouse  # noqa: E402
-from src.parse import parse_question  # noqa: E402
+from src.parse import MISSING_SERIES_ERROR, parse_question  # noqa: E402
+from src.retriever import TfidfRetriever  # noqa: E402
 from src.truth import (  # noqa: E402
     get_ma,
     get_max,
@@ -58,22 +60,40 @@ def main() -> None:
     _ensure_cards_dir(cards_dir)
     load_series_config(config_path)  # Ensures config exists; no direct use yet.
 
-    con = warehouse.get_connection(db_path)
+    retriever = TfidfRetriever(cards_dir)
+    retriever.build()
+
+    retrieved = retriever.retrieve(args.question, k=3)
+    retrieved_summary = [
+        {"doc_id": doc["doc_id"], "score": round(doc["score"], 4)} for doc in retrieved
+    ]
 
     parsed = parse_question(args.question)
-    response = _build_response(parsed, con, cards_dir)
+    parsed = _maybe_infer_series_from_retrieval(parsed, retrieved)
+
+    con = warehouse.get_connection(db_path)
+
+    if parsed.missing_series and (parsed.series_id is None):
+        response = _clarifying_response(parsed, retrieved_summary)
+    else:
+        response = _build_response(parsed, con, cards_dir, retrieved_summary)
     print(json.dumps(response, indent=2))
 
 
-def _build_response(parsed, con, cards_dir: Path) -> Dict[str, object]:
+def _build_response(
+    parsed,
+    con,
+    cards_dir: Path,
+    retrieved_docs: List[Dict[str, object]],
+) -> Dict[str, object]:
     base = {
         "question": parsed.question,
         "series_id": parsed.series_id,
         "transform": parsed.transform,
-        "date": parsed.date if parsed.transform in {"point", "yoy", "mom", "ma"} else None,
+        "date": _date_to_str(parsed.date) if parsed.transform in {"point", "yoy", "mom", "ma"} else None,
         "window": {
-            "start": parsed.window_start if parsed.transform in {"max", "min"} else None,
-            "end": parsed.window_end if parsed.transform in {"max", "min"} else None,
+            "start": _date_to_str(parsed.window_start) if parsed.transform in {"max", "min"} else None,
+            "end": _date_to_str(parsed.window_end) if parsed.transform in {"max", "min"} else None,
             "periods": parsed.periods if parsed.transform == "ma" else None,
         },
         "value": None,
@@ -82,6 +102,7 @@ def _build_response(parsed, con, cards_dir: Path) -> Dict[str, object]:
         "citations": [],
         "confidence": 0.2,
         "errors": list(parsed.errors),
+        "retrieved_docs": retrieved_docs,
     }
 
     if parsed.errors:
@@ -112,11 +133,19 @@ def _build_response(parsed, con, cards_dir: Path) -> Dict[str, object]:
         base["confidence"] = 0.25
         return base
 
+    snippet = _definition_snippet(card_path)
+    if snippet:
+        answer_text = f"{answer_text} {snippet}"
+
+    primary_doc_id = f"series_{parsed.series_id}"
+    _ensure_doc_in_retrieved(base["retrieved_docs"], primary_doc_id)
+
     base["value"] = value
     base["answer"] = answer_text
+    citation_dates = [_date_to_str(d) for d in citation_dates]
     base["citations"] = [
         {
-            "doc_id": f"series_{parsed.series_id}",
+            "doc_id": primary_doc_id,
             "series_id": parsed.series_id,
             "dates": citation_dates,
             "source": "mini-fred",
@@ -240,10 +269,17 @@ def _format_value(value: float, units: Optional[str], percent_hint: bool) -> str
 
 
 def _humanize_date(date_str: str) -> str:
-    try:
-        dt = datetime.fromisoformat(date_str)
-    except ValueError:
-        return date_str
+    if date_str is None:
+        return "N/A"
+    if isinstance(date_str, datetime):
+        dt = date_str
+    elif isinstance(date_str, date):
+        dt = datetime.combine(date_str, datetime.min.time())
+    else:
+        try:
+            dt = datetime.fromisoformat(str(date_str))
+        except ValueError:
+            return str(date_str)
     if dt.day == 1:
         return dt.strftime("%B %Y")
     return dt.strftime("%B %d, %Y").replace(" 0", " ")
@@ -277,6 +313,101 @@ def _fetch_metadata(con, series_id: Optional[str]) -> Optional[Dict[str, object]
     if not row:
         return None
     return {"series_id": row[0], "title": row[1], "units": row[2]}
+
+def _maybe_infer_series_from_retrieval(parsed, retrieved_docs):
+    """Use lexical retrieval to fill in the series_id when only that field is missing."""
+    if parsed.series_id:
+        return parsed
+    if not parsed.missing_series:
+        return parsed
+    other_errors = [err for err in parsed.errors if err != MISSING_SERIES_ERROR]
+    if other_errors:
+        return parsed
+    if not retrieved_docs:
+        return parsed
+    top = retrieved_docs[0]
+    if top["score"] >= 0.25:
+        parsed.series_id = _series_id_from_doc(top["doc_id"])
+        parsed.missing_series = False
+        parsed.errors = other_errors
+    return parsed
+
+
+def _clarifying_response(parsed, retrieved_docs: List[Dict[str, object]]) -> Dict[str, object]:
+    answer_text = " ".join(parsed.errors) if parsed.errors else MISSING_SERIES_ERROR
+    return {
+        "question": parsed.question,
+        "series_id": None,
+        "transform": parsed.transform,
+        "date": _date_to_str(parsed.date) if parsed.transform in {"point", "yoy", "mom", "ma"} else None,
+        "window": {
+            "start": _date_to_str(parsed.window_start) if parsed.transform in {"max", "min"} else None,
+            "end": _date_to_str(parsed.window_end) if parsed.transform in {"max", "min"} else None,
+            "periods": parsed.periods if parsed.transform == "ma" else None,
+        },
+        "value": None,
+        "unit": None,
+        "answer": answer_text,
+        "citations": [],
+        "confidence": 0.2,
+        "errors": list(parsed.errors),
+        "retrieved_docs": retrieved_docs,
+    }
+
+
+def _definition_snippet(card_path: Path, max_chars: int = 200) -> Optional[str]:
+    text = card_path.read_text(encoding="utf-8")
+    marker = "## Definition"
+    if marker not in text:
+        return None
+    after = text.split(marker, 1)[1]
+    if "## " in after:
+        after = after.split("## ", 1)[0]
+    cleaned = " ".join(line.strip() for line in after.splitlines() if line.strip())
+    cleaned = re.sub(r"https?://\S+", "", cleaned)
+    if not cleaned:
+        return None
+    sentences = re.split(r"(?<=[.!?])\s+", cleaned)
+    sentence = ""
+    for candidate in sentences:
+        candidate = candidate.strip()
+        if not candidate:
+            continue
+        if len(candidate.split()) < 6:
+            continue
+        if re.search(r"\b\d{4}\s*-\s*\d{4}\b", candidate):
+            continue
+        sentence = candidate
+        break
+    if not sentence:
+        return None
+    if not sentence.endswith("."):
+        sentence = f"{sentence}."
+    if len(sentence) > max_chars:
+        sentence = sentence[: max_chars].rstrip() + "…"
+    return sentence
+
+
+def _ensure_doc_in_retrieved(retrieved_docs: List[Dict[str, object]], doc_id: str) -> None:
+    doc_ids = {doc["doc_id"] for doc in retrieved_docs}
+    if doc_id not in doc_ids:
+        retrieved_docs.insert(0, {"doc_id": doc_id, "score": 1.0})
+
+
+def _series_id_from_doc(doc_id: str) -> str:
+    if doc_id.startswith("series_"):
+        return doc_id[len("series_") :].upper()
+    return doc_id.upper()
+
+
+def _date_to_str(value):
+    if value is None:
+        return None
+    if isinstance(value, datetime):
+        return value.isoformat()
+    if isinstance(value, date):
+        return value.isoformat()
+    return str(value)
 
 
 if __name__ == "__main__":

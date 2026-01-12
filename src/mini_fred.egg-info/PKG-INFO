@@ -9,6 +9,7 @@ Requires-Dist: pandas>=2.2
 Requires-Dist: pyyaml>=6.0
 Requires-Dist: requests>=2.32
 Requires-Dist: python-dotenv>=1.0
+Requires-Dist: scikit-learn>=1.4
 Provides-Extra: dev
 Requires-Dist: pytest>=8.0; extra == "dev"
 
@@ -19,10 +20,12 @@ Purpose is to create a deterministic, lightweight subset of key macroeconomic se
 ### Quickstart
 1. `cd mini-fred`
 2. Create a virtual environment (example): `python3 -m venv .venv && source .venv/bin/activate`
-3. Install dependencies: `pip install -e .`
+3. Install dependencies (DuckDB, pandas, scikit-learn, etc.): `pip install -e .`
 4. Provide your FRED key (needed only for online ingest) by creating a `.env` file that contains `FRED_API_KEY=YOUR_KEY` or exporting the variable manually.
 5. Run the ingest command (see below) to populate DuckDB + snapshots.
 6. Execute QC checks to validate the snapshot.
+7. Generate Markdown series cards.
+8. Ask a question using the deterministic answer CLI.
 
 ### Ingest & QC
 ```
@@ -30,11 +33,16 @@ Purpose is to create a deterministic, lightweight subset of key macroeconomic se
 export FRED_API_KEY=YOUR_KEY
 python scripts/ingest_fred.py --refresh --export-snapshots
 python scripts/qc_checks.py
+python scripts/build_series_cards.py --last-n 12
+python scripts/answer.py "What was the unemployment rate in April 2020?"
 ```
 The ingest script downloads metadata + observations for CPIAUCSL, UNRATE, FEDFUNDS, PCEPI, and GDPC1 from 2000-01-01 through 2025-12-31, writes them into `data/warehouse.duckdb`, caches raw JSON in `data/raw/`, and optionally exports CSV snapshots under `data/snapshots/`. After a snapshot exists, downstream demos can run offline without reusing the API key because all inputs are already committed.
 
+### Series cards & answerer
+- `python scripts/build_series_cards.py --last-n 12` writes `corpus/series_cards/series_<SERIES>.md` (the context plane for RAG-style explanations).
+- `python scripts/answer.py "What was the unemployment rate in April 2020?"` loads the DuckDB truth store, uses TF-IDF retrieval over `corpus/series_cards` to ground/infer series IDs, computes the numeric answer, and emits JSON (value, explanation text, deterministic citations, retrieved doc scores).
+
 ### Next milestones
-- Generate Markdown series cards and snapshot them into `corpus/series_cards`.
 - Commit reproducible data snapshots for offline truth checks.
 - Wire promptfoo/MVES verifiers to cite the committed series cards.
 

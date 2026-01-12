@@ -39,7 +39,7 @@ Both tables share a deterministic CSV import contract so they can be regenerated
 2. **Ingest:** `scripts/ingest_fred.py` reads the config, downloads metadata + observations via `fred_client`, caches raw JSON under `data/raw/`, stores everything in `data/warehouse.duckdb`, and optionally exports CSV snapshots under `data/snapshots/`.
 3. **QC:** `scripts/qc_checks.py` runs schema validation, coverage checks, row-count thresholds, and null-density warnings; it exits non-zero if critical checks fail.
 4. **Series cards:** `scripts/build_series_cards.py` loads the latest snapshot, fetches the last _N_ observations for each series, and produces Markdown cards in `corpus/series_cards/` (`series_<SERIES>.md`).
-5. **Answerer:** `scripts/answer.py` parses a natural-language question, computes the requested statistic from DuckDB (`src/truth.py`), retrieves the matching series card for deterministic citations, and emits a JSON payload.
+5. **Answerer:** `scripts/answer.py` parses a natural-language question, computes the requested statistic from DuckDB (`src/truth.py`), runs a TF-IDF retriever over series cards (`src/retriever.py`) to infer/ground the series, and emits a JSON payload with citations + retrieved doc scores.
 
 ## What Comes Next
 - **Agent + MVES wiring:** promptfoo scenarios, verifier prompts, and any orchestration stay out of scope until the warehouse is fully reproducible.

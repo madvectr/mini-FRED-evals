@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from datetime import datetime
 from typing import Any, Mapping, Sequence
 
@@ -21,6 +22,7 @@ def render_series_card(
     last_updated = series_meta.get("last_updated") or "unknown"
 
     definition = _build_definition(series_meta)
+    keywords_line = _build_keywords_line(series_id)
     trimmed = list(
         sorted(
             recent_observations,
@@ -31,6 +33,8 @@ def render_series_card(
 
     lines = [
         f"# {series_id}: {title}",
+        "",
+        keywords_line,
         "",
         f"- **Units:** {units}",
         f"- **Frequency:** {frequency}",
@@ -68,11 +72,53 @@ def _observations_table(observations: Sequence[Mapping[str, Any]]) -> list[str]:
 
 def _build_definition(series_meta: Mapping[str, Any]) -> str:
     notes = (series_meta.get("notes") or "").strip()
-    if notes:
-        single_line = " ".join(line.strip() for line in notes.splitlines() if line.strip())
-        return single_line or "This FRED series measures an economic indicator tracked by the St. Louis Fed."
     title = series_meta.get("title") or "this indicator"
-    return f"This FRED series measures {title.lower()} as published by the St. Louis Fed."
+    units = series_meta.get("units") or "the stated units"
+    frequency = series_meta.get("frequency") or "the stated frequency"
+    if notes:
+        sentences = re.split(r"(?<=[.!?])\s+", notes)
+        cleaned_sentences = []
+        for sentence in sentences:
+            sanitized = _sanitize_sentence(sentence)
+            if _is_clean_sentence(sanitized):
+                cleaned_sentences.append(sanitized)
+            if len(cleaned_sentences) == 2:
+                break
+        if cleaned_sentences:
+            return " ".join(cleaned_sentences)
+    return f"This series reports {title} measured in {units} on a {frequency} basis."
+
+
+def _build_keywords_line(series_id: str) -> str:
+    aliases = {
+        "UNRATE": "unemployment, jobless rate, labor market",
+        "CPIAUCSL": "inflation, consumer prices, CPI",
+        "FEDFUNDS": "fed funds, interest rate, policy rate",
+        "PCEPI": "inflation, personal consumption, PCE",
+        "GDPC1": "real GDP, output, economic growth",
+    }
+    keywords = aliases.get(series_id.upper(), series_id.upper())
+    return f"**Keywords:** {keywords}"
+
+
+def _sanitize_sentence(sentence: str) -> str:
+    no_urls = re.sub(r"https?://\S+", "", sentence)
+    cleaned = no_urls.strip()
+    if not cleaned:
+        return ""
+    return cleaned
+
+
+def _is_clean_sentence(sentence: str) -> bool:
+    if not sentence:
+        return False
+    if len(sentence.split()) < 6:
+        return False
+    if re.search(r"\b\d{4}\s*-\s*\d{4}\b", sentence):
+        return False
+    if "categories/" in sentence.lower():
+        return False
+    return True
 
 
 def _format_date(value: Any) -> str:

@@ -2,7 +2,10 @@ README.md
 pyproject.toml
 src/__init__.py
 src/fred_client.py
+src/parse.py
+src/retriever.py
 src/series_cards.py
+src/truth.py
 src/util.py
 src/warehouse.py
 src/mini_fred.egg-info/PKG-INFO

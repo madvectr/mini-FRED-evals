@@ -5,7 +5,7 @@ Purpose is to create a deterministic, lightweight subset of key macroeconomic se
 ### Quickstart
 1. `cd mini-fred`
 2. Create a virtual environment (example): `python3 -m venv .venv && source .venv/bin/activate`
-3. Install dependencies: `pip install -e .`
+3. Install dependencies (DuckDB, pandas, scikit-learn, etc.): `pip install -e .`
 4. Provide your FRED key (needed only for online ingest) by creating a `.env` file that contains `FRED_API_KEY=YOUR_KEY` or exporting the variable manually.
 5. Run the ingest command (see below) to populate DuckDB + snapshots.
 6. Execute QC checks to validate the snapshot.
@@ -25,7 +25,7 @@ The ingest script downloads metadata + observations for CPIAUCSL, UNRATE, FEDFUN
 
 ### Series cards & answerer
 - `python scripts/build_series_cards.py --last-n 12` writes `corpus/series_cards/series_<SERIES>.md` (the context plane for RAG-style explanations).
-- `python scripts/answer.py "What was the unemployment rate in April 2020?"` loads the DuckDB truth store, computes the numeric answer, pulls the matching series card for grounding, and emits a JSON payload (value, explanation text, and deterministic citations).
+- `python scripts/answer.py "What was the unemployment rate in April 2020?"` loads the DuckDB truth store, uses TF-IDF retrieval over `corpus/series_cards` to ground/infer series IDs, computes the numeric answer, and emits JSON (value, explanation text, deterministic citations, retrieved doc scores).
 
 ### Next milestones
 - Commit reproducible data snapshots for offline truth checks.
