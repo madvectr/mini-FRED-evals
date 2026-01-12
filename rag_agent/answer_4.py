@@ -125,10 +125,12 @@ def _refine_parsed_result(parsed, question: str):
     if parsed.transform in {"point", "yoy", "mom", "ma"} and not parsed.date:
         parsed.date = _extract_single_date(question)
 
-    if parsed.transform == "ma" and not parsed.periods:
+    if parsed.transform == "ma":
         periods = _extract_periods(normalized)
         if periods:
             parsed.periods = periods
+        elif not parsed.periods:
+            parsed.periods = 3
 
     return parsed
 

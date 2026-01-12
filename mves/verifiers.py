@@ -67,7 +67,7 @@ def verify_case(
         "citations_match_series_id": lambda: _citations_match_series_id(response),
         "citations_subset_of_retrieved": lambda: _citations_subset_of_retrieved(response),
         "window_rules": lambda: _window_rules(response),
-        "date_rules": lambda: _date_rules(response),
+        "date_rules": lambda: _date_rules(case, response),
         "confidence_rules": lambda: _confidence_rules(response),
         "no_urls_in_answer": lambda: _no_urls_in_answer(response),
         "value_display_in_answer": lambda: _value_display_in_answer(response),
@@ -193,8 +193,11 @@ def _window_rules(response: Dict[str, Any]) -> List[str]:
     return messages
 
 
-def _date_rules(response: Dict[str, Any]) -> List[str]:
+def _date_rules(case: Dict[str, Any], response: Dict[str, Any]) -> List[str]:
     messages: List[str] = []
+    expect = case.get("expect", {})
+    if not expect.get("should_have_value", True):
+        return messages
     transform = response.get("transform")
     if transform in {"point", "yoy", "mom", "ma"}:
         if not response.get("date"):

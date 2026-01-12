@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import calendar
 from datetime import date, datetime, timedelta
-from typing import Dict, Optional, Tuple
+from typing import Dict, List, Optional, Tuple
 
 _FREQUENCY_CACHE: Dict[str, str] = {}
 
@@ -51,21 +51,37 @@ def get_mom(con, series_id: str, target_date: str) -> Optional[float]:
     return _percent_change(current_value, prev_value)
 
 
-def get_ma(con, series_id: str, target_date: str, periods: int) -> Optional[float]:
-    """Return the simple moving average over the last N periods including target_date."""
-    if not target_date or not periods or periods <= 0:
-        return None
+def select_trailing_window(
+    con,
+    series_id: str,
+    end_date: Optional[str],
+    periods: int,
+    inclusive_end: bool = True,
+) -> List[Tuple[str, Optional[float]]]:
+    """Return the trailing window (oldest -> newest) used for moving averages."""
+    if not end_date or not periods or periods <= 0:
+        return []
+    comparator = "<=" if inclusive_end else "<"
     rows = con.execute(
-        """
-        SELECT value
+        f"""
+        SELECT date, value
         FROM observations
-        WHERE series_id = ? AND date <= ?
+        WHERE series_id = ?
+          AND date {comparator} ?
         ORDER BY date DESC
         LIMIT ?
         """,
-        [series_id, target_date, periods],
+        [series_id, end_date, periods],
     ).fetchall()
-    values = [row[0] for row in rows if row[0] is not None]
+    return list(reversed(rows))
+
+
+def get_ma(con, series_id: str, target_date: str, periods: int) -> Optional[float]:
+    """Return MA(N, D): the average of the trailing N observations ending at D (inclusive)."""
+    window = select_trailing_window(con, series_id, target_date, periods, inclusive_end=True)
+    if len(window) < periods:
+        return None
+    values = [row[1] for row in window if row[1] is not None]
     if len(values) < periods:
         return None
     return float(sum(values) / periods)

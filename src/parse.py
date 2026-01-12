@@ -58,6 +58,7 @@ WINDOW_PATTERN = re.compile(
 
 ISO_DATE_PATTERN = re.compile(r"\b\d{4}-\d{2}-\d{2}\b")
 ISO_MONTH_PATTERN = re.compile(r"\b\d{4}-\d{2}\b")
+SLASH_MONTH_PATTERN = re.compile(r"\b\d{4}/\d{1,2}\b")
 
 TRANSFORM_KEYWORDS = {
     "yoy": "yoy",
@@ -159,12 +160,18 @@ def _extract_single_date(text: str) -> Optional[str]:
     iso_match = ISO_DATE_PATTERN.search(text)
     if iso_match:
         return iso_match.group(0)
+    slash_month = SLASH_MONTH_PATTERN.search(text)
+    if slash_month:
+        token = slash_month.group(0).replace("/", "-")
+        return _normalize_numeric_month(token)
     month_match = ISO_MONTH_PATTERN.search(text)
     if month_match:
-        token = f"{month_match.group(0)}-01"
-        return token
+        return _normalize_numeric_month(month_match.group(0))
     # Look for Month YYYY patterns
     tokens = re.findall(r"[A-Za-z]+\s+\d{4}", text)
+    tokens += re.findall(r"[A-Za-z]+[./-]\s*\d{4}", text)
+    tokens += re.findall(r"[A-Za-z]+,\s*\d{4}", text)
+    tokens += re.findall(r"\b\d{4}[./-]\d{1,2}\b", text)
     for token in tokens:
         parsed = _parse_date_token(token)
         if parsed:
@@ -173,29 +180,45 @@ def _extract_single_date(text: str) -> Optional[str]:
 
 
 def _parse_date_token(token: str) -> Optional[str]:
-    clean = token.strip().strip(".,;:?!").replace(",", "")
+    clean = token.strip()
+    clean = clean.replace("–", "-").replace("—", "-")
+    clean = clean.replace("/", "-")
+    clean = clean.replace(",", " ")
+    clean = re.sub(r"\s+", " ", clean)
+    clean = re.sub(r"([A-Za-z])\.", r"\1", clean)
+    clean = clean.strip(".,;:?! ")
+    if re.fullmatch(r"[A-Za-z]+-\d{4}", clean):
+        clean = clean.replace("-", " ")
     try:
         return datetime.fromisoformat(clean).date().isoformat()
     except ValueError:
         pass
-    iso_month_match = re.fullmatch(r"\d{4}-\d{2}", clean)
+    iso_month_match = re.fullmatch(r"\d{4}-\d{1,2}", clean)
     if iso_month_match:
-        try:
-            dt = datetime.strptime(clean, "%Y-%m")
-            return dt.replace(day=1).date().isoformat()
-        except ValueError:
-            return None
+        return _normalize_numeric_month(clean)
     parts = clean.split()
     if len(parts) == 2:
-        month = MONTHS.get(parts[0].lower())
+        month_token = parts[0].rstrip(".").lower()
+        month = MONTHS.get(month_token)
         year = _safe_int(parts[1])
         if month and year:
             return f"{year:04d}-{month:02d}-01"
     return None
 
 
+def _normalize_numeric_month(token: str) -> Optional[str]:
+    try:
+        year, month = token.split("-")
+        return f"{int(year):04d}-{int(month):02d}-01"
+    except ValueError:
+        return None
+
+
 def _detect_ma_periods(lowered_question: str) -> int:
-    match = re.search(r"(\d+)\s*(?:period|month|point)\s+(?:moving average|ma)", lowered_question)
+    match = re.search(
+        r"(\d+)\s*(?:[- ]?(?:periods?|months?|points?))\s+(?:moving average|ma)",
+        lowered_question,
+    )
     if match:
         return int(match.group(1))
     return 3
