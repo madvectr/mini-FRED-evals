@@ -79,6 +79,8 @@ def verify_case(
     for entry in verifier_map:
         if not entry.get("enabled", True):
             continue
+        if not _entry_applicable(entry, case):
+            continue
         verifier_id = entry["id"]
         severity = entry["severity"]
         fn = registry.get(verifier_id)
@@ -339,6 +341,15 @@ def _compute_truth(db_path: Path, spec: Dict[str, Any]) -> Optional[float]:
         return None
     finally:
         conn.close()
+
+
+def _entry_applicable(entry: Dict[str, Any], case: Dict[str, Any]) -> bool:
+    expect = case.get("expect", {})
+    if entry.get("require_expect_should_answer") and not expect.get("should_answer", True):
+        return False
+    if entry.get("require_expect_should_have_value") and not expect.get("should_have_value", True):
+        return False
+    return True
 
 
 def dump_failures_json(failures: List[Failure]) -> str:

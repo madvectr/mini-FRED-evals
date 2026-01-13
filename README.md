@@ -1,42 +1,67 @@
 ## Mini-FRED Warehouse
 
-Purpose is to create a deterministic, lightweight subset of key macroeconomic series that can be stored locally in DuckDB and reused for MVES verifiers and promptfoo experiments without requiring a network connection after the initial ingest.
+Mini-FRED is a deterministic DuckDB snapshot containing a handful of macro series (CPIAUCSL, UNRATE, FEDFUNDS, PCEPI, GDPC1) curated for MVES specifications and promptfoo-based regressions. Everything runs locally—data, truth logic, and evaluation harnesses—so once you ingest snapshots you can test agents offline.
 
-### Quickstart
-1. `cd mini-fred`
-2. Create a virtual environment (example): `python3 -m venv .venv && source .venv/bin/activate`
-3. Install dependencies (DuckDB, pandas, scikit-learn, etc.): `pip install -e .`
-4. Provide your FRED key (needed only for online ingest) by creating a `.env` file that contains `FRED_API_KEY=YOUR_KEY` or exporting the variable manually.
-5. Run the ingest command (see below) to populate DuckDB + snapshots.
-6. Execute QC checks to validate the snapshot.
-7. Generate Markdown series cards.
-8. Ask a question using the deterministic answer CLI.
+### Prerequisites
+- Python ≥3.10 with virtualenv support  
+  ```
+  cd mini-fred
+  python3 -m venv .venv && source .venv/bin/activate
+  pip install -e .
+  ```
+- Node.js/npm for promptfoo (`brew install node` or equivalent)
+- Optional: `FRED_API_KEY` in `.env` if you need to refresh data
 
-### Ingest & QC
-```
-# .env is read automatically; this manual export is optional
-export FRED_API_KEY=YOUR_KEY
-python scripts/ingest_fred.py --refresh --export-snapshots
-python scripts/qc_checks.py
-python scripts/build_series_cards.py --last-n 12
-python scripts/answer.py "What was the unemployment rate in April 2020?"
-```
-The ingest script downloads metadata + observations for CPIAUCSL, UNRATE, FEDFUNDS, PCEPI, and GDPC1 from 2000-01-01 through 2025-12-31, writes them into `data/warehouse.duckdb`, caches raw JSON in `data/raw/`, and optionally exports CSV snapshots under `data/snapshots/`. After a snapshot exists, downstream demos can run offline without reusing the API key because all inputs are already committed.
+### Core workflow (Python venv active)
+1. Ingest + QC:
+   ```
+   python scripts/ingest_fred.py --refresh --export-snapshots
+   python scripts/qc_checks.py
+   python scripts/build_series_cards.py --last-n 12
+   ```
+2. Ask ad-hoc questions:
+   ```
+   python scripts/answer.py "What was the unemployment rate in April 2020?" --agent answer_4
+   ```
 
-### Series cards & answerer
-- `python scripts/build_series_cards.py --last-n 12` writes `corpus/series_cards/series_<SERIES>.md` (the context plane for RAG-style explanations).
-- Agents live under `rag_agent/` (e.g., `answer_1.py`, `answer_2.py`, `answer_3.py`, `answer_4.py`). Use `--agent answer_X` to select one; `answer_4` is the current default.
-- `python scripts/answer.py "What was the unemployment rate in April 2020?" --agent answer_4` loads the DuckDB truth store, uses TF-IDF retrieval over `corpus/series_cards` to ground/infer series IDs, computes the numeric answer, and emits JSON including `value`, `value_display`, explanation text, deterministic citations, and retrieved-doc scores.
+### MVES specification
+- Specs, verifiers, and custom Python checks live in `mves/`.  
+- The canonical golden + refusal set lives in `evals/mves/`. Regenerate with:
+  ```
+  python scripts/generate_golden.py --out evals/mves/golden.jsonl
+  ```
+- Run MVES against any agent (still inside the Python venv):
+  ```bash
+  for agent in answer_1 answer_2 answer_3 answer_4; do
+    python scripts/mves_run.py --agent "$agent" --golden evals/mves/golden.jsonl
+  done
+  ```
 
-### MVES: running evaluations
-- Specs, verifiers, and goldens live in `mves/` + `eval/golden.jsonl`.
-- Regenerate the data-derived golden set with `python scripts/generate_golden.py --out eval/golden.jsonl` (see `--help` for sampling knobs). Ambiguity tests live in `eval/refusal.jsonl`.
-- Run the full gate with `python scripts/mves_run.py --agent answer_4` (or any other agent module).
-- Results land in `reports/mves_report_<agent>.json|md`. The runner exits non-zero if any critical verifier fails or pass rate drops below 90%.
+### Additional evaluation suites
+All commands assume the Python venv is active; promptfoo runs also require `npm` to be available.
 
-### Next milestones
-- Commit reproducible data snapshots for offline truth checks.
-- Wire promptfoo/MVES verifiers to cite the committed series cards.
+1. **`evals/mves/` (golden + refusals)** – described above; produces reports under `reports/mves_report_<agent>.*`.
 
-### Environment variables
-- `FRED_API_KEY`: store it in `.env` (preferred) or export it before running ingest. Once snapshots are checked in, the warehouse can be queried offline without this key.
+2. **`evals/ext_v1/` (auto-generated large suite)**  
+   - Rebuild merged spec/verifier overrides (see `evals/ext_v1/README.md`).  
+   - Execute for every agent:
+     ```bash
+     for agent in answer_1 answer_2 answer_3 answer_4; do
+       python evals/ext_v1/run_ext_mves.py --agent "$agent" --eval evals/ext_v1/evalset.jsonl
+     done
+     ```
+
+3. **`evals/promptfoo_ext/` (promptfoo + Python assertions)**  
+   - Requires `npm` (in addition to the Python venv).  
+   - Run promptfoo for each agent via the helper script:
+     ```bash
+     for agent in answer_1 answer_2 answer_3 answer_4; do
+       evals/promptfoo_ext/scripts/run.sh --agent "$agent"
+     done
+     ```
+   - The script shells into `npx promptfoo@latest eval -c evals/promptfoo_ext/promptfooconfig.yaml`, so append any extra flags (e.g., `--max-concurrency 2`).
+
+### Environment
+- Keep the Python venv active for all scripts (`source .venv/bin/activate`).
+- Ensure `npm` is on PATH before running promptfoo commands.
+- Once snapshots are committed, no API keys are required for evaluation.

@@ -1,0 +1,18 @@
+{
+  "behavior_rules": [
+    {
+      "id": "refusal_behavior",
+      "description": "Refusals bypass date/window requirements and keep low-confidence, citation-free answers.",
+      "expression": {
+        "if": "expect.should_answer is False",
+        "then": [
+          "value is None",
+          "len(citations) == 0",
+          "confidence <= 0.4",
+          "window['start'] is None or window['end'] is None or transform not in {'max','min'}",
+          "date is None or transform not in {'point','yoy','mom','ma'}"
+        ]
+      }
+    }
+  ]
+}

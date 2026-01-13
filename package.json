@@ -1,0 +1,19 @@
+{
+  "name": "mini-fred",
+  "version": "1.0.0",
+  "description": "Purpose is to create a deterministic, lightweight subset of key macroeconomic series that can be stored locally in DuckDB and reused for MVES verifiers and promptfoo experiments without requiring a network connection after the initial ingest.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "promptfoo": "^0.120.13"
+  }
+}

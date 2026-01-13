@@ -79,7 +79,7 @@ def run(
     parsed = _validate_parsed_result(parsed)
     parsed = _maybe_infer_series_from_retrieval(parsed, retrieved)
 
-    con = warehouse.get_connection(db_path)
+    con = warehouse.get_connection(db_path, read_only=True, retries=3)
 
     if parsed.missing_series and (parsed.series_id is None):
         return _clarifying_response(parsed, retrieved_summary)
@@ -89,20 +89,25 @@ def run(
 
 def _normalize_question_text(question: str) -> str:
     text = question
-    subs = {
-        "sept.": "september",
-        "sep.": "september",
-        "aug.": "august",
-        "oct.": "october",
-        "nov.": "november",
-        "dec.": "december",
-        "jan.": "january",
-        "feb.": "february",
-        "mar.": "march",
-        "apr.": "april",
-        "jun.": "june",
-        "jul.": "july",
+    month_aliases = {
+        "jan": "january",
+        "feb": "february",
+        "mar": "march",
+        "apr": "april",
+        "may": "may",
+        "jun": "june",
+        "jul": "july",
+        "aug": "august",
+        "sep": "september",
+        "sept": "september",
+        "oct": "october",
+        "nov": "november",
+        "dec": "december",
     }
+    subs = {}
+    for alias, full in month_aliases.items():
+        subs[alias] = full
+        subs[f"{alias}."] = full
     for needle, repl in subs.items():
         text = re.sub(rf"\b{needle}\b", repl, text, flags=re.IGNORECASE)
     text = text.replace("–", "-").replace("—", "-")

@@ -18,7 +18,7 @@
 - `src/` — Python package with clients (`fred_client`), warehouse helpers, card builders, parsing/truth utilities, and shared helpers.
 - `rag_agent/` — versioned RAG agents (e.g., `answer_1.py`) that `scripts/answer.py` can load via `--agent`.
 - `mves/` — evaluation spec + verifier map + Python verifiers.
-- `eval/` — golden JSONL generated from DuckDB-derived snapshots plus refusal cases.
+- `evals/` — evaluation assets (`evals/mves/` golden + refusal sets, `evals/ext_v1/`, `evals/promptfoo_ext/`).
 - `reports/` — artifacts emitted by `scripts/mves_run.py`.
 
 ## Data Model (DuckDB)
@@ -44,7 +44,7 @@ Both tables share a deterministic CSV import contract so they can be regenerated
 3. **QC:** `scripts/qc_checks.py` runs schema validation, coverage checks, row-count thresholds, and null-density warnings; it exits non-zero if critical checks fail.
 4. **Series cards:** `scripts/build_series_cards.py` loads the latest snapshot, fetches the last _N_ observations for each series, and produces Markdown cards in `corpus/series_cards/` (`series_<SERIES>.md`).
 5. **Answerer:** `scripts/answer.py` loads a versioned agent (current default: `rag_agent.answer_4`). Each agent parses the question, normalizes requested dates/windows, retrieves series cards, computes the statistic from DuckDB (`src/truth.py`), and emits JSON with `value`, `value_display`, citations, retrieval scores, and a parse trace.
-6. **MVES control plane:** `scripts/generate_golden.py` samples queries/dates/windows from the warehouse snapshots to produce `eval/golden.jsonl`; `scripts/mves_run.py` replays those questions through the answerer, applies verifiers in `mves/verifiers.py`, and writes reports under `reports/`.
+6. **MVES control plane:** `scripts/generate_golden.py` samples queries/dates/windows from the warehouse snapshots to produce `evals/mves/golden.jsonl`; `scripts/mves_run.py` replays those questions through the answerer, applies verifiers in `mves/verifiers.py`, and writes reports under `reports/`.
 
 ## What Comes Next
 - **Agent + MVES wiring:** promptfoo scenarios, verifier prompts, and any orchestration stay out of scope until the warehouse is fully reproducible.

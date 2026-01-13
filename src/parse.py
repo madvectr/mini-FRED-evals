@@ -62,19 +62,42 @@ SLASH_MONTH_PATTERN = re.compile(r"\b\d{4}/\d{1,2}\b")
 
 TRANSFORM_KEYWORDS = {
     "yoy": "yoy",
+    "yoy change": "yoy",
     "year over year": "yoy",
+    "year-over-year": "yoy",
     "year-on-year": "yoy",
+    "annual change": "yoy",
+    "annual percent change": "yoy",
+    "annual percentage change": "yoy",
     "mom": "mom",
+    "mom change": "mom",
     "month over month": "mom",
     "month-on-month": "mom",
+    "monthly change": "mom",
+    "monthly percent change": "mom",
+    "monthly percentage change": "mom",
     "moving average": "ma",
     "ma": "ma",
     "highest": "max",
+    "highest level": "max",
     "maximum": "max",
     "max": "max",
+    "how high": "max",
+    "peak": "max",
     "lowest": "min",
+    "lowest level": "min",
     "minimum": "min",
     "min": "min",
+    "how low": "min",
+}
+
+_TRANSFORM_PATTERNS = {
+    keyword: re.compile(
+        r"\b"
+        + re.escape(keyword).replace(r"\ ", r"\s+")
+        + r"\b"
+    )
+    for keyword in TRANSFORM_KEYWORDS
 }
 
 
@@ -140,7 +163,8 @@ def _detect_series(lowered_question: str) -> Optional[str]:
 
 def _detect_transform(lowered_question: str) -> str:
     for keyword, transform in TRANSFORM_KEYWORDS.items():
-        if keyword in lowered_question:
+        pattern = _TRANSFORM_PATTERNS[keyword]
+        if pattern.search(lowered_question):
             return transform
     return "point"
 

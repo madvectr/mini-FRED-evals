@@ -1,0 +1,13 @@
+prompts:
+  - "{{question}}"
+
+providers:
+  - 'exec: python3 {{ env.PROMPTFOO_PROJECT_ROOT | default(env.PWD) }}/evals/promptfoo_ext/scripts/exec_answer.py'
+
+tests:
+  - file://tests/cases.yaml
+
+defaultTest:
+  assert:
+    - type: python
+      value: file://assertions/mves_assert.py

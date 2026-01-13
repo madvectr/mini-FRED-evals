@@ -26,10 +26,10 @@ from src import truth  # noqa: E402
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Generate eval/golden.jsonl")
+    parser = argparse.ArgumentParser(description="Generate evals/mves/golden.jsonl")
     parser.add_argument("--db", default="data/warehouse.duckdb", help="DuckDB path.")
     parser.add_argument("--config", default="config/series.yaml", help="Series config.")
-    parser.add_argument("--out", default="eval/golden.jsonl", help="Output JSONL.")
+    parser.add_argument("--out", default="evals/mves/golden.jsonl", help="Output JSONL.")
     parser.add_argument("--seed", type=int, default=42, help="Random seed.")
     parser.add_argument("--n-point", type=int, default=20)
     parser.add_argument("--n-window", type=int, default=10)

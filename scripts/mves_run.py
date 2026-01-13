@@ -15,9 +15,9 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from mves.verifiers import Failure, verify_case  # noqa: E402
-DEFAULT_GOLDEN = Path("eval/golden.jsonl")
-REFUSAL_PATH = Path("eval/refusal.jsonl")
+from mves import verifiers as mves_verifiers  # noqa: E402
+DEFAULT_GOLDEN = Path("evals/mves/golden.jsonl")
+REFUSAL_PATH = Path("evals/mves/refusal.jsonl")
 REPORTS_DIR = Path("reports")
 ANSWER_SCRIPT = Path("scripts/answer.py")
 
@@ -27,7 +27,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--golden",
         default=str(DEFAULT_GOLDEN),
-        help="Path to golden JSONL file (default: eval/golden.jsonl).",
+        help="Path to golden JSONL file (default: evals/mves/golden.jsonl).",
     )
     parser.add_argument(
         "--reports-dir",
@@ -43,6 +43,21 @@ def parse_args() -> argparse.Namespace:
         "--agent",
         default="answer_1",
         help="rag_agent module to evaluate (default: answer_1).",
+    )
+    parser.add_argument(
+        "--spec",
+        default=str(mves_verifiers.SPEC_PATH),
+        help="Path to MVES spec (default: mves/spec.yaml).",
+    )
+    parser.add_argument(
+        "--verifiers",
+        default=str(mves_verifiers.MAP_PATH),
+        help="Path to verifier map (default: mves/verifier_map.yaml).",
+    )
+    parser.add_argument(
+        "--refusals",
+        default=str(REFUSAL_PATH),
+        help="Optional refusal JSONL (set to empty string to skip).",
     )
     return parser.parse_args()
 
@@ -78,7 +93,7 @@ def run_case(case: Dict[str, Any], db_path: Path, agent: str) -> Dict[str, Any]:
     try:
         response = run_answer(question, agent)
     except Exception as exc:
-        failure = Failure("runner_error", "critical", str(exc))
+        failure = mves_verifiers.Failure("runner_error", "critical", str(exc))
         return {
             "id": case["id"],
             "question": question,
@@ -87,7 +102,7 @@ def run_case(case: Dict[str, Any], db_path: Path, agent: str) -> Dict[str, Any]:
             "failures": [asdict(failure)],
         }
 
-    failures = [asdict(f) for f in verify_case(case, response, db_path)]
+    failures = [asdict(f) for f in mves_verifiers.verify_case(case, response, db_path)]
     status = "pass" if not failures else "fail"
     return {
         "id": case["id"],
@@ -181,9 +196,15 @@ def main() -> None:
     golden_path = Path(args.golden)
     reports_dir = Path(args.reports_dir)
 
+    mves_verifiers.SPEC_PATH = Path(args.spec)
+    mves_verifiers.MAP_PATH = Path(args.verifiers)
+
     cases = load_golden(golden_path)
-    if REFUSAL_PATH.exists():
-        cases.extend(load_golden(REFUSAL_PATH))
+    refusal_arg = args.refusals.strip()
+    if refusal_arg:
+        refusal_path = Path(refusal_arg)
+        if refusal_path.exists():
+            cases.extend(load_golden(refusal_path))
 
     db_path = Path(args.db)
     agent = args.agent

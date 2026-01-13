@@ -1,0 +1,17 @@
+{
+  "verifiers": [
+    {
+      "id": "date_rules",
+      "require_expect_should_answer": true
+    },
+    {
+      "id": "window_rules",
+      "require_expect_should_answer": true
+    },
+    {
+      "id": "truth_matches",
+      "require_expect_should_answer": true,
+      "require_expect_should_have_value": true
+    }
+  ]
+}

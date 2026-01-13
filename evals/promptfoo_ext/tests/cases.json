@@ -1,0 +1,1978 @@
+[
+  {
+    "description": "easy_CPIAUCSL_point_0__v1",
+    "category": "easy",
+    "vars": {
+      "question": "Report the value of Consumer Price Index for All Urban Consumers: All Items as of February 2022.?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "point",
+        "series_id": "CPIAUCSL"
+      },
+      "truth_spec": {
+        "series_id": "CPIAUCSL",
+        "transform": "point",
+        "date": "2022-02-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_CPIAUCSL_point_1__v1",
+    "category": "easy",
+    "vars": {
+      "question": "What was Consumer Price Index for All Urban Consumers: All Items in 2000-11?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "point",
+        "series_id": "CPIAUCSL"
+      },
+      "truth_spec": {
+        "series_id": "CPIAUCSL",
+        "transform": "point",
+        "date": "2000-11-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_CPIAUCSL_point_2__v1",
+    "category": "easy",
+    "vars": {
+      "question": "Give me Consumer Price Index for All Urban Consumers: All Items for March 2013.?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "point",
+        "series_id": "CPIAUCSL"
+      },
+      "truth_spec": {
+        "series_id": "CPIAUCSL",
+        "transform": "point",
+        "date": "2013-03-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_CPIAUCSL_point_3__v1",
+    "category": "easy",
+    "vars": {
+      "question": "What was Consumer Price Index for All Urban Consumers: All Items in August 2001?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "point",
+        "series_id": "CPIAUCSL"
+      },
+      "truth_spec": {
+        "series_id": "CPIAUCSL",
+        "transform": "point",
+        "date": "2001-08-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_CPIAUCSL_point_4__v1",
+    "category": "easy",
+    "vars": {
+      "question": "Report the value of Consumer Price Index for All Urban Consumers: All Items as of July 2025.?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "point",
+        "series_id": "CPIAUCSL"
+      },
+      "truth_spec": {
+        "series_id": "CPIAUCSL",
+        "transform": "point",
+        "date": "2025-07-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_CPIAUCSL_point_5__v1",
+    "category": "easy",
+    "vars": {
+      "question": "Report the value of Consumer Price Index for All Urban Consumers: All Items as of 2023-09.?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "point",
+        "series_id": "CPIAUCSL"
+      },
+      "truth_spec": {
+        "series_id": "CPIAUCSL",
+        "transform": "point",
+        "date": "2023-09-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_CPIAUCSL_point_6__v1",
+    "category": "easy",
+    "vars": {
+      "question": "Report the value of Consumer Price Index for All Urban Consumers: All Items as of January 2011.?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "point",
+        "series_id": "CPIAUCSL"
+      },
+      "truth_spec": {
+        "series_id": "CPIAUCSL",
+        "transform": "point",
+        "date": "2011-01-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_CPIAUCSL_yoy_0__v1",
+    "category": "easy",
+    "vars": {
+      "question": "How large was the year-over-year change in Dec 2020 for Consumer Price Index for All Urban Consumers: All Items?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "yoy",
+        "series_id": "CPIAUCSL"
+      },
+      "truth_spec": {
+        "series_id": "CPIAUCSL",
+        "transform": "yoy",
+        "date": "2020-12-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_CPIAUCSL_yoy_1__v1",
+    "category": "easy",
+    "vars": {
+      "question": "What was the year-over-year change for Consumer Price Index for All Urban Consumers: All Items in June 2008?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "yoy",
+        "series_id": "CPIAUCSL"
+      },
+      "truth_spec": {
+        "series_id": "CPIAUCSL",
+        "transform": "yoy",
+        "date": "2008-06-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_CPIAUCSL_yoy_2__v1",
+    "category": "easy",
+    "vars": {
+      "question": "What was the annual change for Consumer Price Index for All Urban Consumers: All Items in 2021-04?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "yoy",
+        "series_id": "CPIAUCSL"
+      },
+      "truth_spec": {
+        "series_id": "CPIAUCSL",
+        "transform": "yoy",
+        "date": "2021-04-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_CPIAUCSL_yoy_3__v1",
+    "category": "easy",
+    "vars": {
+      "question": "What was the year-over-year change for Consumer Price Index for All Urban Consumers: All Items in 2003-08?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "yoy",
+        "series_id": "CPIAUCSL"
+      },
+      "truth_spec": {
+        "series_id": "CPIAUCSL",
+        "transform": "yoy",
+        "date": "2003-08-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_CPIAUCSL_yoy_4__v1",
+    "category": "easy",
+    "vars": {
+      "question": "How large was the annual change in 2010-09 for Consumer Price Index for All Urban Consumers: All Items?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "yoy",
+        "series_id": "CPIAUCSL"
+      },
+      "truth_spec": {
+        "series_id": "CPIAUCSL",
+        "transform": "yoy",
+        "date": "2010-09-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_CPIAUCSL_yoy_5__v1",
+    "category": "easy",
+    "vars": {
+      "question": "How large was the year-over-year change in Aug 2017 for Consumer Price Index for All Urban Consumers: All Items?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "yoy",
+        "series_id": "CPIAUCSL"
+      },
+      "truth_spec": {
+        "series_id": "CPIAUCSL",
+        "transform": "yoy",
+        "date": "2017-08-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_CPIAUCSL_yoy_6__v1",
+    "category": "easy",
+    "vars": {
+      "question": "Provide the YoY change of Consumer Price Index for All Urban Consumers: All Items for 2024-06.?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "yoy",
+        "series_id": "CPIAUCSL"
+      },
+      "truth_spec": {
+        "series_id": "CPIAUCSL",
+        "transform": "yoy",
+        "date": "2024-06-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_FEDFUNDS_point_0__v1",
+    "category": "easy",
+    "vars": {
+      "question": "Give me Effective Federal Funds Rate for July 2005.?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "point",
+        "series_id": "FEDFUNDS"
+      },
+      "truth_spec": {
+        "series_id": "FEDFUNDS",
+        "transform": "point",
+        "date": "2005-07-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_FEDFUNDS_point_1__v1",
+    "category": "easy",
+    "vars": {
+      "question": "Report the value of Effective Federal Funds Rate as of 2011-12.?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "point",
+        "series_id": "FEDFUNDS"
+      },
+      "truth_spec": {
+        "series_id": "FEDFUNDS",
+        "transform": "point",
+        "date": "2011-12-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_FEDFUNDS_point_2__v1",
+    "category": "easy",
+    "vars": {
+      "question": "What was Effective Federal Funds Rate in 2010-05?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "point",
+        "series_id": "FEDFUNDS"
+      },
+      "truth_spec": {
+        "series_id": "FEDFUNDS",
+        "transform": "point",
+        "date": "2010-05-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_FEDFUNDS_point_3__v1",
+    "category": "easy",
+    "vars": {
+      "question": "What was Effective Federal Funds Rate in January 2006?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "point",
+        "series_id": "FEDFUNDS"
+      },
+      "truth_spec": {
+        "series_id": "FEDFUNDS",
+        "transform": "point",
+        "date": "2006-01-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_FEDFUNDS_point_4__v1",
+    "category": "easy",
+    "vars": {
+      "question": "What was Effective Federal Funds Rate in 2000-04?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "point",
+        "series_id": "FEDFUNDS"
+      },
+      "truth_spec": {
+        "series_id": "FEDFUNDS",
+        "transform": "point",
+        "date": "2000-04-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_FEDFUNDS_point_5__v1",
+    "category": "easy",
+    "vars": {
+      "question": "Report the value of Effective Federal Funds Rate as of December 2009.?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "point",
+        "series_id": "FEDFUNDS"
+      },
+      "truth_spec": {
+        "series_id": "FEDFUNDS",
+        "transform": "point",
+        "date": "2009-12-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_FEDFUNDS_point_6__v1",
+    "category": "easy",
+    "vars": {
+      "question": "What was Effective Federal Funds Rate in August 2024?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "point",
+        "series_id": "FEDFUNDS"
+      },
+      "truth_spec": {
+        "series_id": "FEDFUNDS",
+        "transform": "point",
+        "date": "2024-08-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_FEDFUNDS_yoy_0__v1",
+    "category": "easy",
+    "vars": {
+      "question": "What was the year-over-year change for Effective Federal Funds Rate in May 2017?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "yoy",
+        "series_id": "FEDFUNDS"
+      },
+      "truth_spec": {
+        "series_id": "FEDFUNDS",
+        "transform": "yoy",
+        "date": "2017-05-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_FEDFUNDS_yoy_1__v1",
+    "category": "easy",
+    "vars": {
+      "question": "How large was the YoY change in November 2005 for Effective Federal Funds Rate?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "yoy",
+        "series_id": "FEDFUNDS"
+      },
+      "truth_spec": {
+        "series_id": "FEDFUNDS",
+        "transform": "yoy",
+        "date": "2005-11-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_FEDFUNDS_yoy_2__v1",
+    "category": "easy",
+    "vars": {
+      "question": "How large was the year-over-year change in Jan 2024 for Effective Federal Funds Rate?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "yoy",
+        "series_id": "FEDFUNDS"
+      },
+      "truth_spec": {
+        "series_id": "FEDFUNDS",
+        "transform": "yoy",
+        "date": "2024-01-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_FEDFUNDS_yoy_3__v1",
+    "category": "easy",
+    "vars": {
+      "question": "How large was the annual change in June 2013 for Effective Federal Funds Rate?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "yoy",
+        "series_id": "FEDFUNDS"
+      },
+      "truth_spec": {
+        "series_id": "FEDFUNDS",
+        "transform": "yoy",
+        "date": "2013-06-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_FEDFUNDS_yoy_4__v1",
+    "category": "easy",
+    "vars": {
+      "question": "How large was the YoY change in 2019-04 for Effective Federal Funds Rate?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "yoy",
+        "series_id": "FEDFUNDS"
+      },
+      "truth_spec": {
+        "series_id": "FEDFUNDS",
+        "transform": "yoy",
+        "date": "2019-04-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_FEDFUNDS_yoy_5__v1",
+    "category": "easy",
+    "vars": {
+      "question": "What was the YoY change for Effective Federal Funds Rate in May 2005?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "yoy",
+        "series_id": "FEDFUNDS"
+      },
+      "truth_spec": {
+        "series_id": "FEDFUNDS",
+        "transform": "yoy",
+        "date": "2005-05-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_FEDFUNDS_yoy_6__v1",
+    "category": "easy",
+    "vars": {
+      "question": "What was the year-over-year change for Effective Federal Funds Rate in September 2009?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "yoy",
+        "series_id": "FEDFUNDS"
+      },
+      "truth_spec": {
+        "series_id": "FEDFUNDS",
+        "transform": "yoy",
+        "date": "2009-09-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_GDPC1_point_0__v1",
+    "category": "easy",
+    "vars": {
+      "question": "Give me Real Gross Domestic Product for January 2010.?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "point",
+        "series_id": "GDPC1"
+      },
+      "truth_spec": {
+        "series_id": "GDPC1",
+        "transform": "point",
+        "date": "2010-01-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_GDPC1_point_1__v1",
+    "category": "easy",
+    "vars": {
+      "question": "Give me Real Gross Domestic Product for January 2006.?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "point",
+        "series_id": "GDPC1"
+      },
+      "truth_spec": {
+        "series_id": "GDPC1",
+        "transform": "point",
+        "date": "2006-01-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_GDPC1_point_2__v1",
+    "category": "easy",
+    "vars": {
+      "question": "Report the value of Real Gross Domestic Product as of October 2015.?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "point",
+        "series_id": "GDPC1"
+      },
+      "truth_spec": {
+        "series_id": "GDPC1",
+        "transform": "point",
+        "date": "2015-10-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_GDPC1_point_3__v1",
+    "category": "easy",
+    "vars": {
+      "question": "Report the value of Real Gross Domestic Product as of October 2016.?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "point",
+        "series_id": "GDPC1"
+      },
+      "truth_spec": {
+        "series_id": "GDPC1",
+        "transform": "point",
+        "date": "2016-10-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_GDPC1_point_4__v1",
+    "category": "easy",
+    "vars": {
+      "question": "Give me Real Gross Domestic Product for 2012-04.?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "point",
+        "series_id": "GDPC1"
+      },
+      "truth_spec": {
+        "series_id": "GDPC1",
+        "transform": "point",
+        "date": "2012-04-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_GDPC1_point_5__v1",
+    "category": "easy",
+    "vars": {
+      "question": "Give me Real Gross Domestic Product for 2007-07.?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "point",
+        "series_id": "GDPC1"
+      },
+      "truth_spec": {
+        "series_id": "GDPC1",
+        "transform": "point",
+        "date": "2007-07-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_GDPC1_point_6__v1",
+    "category": "easy",
+    "vars": {
+      "question": "Report the value of Real Gross Domestic Product as of July 2019.?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "point",
+        "series_id": "GDPC1"
+      },
+      "truth_spec": {
+        "series_id": "GDPC1",
+        "transform": "point",
+        "date": "2019-07-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_GDPC1_yoy_0__v1",
+    "category": "easy",
+    "vars": {
+      "question": "What was the year-over-year change for Real Gross Domestic Product in October 2017?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "yoy",
+        "series_id": "GDPC1"
+      },
+      "truth_spec": {
+        "series_id": "GDPC1",
+        "transform": "yoy",
+        "date": "2017-10-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_GDPC1_yoy_1__v1",
+    "category": "easy",
+    "vars": {
+      "question": "Provide the year-over-year change of Real Gross Domestic Product for January 2005.?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "yoy",
+        "series_id": "GDPC1"
+      },
+      "truth_spec": {
+        "series_id": "GDPC1",
+        "transform": "yoy",
+        "date": "2005-01-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_GDPC1_yoy_2__v1",
+    "category": "easy",
+    "vars": {
+      "question": "How large was the YoY change in Oct 2020 for Real Gross Domestic Product?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "yoy",
+        "series_id": "GDPC1"
+      },
+      "truth_spec": {
+        "series_id": "GDPC1",
+        "transform": "yoy",
+        "date": "2020-10-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_GDPC1_yoy_3__v1",
+    "category": "easy",
+    "vars": {
+      "question": "How large was the year-over-year change in 2008-07 for Real Gross Domestic Product?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "yoy",
+        "series_id": "GDPC1"
+      },
+      "truth_spec": {
+        "series_id": "GDPC1",
+        "transform": "yoy",
+        "date": "2008-07-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_GDPC1_yoy_4__v1",
+    "category": "easy",
+    "vars": {
+      "question": "Provide the annual change of Real Gross Domestic Product for July 2016.?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "yoy",
+        "series_id": "GDPC1"
+      },
+      "truth_spec": {
+        "series_id": "GDPC1",
+        "transform": "yoy",
+        "date": "2016-07-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_GDPC1_yoy_5__v1",
+    "category": "easy",
+    "vars": {
+      "question": "What was the year-over-year change for Real Gross Domestic Product in Jan 2024?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "yoy",
+        "series_id": "GDPC1"
+      },
+      "truth_spec": {
+        "series_id": "GDPC1",
+        "transform": "yoy",
+        "date": "2024-01-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_GDPC1_yoy_6__v1",
+    "category": "easy",
+    "vars": {
+      "question": "Provide the year-over-year change of Real Gross Domestic Product for January 2021.?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "yoy",
+        "series_id": "GDPC1"
+      },
+      "truth_spec": {
+        "series_id": "GDPC1",
+        "transform": "yoy",
+        "date": "2021-01-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_PCEPI_point_0__v1",
+    "category": "easy",
+    "vars": {
+      "question": "What was Personal Consumption Expenditures Price Index in 2013-07?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "point",
+        "series_id": "PCEPI"
+      },
+      "truth_spec": {
+        "series_id": "PCEPI",
+        "transform": "point",
+        "date": "2013-07-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_PCEPI_point_1__v1",
+    "category": "easy",
+    "vars": {
+      "question": "What was Personal Consumption Expenditures Price Index in 2013-05?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "point",
+        "series_id": "PCEPI"
+      },
+      "truth_spec": {
+        "series_id": "PCEPI",
+        "transform": "point",
+        "date": "2013-05-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_PCEPI_point_2__v1",
+    "category": "easy",
+    "vars": {
+      "question": "What was Personal Consumption Expenditures Price Index in Jun 2007?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "point",
+        "series_id": "PCEPI"
+      },
+      "truth_spec": {
+        "series_id": "PCEPI",
+        "transform": "point",
+        "date": "2007-06-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_PCEPI_point_3__v1",
+    "category": "easy",
+    "vars": {
+      "question": "What was Personal Consumption Expenditures Price Index in 2021-06?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "point",
+        "series_id": "PCEPI"
+      },
+      "truth_spec": {
+        "series_id": "PCEPI",
+        "transform": "point",
+        "date": "2021-06-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_PCEPI_point_4__v1",
+    "category": "easy",
+    "vars": {
+      "question": "What was Personal Consumption Expenditures Price Index in 2006-03?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "point",
+        "series_id": "PCEPI"
+      },
+      "truth_spec": {
+        "series_id": "PCEPI",
+        "transform": "point",
+        "date": "2006-03-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_PCEPI_point_5__v1",
+    "category": "easy",
+    "vars": {
+      "question": "Report the value of Personal Consumption Expenditures Price Index as of September 2009.?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "point",
+        "series_id": "PCEPI"
+      },
+      "truth_spec": {
+        "series_id": "PCEPI",
+        "transform": "point",
+        "date": "2009-09-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_PCEPI_point_6__v1",
+    "category": "easy",
+    "vars": {
+      "question": "Report the value of Personal Consumption Expenditures Price Index as of January 2025.?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "point",
+        "series_id": "PCEPI"
+      },
+      "truth_spec": {
+        "series_id": "PCEPI",
+        "transform": "point",
+        "date": "2025-01-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "easy_PCEPI_yoy_0__v1",
+    "category": "easy",
+    "vars": {
+      "question": "Provide the annual change of Personal Consumption Expenditures Price Index for 2005-10.?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "yoy",
+        "series_id": "PCEPI"
+      },
+      "truth_spec": {
+        "series_id": "PCEPI",
+        "transform": "yoy",
+        "date": "2005-10-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "medium_CPIAUCSL_ma_0__v1",
+    "category": "medium",
+    "vars": {
+      "question": "What was the 3-period moving average of Consumer Price Index for All Urban Consumers: All Items in Jul 2000?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "ma",
+        "series_id": "CPIAUCSL"
+      },
+      "truth_spec": {
+        "series_id": "CPIAUCSL",
+        "transform": "ma",
+        "date": "2000-07-01",
+        "periods": 3,
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "medium_CPIAUCSL_ma_1__v1",
+    "category": "medium",
+    "vars": {
+      "question": "What was the 3-period moving average of Consumer Price Index for All Urban Consumers: All Items in 2021-04?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "ma",
+        "series_id": "CPIAUCSL"
+      },
+      "truth_spec": {
+        "series_id": "CPIAUCSL",
+        "transform": "ma",
+        "date": "2021-04-01",
+        "periods": 3,
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "medium_CPIAUCSL_ma_2__v1",
+    "category": "medium",
+    "vars": {
+      "question": "Report the 6-month moving average for Consumer Price Index for All Urban Consumers: All Items as of 2006-06.?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "ma",
+        "series_id": "CPIAUCSL"
+      },
+      "truth_spec": {
+        "series_id": "CPIAUCSL",
+        "transform": "ma",
+        "date": "2006-06-01",
+        "periods": 6,
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "medium_CPIAUCSL_ma_3__v1",
+    "category": "medium",
+    "vars": {
+      "question": "Give me the 3-period MA for Consumer Price Index for All Urban Consumers: All Items at Dec 2014.?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "ma",
+        "series_id": "CPIAUCSL"
+      },
+      "truth_spec": {
+        "series_id": "CPIAUCSL",
+        "transform": "ma",
+        "date": "2014-12-01",
+        "periods": 3,
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "medium_CPIAUCSL_ma_4__v1",
+    "category": "medium",
+    "vars": {
+      "question": "Give me the 6-period MA for Consumer Price Index for All Urban Consumers: All Items at May 2015.?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "ma",
+        "series_id": "CPIAUCSL"
+      },
+      "truth_spec": {
+        "series_id": "CPIAUCSL",
+        "transform": "ma",
+        "date": "2015-05-01",
+        "periods": 6,
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "medium_CPIAUCSL_ma_5__v1",
+    "category": "medium",
+    "vars": {
+      "question": "Give me the 5-period MA for Consumer Price Index for All Urban Consumers: All Items at September 2013.?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "ma",
+        "series_id": "CPIAUCSL"
+      },
+      "truth_spec": {
+        "series_id": "CPIAUCSL",
+        "transform": "ma",
+        "date": "2013-09-01",
+        "periods": 5,
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "medium_CPIAUCSL_ma_6__v1",
+    "category": "medium",
+    "vars": {
+      "question": "What was the 3-period moving average of Consumer Price Index for All Urban Consumers: All Items in 2019-11?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "ma",
+        "series_id": "CPIAUCSL"
+      },
+      "truth_spec": {
+        "series_id": "CPIAUCSL",
+        "transform": "ma",
+        "date": "2019-11-01",
+        "periods": 3,
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "medium_CPIAUCSL_mom_0__v1",
+    "category": "medium",
+    "vars": {
+      "question": "What was the monthly change for Consumer Price Index for All Urban Consumers: All Items in July 2009?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "mom",
+        "series_id": "CPIAUCSL"
+      },
+      "truth_spec": {
+        "series_id": "CPIAUCSL",
+        "transform": "mom",
+        "date": "2009-07-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "medium_CPIAUCSL_mom_1__v1",
+    "category": "medium",
+    "vars": {
+      "question": "Provide the MoM change of Consumer Price Index for All Urban Consumers: All Items for Sep 2024.?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "mom",
+        "series_id": "CPIAUCSL"
+      },
+      "truth_spec": {
+        "series_id": "CPIAUCSL",
+        "transform": "mom",
+        "date": "2024-09-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "medium_CPIAUCSL_mom_2__v1",
+    "category": "medium",
+    "vars": {
+      "question": "What was the MoM change for Consumer Price Index for All Urban Consumers: All Items in July 2014?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "mom",
+        "series_id": "CPIAUCSL"
+      },
+      "truth_spec": {
+        "series_id": "CPIAUCSL",
+        "transform": "mom",
+        "date": "2014-07-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "medium_CPIAUCSL_mom_3__v1",
+    "category": "medium",
+    "vars": {
+      "question": "What was the MoM change for Consumer Price Index for All Urban Consumers: All Items in June 2015?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "mom",
+        "series_id": "CPIAUCSL"
+      },
+      "truth_spec": {
+        "series_id": "CPIAUCSL",
+        "transform": "mom",
+        "date": "2015-06-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "medium_CPIAUCSL_mom_4__v1",
+    "category": "medium",
+    "vars": {
+      "question": "What was the MoM change for Consumer Price Index for All Urban Consumers: All Items in Jul 2015?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "mom",
+        "series_id": "CPIAUCSL"
+      },
+      "truth_spec": {
+        "series_id": "CPIAUCSL",
+        "transform": "mom",
+        "date": "2015-07-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "medium_CPIAUCSL_mom_5__v1",
+    "category": "medium",
+    "vars": {
+      "question": "How large was the month-over-month change in Jan 2020 for Consumer Price Index for All Urban Consumers: All Items?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "mom",
+        "series_id": "CPIAUCSL"
+      },
+      "truth_spec": {
+        "series_id": "CPIAUCSL",
+        "transform": "mom",
+        "date": "2020-01-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "medium_CPIAUCSL_mom_6__v1",
+    "category": "medium",
+    "vars": {
+      "question": "How large was the monthly change in Mar 2010 for Consumer Price Index for All Urban Consumers: All Items?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "mom",
+        "series_id": "CPIAUCSL"
+      },
+      "truth_spec": {
+        "series_id": "CPIAUCSL",
+        "transform": "mom",
+        "date": "2010-03-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "medium_FEDFUNDS_ma_0__v1",
+    "category": "medium",
+    "vars": {
+      "question": "Report the 5-month moving average for Effective Federal Funds Rate as of October 2021.?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "ma",
+        "series_id": "FEDFUNDS"
+      },
+      "truth_spec": {
+        "series_id": "FEDFUNDS",
+        "transform": "ma",
+        "date": "2021-10-01",
+        "periods": 5,
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "medium_FEDFUNDS_ma_1__v1",
+    "category": "medium",
+    "vars": {
+      "question": "Report the 12-month moving average for Effective Federal Funds Rate as of February 2019.?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "ma",
+        "series_id": "FEDFUNDS"
+      },
+      "truth_spec": {
+        "series_id": "FEDFUNDS",
+        "transform": "ma",
+        "date": "2019-02-01",
+        "periods": 12,
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "medium_FEDFUNDS_ma_2__v1",
+    "category": "medium",
+    "vars": {
+      "question": "Report the 6-month moving average for Effective Federal Funds Rate as of Jun 2025.?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "ma",
+        "series_id": "FEDFUNDS"
+      },
+      "truth_spec": {
+        "series_id": "FEDFUNDS",
+        "transform": "ma",
+        "date": "2025-06-01",
+        "periods": 6,
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "medium_FEDFUNDS_ma_3__v1",
+    "category": "medium",
+    "vars": {
+      "question": "What was the 12-period moving average of Effective Federal Funds Rate in April 2020?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "ma",
+        "series_id": "FEDFUNDS"
+      },
+      "truth_spec": {
+        "series_id": "FEDFUNDS",
+        "transform": "ma",
+        "date": "2020-04-01",
+        "periods": 12,
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "medium_FEDFUNDS_ma_4__v1",
+    "category": "medium",
+    "vars": {
+      "question": "Report the 6-month moving average for Effective Federal Funds Rate as of 2004-09.?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "ma",
+        "series_id": "FEDFUNDS"
+      },
+      "truth_spec": {
+        "series_id": "FEDFUNDS",
+        "transform": "ma",
+        "date": "2004-09-01",
+        "periods": 6,
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "medium_FEDFUNDS_ma_5__v1",
+    "category": "medium",
+    "vars": {
+      "question": "What was the 3-period moving average of Effective Federal Funds Rate in September 2019?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "ma",
+        "series_id": "FEDFUNDS"
+      },
+      "truth_spec": {
+        "series_id": "FEDFUNDS",
+        "transform": "ma",
+        "date": "2019-09-01",
+        "periods": 3,
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "medium_FEDFUNDS_ma_6__v1",
+    "category": "medium",
+    "vars": {
+      "question": "Give me the 3-period MA for Effective Federal Funds Rate at 2010-05.?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "ma",
+        "series_id": "FEDFUNDS"
+      },
+      "truth_spec": {
+        "series_id": "FEDFUNDS",
+        "transform": "ma",
+        "date": "2010-05-01",
+        "periods": 3,
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "medium_FEDFUNDS_mom_0__v1",
+    "category": "medium",
+    "vars": {
+      "question": "How large was the MoM change in May 2022 for Effective Federal Funds Rate?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "mom",
+        "series_id": "FEDFUNDS"
+      },
+      "truth_spec": {
+        "series_id": "FEDFUNDS",
+        "transform": "mom",
+        "date": "2022-05-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "medium_FEDFUNDS_mom_1__v1",
+    "category": "medium",
+    "vars": {
+      "question": "Provide the MoM change of Effective Federal Funds Rate for Dec 2001.?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "mom",
+        "series_id": "FEDFUNDS"
+      },
+      "truth_spec": {
+        "series_id": "FEDFUNDS",
+        "transform": "mom",
+        "date": "2001-12-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "medium_FEDFUNDS_mom_2__v1",
+    "category": "medium",
+    "vars": {
+      "question": "How large was the monthly change in May 2011 for Effective Federal Funds Rate?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "mom",
+        "series_id": "FEDFUNDS"
+      },
+      "truth_spec": {
+        "series_id": "FEDFUNDS",
+        "transform": "mom",
+        "date": "2011-05-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "medium_FEDFUNDS_mom_3__v1",
+    "category": "medium",
+    "vars": {
+      "question": "How large was the month-over-month change in 2006-11 for Effective Federal Funds Rate?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "mom",
+        "series_id": "FEDFUNDS"
+      },
+      "truth_spec": {
+        "series_id": "FEDFUNDS",
+        "transform": "mom",
+        "date": "2006-11-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "medium_FEDFUNDS_mom_4__v1",
+    "category": "medium",
+    "vars": {
+      "question": "What was the monthly change for Effective Federal Funds Rate in May 2000?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "mom",
+        "series_id": "FEDFUNDS"
+      },
+      "truth_spec": {
+        "series_id": "FEDFUNDS",
+        "transform": "mom",
+        "date": "2000-05-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "medium_FEDFUNDS_mom_5__v1",
+    "category": "medium",
+    "vars": {
+      "question": "Provide the month-over-month change of Effective Federal Funds Rate for May 2025.?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "mom",
+        "series_id": "FEDFUNDS"
+      },
+      "truth_spec": {
+        "series_id": "FEDFUNDS",
+        "transform": "mom",
+        "date": "2025-05-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "medium_FEDFUNDS_mom_6__v1",
+    "category": "medium",
+    "vars": {
+      "question": "What was the monthly change for Effective Federal Funds Rate in December 2022?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "mom",
+        "series_id": "FEDFUNDS"
+      },
+      "truth_spec": {
+        "series_id": "FEDFUNDS",
+        "transform": "mom",
+        "date": "2022-12-01",
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "medium_GDPC1_ma_0__v1",
+    "category": "medium",
+    "vars": {
+      "question": "What was the 3-period moving average of Real Gross Domestic Product in Jan 2010?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "ma",
+        "series_id": "GDPC1"
+      },
+      "truth_spec": {
+        "series_id": "GDPC1",
+        "transform": "ma",
+        "date": "2010-01-01",
+        "periods": 3,
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "medium_GDPC1_ma_1__v1",
+    "category": "medium",
+    "vars": {
+      "question": "What was the 3-period moving average of Real Gross Domestic Product in 2017-10?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "ma",
+        "series_id": "GDPC1"
+      },
+      "truth_spec": {
+        "series_id": "GDPC1",
+        "transform": "ma",
+        "date": "2017-10-01",
+        "periods": 3,
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "hard_CPIAUCSL_max_0__v1",
+    "category": "hard",
+    "vars": {
+      "question": "What was the highest value of Consumer Price Index for All Urban Consumers: All Items from August 2012 to August 2019?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "max",
+        "series_id": "CPIAUCSL"
+      },
+      "truth_spec": {
+        "series_id": "CPIAUCSL",
+        "transform": "max",
+        "window": {
+          "start": "2012-08-01",
+          "end": "2019-08-01"
+        },
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "hard_CPIAUCSL_max_1__v1",
+    "category": "hard",
+    "vars": {
+      "question": "What was the maximum value of Consumer Price Index for All Urban Consumers: All Items between September 2017 and August 2019?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "max",
+        "series_id": "CPIAUCSL"
+      },
+      "truth_spec": {
+        "series_id": "CPIAUCSL",
+        "transform": "max",
+        "window": {
+          "start": "2017-09-01",
+          "end": "2019-08-01"
+        },
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "hard_CPIAUCSL_max_2__v1",
+    "category": "hard",
+    "vars": {
+      "question": "Tell me the maximum reading for Consumer Price Index for All Urban Consumers: All Items from 2008-07 to 2011-05.?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "max",
+        "series_id": "CPIAUCSL"
+      },
+      "truth_spec": {
+        "series_id": "CPIAUCSL",
+        "transform": "max",
+        "window": {
+          "start": "2008-07-01",
+          "end": "2011-05-01"
+        },
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "hard_CPIAUCSL_max_3__v1",
+    "category": "hard",
+    "vars": {
+      "question": "What was the maximum value of Consumer Price Index for All Urban Consumers: All Items from January 2023 to January 2025?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "max",
+        "series_id": "CPIAUCSL"
+      },
+      "truth_spec": {
+        "series_id": "CPIAUCSL",
+        "transform": "max",
+        "window": {
+          "start": "2023-01-01",
+          "end": "2025-01-01"
+        },
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "hard_CPIAUCSL_max_4__v1",
+    "category": "hard",
+    "vars": {
+      "question": "What was the highest value of Consumer Price Index for All Urban Consumers: All Items from August 2022 to May 2025?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "max",
+        "series_id": "CPIAUCSL"
+      },
+      "truth_spec": {
+        "series_id": "CPIAUCSL",
+        "transform": "max",
+        "window": {
+          "start": "2022-08-01",
+          "end": "2025-05-01"
+        },
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "hard_CPIAUCSL_max_5__v1",
+    "category": "hard",
+    "vars": {
+      "question": "How high did Consumer Price Index for All Urban Consumers: All Items get between 2011-08 and 2015-03?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "max",
+        "series_id": "CPIAUCSL"
+      },
+      "truth_spec": {
+        "series_id": "CPIAUCSL",
+        "transform": "max",
+        "window": {
+          "start": "2011-08-01",
+          "end": "2015-03-01"
+        },
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "hard_CPIAUCSL_min_0__v1",
+    "category": "hard",
+    "vars": {
+      "question": "What was the minimum value of Consumer Price Index for All Urban Consumers: All Items from 2010-12 to 2021-04?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "min",
+        "series_id": "CPIAUCSL"
+      },
+      "truth_spec": {
+        "series_id": "CPIAUCSL",
+        "transform": "min",
+        "window": {
+          "start": "2010-12-01",
+          "end": "2021-04-01"
+        },
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "hard_CPIAUCSL_min_1__v1",
+    "category": "hard",
+    "vars": {
+      "question": "Tell me the minimum reading for Consumer Price Index for All Urban Consumers: All Items between 2012-08 and 2019-11.?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "min",
+        "series_id": "CPIAUCSL"
+      },
+      "truth_spec": {
+        "series_id": "CPIAUCSL",
+        "transform": "min",
+        "window": {
+          "start": "2012-08-01",
+          "end": "2019-11-01"
+        },
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "hard_CPIAUCSL_min_2__v1",
+    "category": "hard",
+    "vars": {
+      "question": "What was the lowest value of Consumer Price Index for All Urban Consumers: All Items between 2004-11 and 2014-11?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "min",
+        "series_id": "CPIAUCSL"
+      },
+      "truth_spec": {
+        "series_id": "CPIAUCSL",
+        "transform": "min",
+        "window": {
+          "start": "2004-11-01",
+          "end": "2014-11-01"
+        },
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "hard_CPIAUCSL_min_3__v1",
+    "category": "hard",
+    "vars": {
+      "question": "Tell me the minimum reading for Consumer Price Index for All Urban Consumers: All Items from 2003-03 to 2009-04.?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "min",
+        "series_id": "CPIAUCSL"
+      },
+      "truth_spec": {
+        "series_id": "CPIAUCSL",
+        "transform": "min",
+        "window": {
+          "start": "2003-03-01",
+          "end": "2009-04-01"
+        },
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "hard_CPIAUCSL_min_4__v1",
+    "category": "hard",
+    "vars": {
+      "question": "What was the minimum value of Consumer Price Index for All Urban Consumers: All Items between 2009-08 and 2024-02?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "min",
+        "series_id": "CPIAUCSL"
+      },
+      "truth_spec": {
+        "series_id": "CPIAUCSL",
+        "transform": "min",
+        "window": {
+          "start": "2009-08-01",
+          "end": "2024-02-01"
+        },
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "hard_CPIAUCSL_min_5__v1",
+    "category": "hard",
+    "vars": {
+      "question": "What was the minimum value of Consumer Price Index for All Urban Consumers: All Items from 2016-12 to 2025-07?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "min",
+        "series_id": "CPIAUCSL"
+      },
+      "truth_spec": {
+        "series_id": "CPIAUCSL",
+        "transform": "min",
+        "window": {
+          "start": "2016-12-01",
+          "end": "2025-07-01"
+        },
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "hard_FEDFUNDS_max_0__v1",
+    "category": "hard",
+    "vars": {
+      "question": "What was the highest value of Effective Federal Funds Rate between September 2006 and December 2023?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "max",
+        "series_id": "FEDFUNDS"
+      },
+      "truth_spec": {
+        "series_id": "FEDFUNDS",
+        "transform": "max",
+        "window": {
+          "start": "2006-09-01",
+          "end": "2023-12-01"
+        },
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "hard_FEDFUNDS_max_1__v1",
+    "category": "hard",
+    "vars": {
+      "question": "What was the maximum value of Effective Federal Funds Rate from 2012-12 to 2025-11?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "max",
+        "series_id": "FEDFUNDS"
+      },
+      "truth_spec": {
+        "series_id": "FEDFUNDS",
+        "transform": "max",
+        "window": {
+          "start": "2012-12-01",
+          "end": "2025-11-01"
+        },
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "hard_FEDFUNDS_max_2__v1",
+    "category": "hard",
+    "vars": {
+      "question": "Tell me the maximum reading for Effective Federal Funds Rate between 2001-09 and 2010-12.?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "max",
+        "series_id": "FEDFUNDS"
+      },
+      "truth_spec": {
+        "series_id": "FEDFUNDS",
+        "transform": "max",
+        "window": {
+          "start": "2001-09-01",
+          "end": "2010-12-01"
+        },
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "hard_FEDFUNDS_max_3__v1",
+    "category": "hard",
+    "vars": {
+      "question": "What was the maximum value of Effective Federal Funds Rate between 2013-12 and 2017-02?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "max",
+        "series_id": "FEDFUNDS"
+      },
+      "truth_spec": {
+        "series_id": "FEDFUNDS",
+        "transform": "max",
+        "window": {
+          "start": "2013-12-01",
+          "end": "2017-02-01"
+        },
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "hard_FEDFUNDS_max_4__v1",
+    "category": "hard",
+    "vars": {
+      "question": "What was the maximum value of Effective Federal Funds Rate from 2003-11 to 2014-07?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "max",
+        "series_id": "FEDFUNDS"
+      },
+      "truth_spec": {
+        "series_id": "FEDFUNDS",
+        "transform": "max",
+        "window": {
+          "start": "2003-11-01",
+          "end": "2014-07-01"
+        },
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "hard_FEDFUNDS_max_5__v1",
+    "category": "hard",
+    "vars": {
+      "question": "Tell me the maximum reading for Effective Federal Funds Rate from March 2015 to September 2023.?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "max",
+        "series_id": "FEDFUNDS"
+      },
+      "truth_spec": {
+        "series_id": "FEDFUNDS",
+        "transform": "max",
+        "window": {
+          "start": "2015-03-01",
+          "end": "2023-09-01"
+        },
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "hard_FEDFUNDS_min_0__v1",
+    "category": "hard",
+    "vars": {
+      "question": "How low did Effective Federal Funds Rate get from 2021-11 to 2022-03?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "min",
+        "series_id": "FEDFUNDS"
+      },
+      "truth_spec": {
+        "series_id": "FEDFUNDS",
+        "transform": "min",
+        "window": {
+          "start": "2021-11-01",
+          "end": "2022-03-01"
+        },
+        "tolerance": 1e-06
+      }
+    }
+  },
+  {
+    "description": "hard_FEDFUNDS_min_1__v1",
+    "category": "hard",
+    "vars": {
+      "question": "What was the lowest value of Effective Federal Funds Rate from October 2012 to May 2018?",
+      "expect": {
+        "should_answer": true,
+        "should_have_value": true,
+        "transform": "min",
+        "series_id": "FEDFUNDS"
+      },
+      "truth_spec": {
+        "series_id": "FEDFUNDS",
+        "transform": "min",
+        "window": {
+          "start": "2012-10-01",
+          "end": "2018-05-01"
+        },
+        "tolerance": 1e-06
+      }
+    }
+  }
+]

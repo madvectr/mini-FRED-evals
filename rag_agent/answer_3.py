@@ -77,7 +77,7 @@ def run(
     parsed = _validate_parsed_result(parsed)
     parsed = _maybe_infer_series_from_retrieval(parsed, retrieved)
 
-    con = warehouse.get_connection(db_path)
+    con = warehouse.get_connection(db_path, read_only=True, retries=3)
 
     if parsed.missing_series and (parsed.series_id is None):
         return _clarifying_response(parsed, retrieved_summary)

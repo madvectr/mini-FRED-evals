@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import contextlib
 from pathlib import Path
 from typing import Iterable, Mapping, Sequence
 
@@ -10,11 +11,25 @@ import duckdb  # type: ignore[import]
 from .util import ensure_directory
 
 
-def get_connection(db_path: str | Path) -> duckdb.DuckDBPyConnection:
+def get_connection(
+    db_path: str | Path,
+    *,
+    read_only: bool = False,
+    retries: int = 0,
+) -> duckdb.DuckDBPyConnection:
     """Create or open the DuckDB database file at the requested location."""
     path = Path(db_path).expanduser().resolve()
     ensure_directory(path.parent)
-    return duckdb.connect(str(path))
+
+    attempt = 0
+    while True:
+        try:
+            return duckdb.connect(str(path), read_only=read_only)
+        except duckdb.IOException as exc:
+            attempt += 1
+            if attempt > retries:
+                raise
+
 
 
 def create_schema(con) -> None:

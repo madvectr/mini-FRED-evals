@@ -13,3 +13,4 @@ src/mini_fred.egg-info/SOURCES.txt
 src/mini_fred.egg-info/dependency_links.txt
 src/mini_fred.egg-info/requires.txt
 src/mini_fred.egg-info/top_level.txt
+tests/test_parse_dates.py

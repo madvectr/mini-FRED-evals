@@ -21,6 +21,18 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Answer Mini-FRED questions via versioned agents.")
     parser.add_argument("question", help="Natural language question.")
     parser.add_argument(
+        "provider_options",
+        nargs="?",
+        default="{}",
+        help="Internal promptfoo wiring (JSON string). Ignored when running standalone.",
+    )
+    parser.add_argument(
+        "provider_context",
+        nargs="?",
+        default="{}",
+        help="Internal promptfoo wiring (JSON string). Ignored when running standalone.",
+    )
+    parser.add_argument(
         "--config",
         default="config/series.yaml",
         help="Path to series config (default: config/series.yaml).",
@@ -65,7 +77,8 @@ def _load_agent(agent_name: str):
     try:
         module = importlib.import_module(f"rag_agent.{agent_name}")
     except ModuleNotFoundError as exc:
-        raise SystemExit(f"Unknown agent '{agent_name}'.") from exc
+        missing = f" (original error: {exc})" if exc.name != f"rag_agent.{agent_name}" else ""
+        raise SystemExit(f"Unknown agent '{agent_name}'.{missing}") from exc
     if not hasattr(module, "run"):
         raise SystemExit(f"Agent '{agent_name}' does not expose a run() function.")
     return module

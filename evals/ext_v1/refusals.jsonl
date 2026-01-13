@@ -1,0 +1,33 @@
+{"id":"refusal_missing_date_cpi","question":"What was CPI in the United States?","expect":{"should_answer":false,"should_have_value":false,"transform":"point","series_id":"CPIAUCSL"}}
+{"id":"refusal_missing_date_unrate","question":"Tell me the unemployment rate.","expect":{"should_answer":false,"should_have_value":false,"transform":"point","series_id":"UNRATE"}}
+{"id":"refusal_missing_date_fedfunds","question":"Give me the federal funds rate.","expect":{"should_answer":false,"should_have_value":false,"transform":"point","series_id":"FEDFUNDS"}}
+{"id":"refusal_missing_date_pce","question":"What is the personal consumption expenditures price index?","expect":{"should_answer":false,"should_have_value":false,"transform":"point","series_id":"PCEPI"}}
+{"id":"refusal_missing_date_gdp","question":"What was real GDP?","expect":{"should_answer":false,"should_have_value":false,"transform":"point","series_id":"GDPC1"}}
+{"id":"refusal_missing_series_jun2022","question":"What was the value in June 2022?","expect":{"should_answer":false,"should_have_value":false,"transform":null,"series_id":null}}
+{"id":"refusal_missing_series_mar2021","question":"How much was recorded in March 2021?","expect":{"should_answer":false,"should_have_value":false,"transform":null,"series_id":null}}
+{"id":"refusal_missing_series_oct2009","question":"Tell me the number for October 2009.","expect":{"should_answer":false,"should_have_value":false,"transform":null,"series_id":null}}
+{"id":"refusal_missing_series_dec2017","question":"What was the value for December 2017?","expect":{"should_answer":false,"should_have_value":false,"transform":null,"series_id":null}}
+{"id":"refusal_missing_series_apr2004","question":"Give me the reading in April 2004.","expect":{"should_answer":false,"should_have_value":false,"transform":null,"series_id":null}}
+{"id":"refusal_vague_range_high2010s","question":"How high did it go between 2010 and 2012?","expect":{"should_answer":false,"should_have_value":false,"transform":null,"series_id":null}}
+{"id":"refusal_vague_range_low2000s","question":"What was the lowest it got from 2000 to 2003?","expect":{"should_answer":false,"should_have_value":false,"transform":null,"series_id":null}}
+{"id":"refusal_vague_range_mid2015","question":"How high was it in the mid 2010s?","expect":{"should_answer":false,"should_have_value":false,"transform":null,"series_id":null}}
+{"id":"refusal_vague_range_first_decade","question":"How low did it fall during the first decade of the 2000s?","expect":{"should_answer":false,"should_have_value":false,"transform":null,"series_id":null}}
+{"id":"refusal_vague_range_between_recent","question":"How high did the number get between the last recession and now?","expect":{"should_answer":false,"should_have_value":false,"transform":null,"series_id":null}}
+{"id":"refusal_pronoun_it","question":"What was it?","expect":{"should_answer":false,"should_have_value":false,"transform":null,"series_id":null}}
+{"id":"refusal_pronoun_that","question":"How did that change?","expect":{"should_answer":false,"should_have_value":false,"transform":null,"series_id":null}}
+{"id":"refusal_pronoun_value","question":"Give me its value.","expect":{"should_answer":false,"should_have_value":false,"transform":null,"series_id":null}}
+{"id":"refusal_pronoun_rate","question":"How fast was it moving?","expect":{"should_answer":false,"should_have_value":false,"transform":null,"series_id":null}}
+{"id":"refusal_pronoun_recent","question":"Did it go up?","expect":{"should_answer":false,"should_have_value":false,"transform":null,"series_id":null}}
+{"id":"refusal_last_summer_inflation","question":"What was inflation last summer?","expect":{"should_answer":false,"should_have_value":false,"transform":null,"series_id":null}}
+{"id":"refusal_last_winter_unrate","question":"What was the unemployment rate last winter?","expect":{"should_answer":false,"should_have_value":false,"transform":"point","series_id":"UNRATE"}}
+{"id":"refusal_recently_gdp","question":"How much was GDP recently?","expect":{"should_answer":false,"should_have_value":false,"transform":"point","series_id":"GDPC1"}}
+{"id":"refusal_recently_fedfunds","question":"Where is the fed funds rate right now?","expect":{"should_answer":false,"should_have_value":false,"transform":"point","series_id":"FEDFUNDS"}}
+{"id":"refusal_last_years_peak","question":"What was the peak last year?","expect":{"should_answer":false,"should_have_value":false,"transform":null,"series_id":null}}
+{"id":"refusal_last_spring_low","question":"What was the lowest reading last spring?","expect":{"should_answer":false,"should_have_value":false,"transform":null,"series_id":null}}
+{"id":"refusal_missing_transform_series","question":"Can you give me the change for CPI?","expect":{"should_answer":false,"should_have_value":false,"transform":null,"series_id":"CPIAUCSL"}}
+{"id":"refusal_missing_transform_rate","question":"How much did unemployment move?","expect":{"should_answer":false,"should_have_value":false,"transform":null,"series_id":"UNRATE"}}
+{"id":"refusal_missing_transform_gdp","question":"Tell me the growth in GDP.","expect":{"should_answer":false,"should_have_value":false,"transform":null,"series_id":"GDPC1"}}
+{"id":"refusal_range_unspecified_series","question":"How high did it get between 2018 and 2020?","expect":{"should_answer":false,"should_have_value":false,"transform":null,"series_id":null}}
+{"id":"refusal_range_unspecified_dates","question":"How low was it during the financial crisis?","expect":{"should_answer":false,"should_have_value":false,"transform":null,"series_id":null}}
+{"id":"refusal_missing_everything","question":"What was the number again?","expect":{"should_answer":false,"should_have_value":false,"transform":null,"series_id":null}}
+{"id":"refusal_compare_without_context","question":"Was it higher or lower than before?","expect":{"should_answer":false,"should_have_value":false,"transform":null,"series_id":null}}
