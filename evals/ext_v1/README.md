@@ -24,7 +24,7 @@ python evals/ext_v1/generate_questions.py \
 python evals/ext_v1/build_evalset.py
 
 # 4) Merge spec/verifier overrides and run MVES
-python evals/ext_v1/run_ext_mves.py \
+python evals/ext_v1/scripts/run_ext_mves.py \
   --agent answer_4 \
   --eval evals/ext_v1/evalset.jsonl
 ```

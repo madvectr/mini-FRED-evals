@@ -1,0 +1,27 @@
+{
+  "verifiers": [
+    {
+      "id": "date_rules",
+      "require_expect_should_answer": true
+    },
+    {
+      "id": "window_rules",
+      "require_expect_should_answer": true
+    },
+    {
+      "id": "truth_matches",
+      "require_expect_should_answer": true,
+      "require_expect_should_have_value": true
+    },
+    {
+      "id": "value_display_in_answer",
+      "severity": "high",
+      "require_expect_should_have_value": true
+    },
+    {
+      "id": "expectation_value_presence",
+      "severity": "critical",
+      "require_expect_should_answer": true
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Helper to run MVES against the ext_v1 evalset with merged spec/verifiers."""
+"""Helper to run MVES against the ext_v2 evalset with merged spec/verifiers."""
 
 from __future__ import annotations
 
@@ -8,23 +8,23 @@ import subprocess
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[3]
 
-LOAD_SPEC = ROOT / "evals" / "ext_v1" / "load_spec.py"
+LOAD_SPEC = ROOT / "evals" / "ext_v2" / "load_spec.py"
 MVES_RUN = ROOT / "scripts" / "mves_run.py"
 
-DEFAULT_EVAL = ROOT / "evals" / "ext_v1" / "evalset.jsonl"
-DEFAULT_REPORTS = ROOT / "reports" / "ext_v1"
+DEFAULT_EVAL = ROOT / "evals" / "ext_v2" / "evalset.jsonl"
+DEFAULT_REPORTS = ROOT / "reports" / "ext_v2"
 DEFAULT_SPEC_BASE = ROOT / "mves" / "spec.yaml"
-DEFAULT_SPEC_OVERRIDE = ROOT / "evals" / "ext_v1" / "spec.override.json"
+DEFAULT_SPEC_OVERRIDE = ROOT / "evals" / "ext_v2" / "spec.override.json"
 DEFAULT_VERIFIERS_BASE = ROOT / "mves" / "verifier_map.yaml"
-DEFAULT_VERIFIERS_OVERRIDE = ROOT / "evals" / "ext_v1" / "verifiers.override.json"
-DEFAULT_MERGED_SPEC = ROOT / "evals" / "ext_v1" / "spec.merged.json"
-DEFAULT_MERGED_VERIFIERS = ROOT / "evals" / "ext_v1" / "verifiers.merged.json"
+DEFAULT_VERIFIERS_OVERRIDE = ROOT / "evals" / "ext_v2" / "verifiers.override.json"
+DEFAULT_MERGED_SPEC = ROOT / "evals" / "ext_v2" / "spec.merged.json"
+DEFAULT_MERGED_VERIFIERS = ROOT / "evals" / "ext_v2" / "verifiers.merged.json"
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Run MVES against the ext_v1 evalset.")
+    parser = argparse.ArgumentParser(description="Run MVES against the ext_v2 evalset.")
     parser.add_argument("--eval", type=Path, default=DEFAULT_EVAL, help="Evalset JSONL path.")
     parser.add_argument("--agent", default="answer_4", help="Agent module to evaluate.")
     parser.add_argument("--db", type=Path, default=ROOT / "data" / "warehouse.duckdb", help="DuckDB path.")

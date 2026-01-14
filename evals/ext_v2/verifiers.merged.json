@@ -1,0 +1,101 @@
+{
+  "verifiers": [
+    {
+      "id": "schema_valid",
+      "description": "Response matches required schema/fields.",
+      "severity": "critical",
+      "enabled": true,
+      "threshold": 0
+    },
+    {
+      "id": "no_hallucination_on_error",
+      "description": "Errors imply value null, no citations, low confidence.",
+      "severity": "critical",
+      "enabled": true,
+      "threshold": 0
+    },
+    {
+      "id": "citations_present_when_value",
+      "description": "Values require citations + series.",
+      "severity": "critical",
+      "enabled": true,
+      "threshold": 0
+    },
+    {
+      "id": "citations_match_series_id",
+      "description": "Citation doc IDs must match series_<series_id>.",
+      "severity": "high",
+      "enabled": true,
+      "threshold": 0
+    },
+    {
+      "id": "citations_subset_of_retrieved",
+      "description": "Cited docs must be within retrieved docs set.",
+      "severity": "high",
+      "enabled": true,
+      "threshold": 0
+    },
+    {
+      "id": "window_rules",
+      "description": "Max/min requests must include window.start + window.end.",
+      "severity": "critical",
+      "enabled": true,
+      "threshold": 0,
+      "require_expect_should_answer": true
+    },
+    {
+      "id": "date_rules",
+      "description": "Point-like transforms must include a date.",
+      "severity": "critical",
+      "enabled": true,
+      "threshold": 0,
+      "require_expect_should_answer": true
+    },
+    {
+      "id": "expectation_transform",
+      "description": "Response transform and series must match the golden expect block.",
+      "severity": "critical",
+      "enabled": true,
+      "threshold": 0
+    },
+    {
+      "id": "expectation_value_presence",
+      "description": "should_have_value flag must align with value/citation presence.",
+      "severity": "critical",
+      "enabled": true,
+      "threshold": 0,
+      "require_expect_should_answer": true
+    },
+    {
+      "id": "confidence_rules",
+      "description": "Confidence must align with value presence.",
+      "severity": "medium",
+      "enabled": true,
+      "threshold": 0
+    },
+    {
+      "id": "no_urls_in_answer",
+      "description": "Answers cannot contain HTTP URLs.",
+      "severity": "medium",
+      "enabled": true,
+      "threshold": 0
+    },
+    {
+      "id": "value_display_in_answer",
+      "description": "value_display must appear in answer text.",
+      "severity": "high",
+      "enabled": true,
+      "threshold": 0,
+      "require_expect_should_have_value": true
+    },
+    {
+      "id": "truth_matches",
+      "description": "Response value must match DuckDB truth_spec within tolerance.",
+      "severity": "critical",
+      "enabled": true,
+      "threshold": 0,
+      "require_expect_should_answer": true,
+      "require_expect_should_have_value": true
+    }
+  ]
+}

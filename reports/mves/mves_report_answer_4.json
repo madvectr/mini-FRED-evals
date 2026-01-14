@@ -1,11 +1,16 @@
 {
   "summary": {
     "total": 63,
-    "passed": 63,
-    "failed": 0,
-    "pass_rate": 1.0,
-    "critical_failures": 0,
-    "failure_breakdown": {},
+    "passed": 61,
+    "failed": 2,
+    "pass_rate": 0.9682539682539683,
+    "critical_failures": 4,
+    "failure_breakdown": {
+      "date_rules": 1,
+      "expectation_value_presence": 1,
+      "truth_matches": 1,
+      "window_rules": 2
+    },
     "agent": "answer_4"
   },
   "cases": [
@@ -332,10 +337,10 @@
         "parse_trace": {
           "series_id": "PCEPI",
           "transform": "min",
-          "date": "2014-03-01",
+          "date": null,
           "window_start": "2014-03-01",
           "window_end": "2014-07-01",
-          "periods": 3,
+          "periods": null,
           "errors": []
         }
       },
@@ -1572,33 +1577,26 @@
     {
       "id": "fedfunds_yoy_7",
       "question": "What was the year-over-year change in Effective Federal Funds Rate in May 2023?",
-      "status": "pass",
+      "status": "fail",
       "response": {
         "question": "What was the year-over-year change in Effective Federal Funds Rate in May 2023?",
         "series_id": "FEDFUNDS",
         "transform": "yoy",
-        "date": "2023-05-01",
+        "date": null,
         "window": {
           "start": null,
           "end": null,
           "periods": null
         },
-        "value": 557.142857142857,
-        "value_display": "557.14%",
-        "unit": "Percent",
-        "answer": "In May 2023, the year-over-year change for Federal Funds Effective Rate was 557.14%. When a depository institution has surplus balances in its reserve account, it lends to other banks in need of larger balances.",
-        "citations": [
-          {
-            "doc_id": "series_FEDFUNDS",
-            "series_id": "FEDFUNDS",
-            "dates": [
-              "2023-05-01"
-            ],
-            "source": "mini-fred"
-          }
+        "value": null,
+        "value_display": null,
+        "unit": null,
+        "answer": "Please specify a date (e.g., April 2020 or 2020-04).",
+        "citations": [],
+        "confidence": 0.2,
+        "errors": [
+          "Please specify a date (e.g., April 2020 or 2020-04)."
         ],
-        "confidence": 0.95,
-        "errors": [],
         "retrieved_docs": [
           {
             "doc_id": "series_FEDFUNDS",
@@ -1616,14 +1614,32 @@
         "parse_trace": {
           "series_id": "FEDFUNDS",
           "transform": "yoy",
-          "date": "2023-05-01",
+          "date": null,
           "window_start": null,
           "window_end": null,
-          "periods": 3,
-          "errors": []
+          "periods": null,
+          "errors": [
+            "Please specify a date (e.g., April 2020 or 2020-04)."
+          ]
         }
       },
-      "failures": []
+      "failures": [
+        {
+          "verifier_id": "date_rules",
+          "severity": "critical",
+          "message": "date missing for point/yoy/mom/ma transform."
+        },
+        {
+          "verifier_id": "expectation_value_presence",
+          "severity": "high",
+          "message": "Expected a numeric value but got null."
+        },
+        {
+          "verifier_id": "truth_matches",
+          "severity": "critical",
+          "message": "Response missing value despite truth_spec."
+        }
+      ]
     },
     {
       "id": "pcepi_point_6",
@@ -1779,7 +1795,7 @@
           "date": "2021-03-01",
           "window_start": null,
           "window_end": null,
-          "periods": 3,
+          "periods": null,
           "errors": []
         }
       },
@@ -1944,10 +1960,10 @@
         "parse_trace": {
           "series_id": "CPIAUCSL",
           "transform": "min",
-          "date": "2004-07-01",
+          "date": null,
           "window_start": "2004-07-01",
           "window_end": "2013-03-01",
-          "periods": 3,
+          "periods": null,
           "errors": []
         }
       },
@@ -2115,7 +2131,7 @@
           "date": "2010-03-01",
           "window_start": null,
           "window_end": null,
-          "periods": 3,
+          "periods": null,
           "errors": []
         }
       },
@@ -2563,7 +2579,7 @@
           "date": "2014-03-01",
           "window_start": null,
           "window_end": null,
-          "periods": 3,
+          "periods": null,
           "errors": []
         }
       },
@@ -3397,11 +3413,11 @@
     {
       "id": "refusal_vague_range",
       "question": "How high did it go between 2010 and 2012?",
-      "status": "pass",
+      "status": "fail",
       "response": {
         "question": "How high did it go between 2010 and 2012?",
         "series_id": null,
-        "transform": "point",
+        "transform": "max",
         "date": null,
         "window": {
           "start": null,
@@ -3411,28 +3427,39 @@
         "value": null,
         "value_display": null,
         "unit": null,
-        "answer": "Please specify a date (e.g., April 2020 or 2020-04). Please specify which series to use (unemployment, CPI, fed funds, PCE, or GDP).",
+        "answer": "Please provide a date window (e.g., between 2006-01 and 2008-12). Please specify which series to use (unemployment, CPI, fed funds, PCE, or GDP).",
         "citations": [],
         "confidence": 0.2,
         "errors": [
-          "Please specify a date (e.g., April 2020 or 2020-04).",
+          "Please provide a date window (e.g., between 2006-01 and 2008-12).",
           "Please specify which series to use (unemployment, CPI, fed funds, PCE, or GDP)."
         ],
         "retrieved_docs": [],
         "parse_trace": {
           "series_id": null,
-          "transform": "point",
+          "transform": "max",
           "date": null,
           "window_start": null,
           "window_end": null,
           "periods": null,
           "errors": [
-            "Please specify a date (e.g., April 2020 or 2020-04).",
+            "Please provide a date window (e.g., between 2006-01 and 2008-12).",
             "Please specify which series to use (unemployment, CPI, fed funds, PCE, or GDP)."
           ]
         }
       },
-      "failures": []
+      "failures": [
+        {
+          "verifier_id": "window_rules",
+          "severity": "critical",
+          "message": "window.start missing for max/min question."
+        },
+        {
+          "verifier_id": "window_rules",
+          "severity": "critical",
+          "message": "window.end missing for max/min question."
+        }
+      ]
     },
     {
       "id": "refusal_no_context",

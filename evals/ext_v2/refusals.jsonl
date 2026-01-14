@@ -1,0 +1,20 @@
+{"id":"refusal_combo_missing_window","question":"Between July and September 2017, how high did CPI get and what was the change?","expect":{"should_answer":false,"should_have_value":false,"transform":null,"series_id":"CPIAUCSL"}}
+{"id":"refusal_compare_two_series","question":"Which grew faster last year, CPI or the unemployment rate?","expect":{"should_answer":false,"should_have_value":false,"transform":null,"series_id":null}}
+{"id":"refusal_missing_transform_ma","question":"Give me the rolling average for GDP.","expect":{"should_answer":false,"should_have_value":false,"transform":null,"series_id":"GDPC1"}}
+{"id":"refusal_recent_peak_unknown_series","question":"What was the latest peak over the last couple of years?","expect":{"should_answer":false,"should_have_value":false,"transform":null,"series_id":null}}
+{"id":"refusal_unspecified_window_high","question":"How high did it climb after the pandemic without telling you which statistic?","expect":{"should_answer":false,"should_have_value":false,"transform":null,"series_id":null}}
+{"id":"refusal_missing_month_context","question":"Remind me of the MoM move in March without saying which series.","expect":{"should_answer":false,"should_have_value":false,"transform":null,"series_id":null}}
+{"id":"refusal_dual_metric_blend","question":"Tell me the CPI level and the unemployment change for 2016 in one shot.","expect":{"should_answer":false,"should_have_value":false,"transform":null,"series_id":null}}
+{"id":"refusal_window_without_bounds","question":"What was the minimum between the financial crisis and the recovery?","expect":{"should_answer":false,"should_have_value":false,"transform":"min","series_id":null}}
+{"id":"refusal_rate_unspecified_date","question":"Where is the fed funds rate sitting these days?","expect":{"should_answer":false,"should_have_value":false,"transform":"point","series_id":"FEDFUNDS"}}
+{"id":"refusal_recent_inflation_trend","question":"Has inflation been easing recently?","expect":{"should_answer":false,"should_have_value":false,"transform":null,"series_id":"CPIAUCSL"}}
+{"id":"refusal_last_quarter_extreme","question":"What was the lowest GDP reading last quarter without citing the dates?","expect":{"should_answer":false,"should_have_value":false,"transform":"min","series_id":"GDPC1"}}
+{"id":"refusal_prefix_pronoun","question":"How did it behave back in the mid 2000s?","expect":{"should_answer":false,"should_have_value":false,"transform":null,"series_id":null}}
+{"id":"refusal_missing_series_date_only","question":"What was the value recorded in May 2014?","expect":{"should_answer":false,"should_have_value":false,"transform":null,"series_id":null}}
+{"id":"refusal_missing_transform_change","question":"Can you tell me the change for unemployment?","expect":{"should_answer":false,"should_have_value":false,"transform":null,"series_id":"UNRATE"}}
+{"id":"refusal_vague_range_peak","question":"How high did it get sometime between 2009 and 2011?","expect":{"should_answer":false,"should_have_value":false,"transform":null,"series_id":null}}
+{"id":"refusal_vague_range_trough","question":"How low was the indicator right after the last recession?","expect":{"should_answer":false,"should_have_value":false,"transform":null,"series_id":null}}
+{"id":"refusal_missing_everything_again","question":"What was the number again for that stat?","expect":{"should_answer":false,"should_have_value":false,"transform":null,"series_id":null}}
+{"id":"refusal_unanchored_roll","question":"Give me the rolling six month story for PCE without specifying when.","expect":{"should_answer":false,"should_have_value":false,"transform":null,"series_id":"PCEPI"}}
+{"id":"refusal_conflicting_request","question":"Provide CPI for 2019 with the latest YoY change blended together.","expect":{"should_answer":false,"should_have_value":false,"transform":null,"series_id":"CPIAUCSL"}}
+{"id":"refusal_compare_to_past","question":"Was the unemployment rate higher than before?","expect":{"should_answer":false,"should_have_value":false,"transform":null,"series_id":"UNRATE"}}

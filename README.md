@@ -30,28 +30,38 @@ Mini-FRED is a deterministic DuckDB snapshot containing a handful of macro serie
   ```
   python scripts/generate_golden.py --out evals/mves/golden.jsonl
   ```
-- Run MVES against any agent (still inside the Python venv):
+- Run the canonical MVES suite (golden + refusals) via the suite-local wrapper:
   ```bash
   for agent in answer_1 answer_2 answer_3 answer_4; do
-    python scripts/mves_run.py --agent "$agent" --golden evals/mves/golden.jsonl
+    python evals/mves/scripts/run_mves.py --agent "$agent"
   done
   ```
 
 ### Additional evaluation suites
 All commands assume the Python venv is active; promptfoo runs also require `npm` to be available.
 
-1. **`evals/mves/` (golden + refusals)** – described above; produces reports under `reports/mves_report_<agent>.*`.
+1. **`evals/mves/` (golden + refusals)** – described above; produces reports under `reports/mves/mves_report_<agent>.*`.
 
 2. **`evals/ext_v1/` (auto-generated large suite)**  
    - Rebuild merged spec/verifier overrides (see `evals/ext_v1/README.md`).  
    - Execute for every agent:
      ```bash
      for agent in answer_1 answer_2 answer_3 answer_4; do
-       python evals/ext_v1/run_ext_mves.py --agent "$agent" --eval evals/ext_v1/evalset.jsonl
+       python evals/ext_v1/scripts/run_ext_mves.py --agent "$agent" --eval evals/ext_v1/evalset.jsonl
      done
      ```
+3. **`evals/ext_v2/` (tough-mode suite with noisy prompts)**  
+   - Biases toward MoM/YoY/MA + long-window extrema, adds noisy phrasing, and includes harder refusal templates (see `evals/ext_v2/README.md` for the full workflow).  
+   - Regenerate via the same four scripts as ext_v1 (`generate_golden_from_duckdb.py`, `generate_questions.py`, `build_evalset.py`, then the wrapper below).  
+   - Run it via:
+     ```bash
+     for agent in answer_1 answer_2 answer_3 answer_4; do
+       python evals/ext_v2/scripts/run_ext_mves.py --agent "$agent" --eval evals/ext_v2/evalset.jsonl
+     done
+     ```
+   - Reports land in `reports/ext_v2/mves_report_<agent>.*`.
 
-3. **`evals/promptfoo_ext/` (promptfoo + Python assertions)**  
+4. **`evals/promptfoo_ext/` (promptfoo + Python assertions)**  
    - Requires `npm` (in addition to the Python venv).  
    - Run promptfoo for each agent via the helper script:
      ```bash
