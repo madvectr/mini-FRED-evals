@@ -24,6 +24,20 @@ Mini-FRED is a deterministic DuckDB snapshot containing a handful of macro serie
    python scripts/answer.py "What was the unemployment rate in April 2020?" --agent answer_4
    ```
 
+### Optional: local Phi-4 Mini for answer_5
+`answer_5` uses Phi-4 Mini to interpret noisier prompts. To enable it locally:
+
+1. Install the optional dependencies:
+   ```
+   pip install ".[llm]"
+   ```
+2. Download the weights (once):
+   ```
+   python scripts/download_phi4.py
+   ```
+   This stores the model under `models/phi4-mini/`. To change the path, set `MINI_FRED_PHI_MODEL_DIR=/custom/path`.
+3. Run as usual. To force deterministic fallback without the LLM, set `MINI_FRED_DISABLE_LOCAL_LLM=1`.
+
 ### MVES specification
 - Specs, verifiers, and custom Python checks live in `mves/`.  
 - The canonical golden + refusal set lives in `evals/mves/`. Regenerate with:
@@ -32,7 +46,7 @@ Mini-FRED is a deterministic DuckDB snapshot containing a handful of macro serie
   ```
 - Run the canonical MVES suite (golden + refusals) via the suite-local wrapper:
   ```bash
-  for agent in answer_1 answer_2 answer_3 answer_4; do
+  for agent in answer_1 answer_2 answer_3 answer_4 answer_5; do
     python evals/mves/scripts/run_mves.py --agent "$agent"
   done
   ```
@@ -46,7 +60,7 @@ All commands assume the Python venv is active; promptfoo runs also require `npm`
    - Rebuild merged spec/verifier overrides (see `evals/ext_v1/README.md`).  
    - Execute for every agent:
      ```bash
-     for agent in answer_1 answer_2 answer_3 answer_4; do
+     for agent in answer_1 answer_2 answer_3 answer_4 answer_5; do
        python evals/ext_v1/scripts/run_ext_mves.py --agent "$agent" --eval evals/ext_v1/evalset.jsonl
      done
      ```
@@ -55,7 +69,7 @@ All commands assume the Python venv is active; promptfoo runs also require `npm`
    - Regenerate via the same four scripts as ext_v1 (`generate_golden_from_duckdb.py`, `generate_questions.py`, `build_evalset.py`, then the wrapper below).  
    - Run it via:
      ```bash
-     for agent in answer_1 answer_2 answer_3 answer_4; do
+     for agent in answer_1 answer_2 answer_3 answer_4 answer_5; do
        python evals/ext_v2/scripts/run_ext_mves.py --agent "$agent" --eval evals/ext_v2/evalset.jsonl
      done
      ```
@@ -65,7 +79,7 @@ All commands assume the Python venv is active; promptfoo runs also require `npm`
    - Requires `npm` (in addition to the Python venv).  
    - Run promptfoo for each agent via the helper script:
      ```bash
-     for agent in answer_1 answer_2 answer_3 answer_4; do
+     for agent in answer_1 answer_2 answer_3 answer_4 answer_5; do
        evals/promptfoo_ext/scripts/run.sh --agent "$agent"
      done
      ```

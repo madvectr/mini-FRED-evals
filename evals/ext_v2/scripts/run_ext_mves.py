@@ -35,6 +35,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--verifiers-base", type=Path, default=DEFAULT_VERIFIERS_BASE)
     parser.add_argument("--verifiers-override", type=Path, default=DEFAULT_VERIFIERS_OVERRIDE)
     parser.add_argument("--verifiers-out", type=Path, default=DEFAULT_MERGED_VERIFIERS)
+    parser.add_argument("--workers", type=int, default=1, help="Concurrent workers for MVES runner.")
     return parser.parse_args()
 
 
@@ -78,6 +79,8 @@ def main() -> None:
         "--refusals",
         "",
     ]
+    if args.workers and args.workers > 1:
+        cmd.extend(["--workers", str(args.workers)])
     subprocess.run(cmd, check=True, cwd=ROOT)
 
 

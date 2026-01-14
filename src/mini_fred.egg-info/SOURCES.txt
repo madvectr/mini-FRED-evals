@@ -1,5 +1,6 @@
 README.md
 pyproject.toml
+setup.cfg
 src/__init__.py
 src/fred_client.py
 src/parse.py

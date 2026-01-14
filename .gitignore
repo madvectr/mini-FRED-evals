@@ -69,3 +69,5 @@ lerna-debug.log*
 .next/
 out/
 dist/
+models/
+.DS_Store

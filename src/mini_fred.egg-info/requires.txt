@@ -7,3 +7,8 @@ scikit-learn>=1.4
 
 [dev]
 pytest>=8.0
+
+[llm]
+torch>=2.3
+transformers>=4.46
+huggingface-hub>=0.23

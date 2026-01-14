@@ -4,12 +4,14 @@
 from __future__ import annotations
 
 import argparse
+import concurrent.futures
 import json
 import subprocess
 import sys
 from dataclasses import asdict
 from pathlib import Path
-from typing import Any, Dict, List
+import time
+from typing import Any, Dict, List, Optional, Tuple
 
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
@@ -58,6 +60,12 @@ def parse_args() -> argparse.Namespace:
         "--refusals",
         default=str(REFUSAL_PATH),
         help="Optional refusal JSONL (set to empty string to skip).",
+    )
+    parser.add_argument(
+        "--workers",
+        type=int,
+        default=1,
+        help="Number of concurrent workers when running cases (default: 1).",
     )
     return parser.parse_args()
 
@@ -191,6 +199,51 @@ def write_reports(
     )
 
 
+def _execute_cases(
+    cases: List[Dict[str, Any]], db_path: Path, agent: str, workers: int
+) -> List[Dict[str, Any]]:
+    total = len(cases)
+    if workers <= 1:
+        results = []
+        for idx, case in enumerate(cases, start=1):
+            print(f"[MVES] ({idx}/{total}) running {case['id']}...", flush=True)
+            start = time.perf_counter()
+            result = run_case(case, db_path, agent)
+            duration = time.perf_counter() - start
+            results.append(result)
+            print(
+                f"[MVES] ({idx}/{total}) finished {case['id']} "
+                f"| status={result['status']} | {duration:.1f}s",
+                flush=True,
+            )
+        return results
+
+    workers = max(1, workers)
+    results: List[Optional[Dict[str, Any]]] = [None] * total
+
+    def _task(index_case: Tuple[int, Dict[str, Any]]) -> Tuple[int, str, Dict[str, Any], float]:
+        idx, case = index_case
+        print(f"[MVES] ({idx + 1}/{total}) running {case['id']}...", flush=True)
+        start = time.perf_counter()
+        result = run_case(case, db_path, agent)
+        duration = time.perf_counter() - start
+        return idx, case["id"], result, duration
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=workers) as executor:
+        futures = [executor.submit(_task, (idx, case)) for idx, case in enumerate(cases)]
+        for future in concurrent.futures.as_completed(futures):
+            idx, case_id, result, duration = future.result()
+            results[idx] = result
+            print(
+                f"[MVES] ({idx + 1}/{total}) finished {case_id} "
+                f"| status={result['status']} | {duration:.1f}s",
+                flush=True,
+            )
+
+    # type: ignore return type, list fully populated
+    return results  # type: ignore[return-value]
+
+
 def main() -> None:
     args = parse_args()
     golden_path = Path(args.golden)
@@ -209,11 +262,7 @@ def main() -> None:
     db_path = Path(args.db)
     agent = args.agent
 
-    results = []
-    total = len(cases)
-    for idx, case in enumerate(cases, start=1):
-        print(f"[MVES] ({idx}/{total}) running {case['id']}...", flush=True)
-        results.append(run_case(case, db_path, agent))
+    results = _execute_cases(cases, db_path, agent, args.workers)
     summary = summarize(results)
     write_reports(reports_dir, summary, results, agent)
 
